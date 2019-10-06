@@ -15,13 +15,31 @@ class miCardApp extends StatelessWidget
       home: Scaffold(
         backgroundColor: Colors.teal,
         body: SafeArea(
-          child: Container(
-            color: Colors.white,
-            child: Text("Hello World"),
-            margin: EdgeInsets.all(32),
-            width: 64,
-            height: 64,
-            padding: EdgeInsets.all(8),
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                Container(
+                  child: CircleAvatar(
+                    backgroundImage: AssetImage("images/myImage.jpg"),
+                    radius: 50,
+                  ),
+                ),
+                Container(
+                  child: Text("Shadat Tonmoy",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 32,
+                      fontWeight: FontWeight.bold
+                    ),
+
+                  ),
+                  padding: EdgeInsets.all(16),
+                ),
+
+              ],
+            ),
           ),
         ),
       ),
@@ -29,3 +47,12 @@ class miCardApp extends StatelessWidget
   }
 
 }
+
+//Container(
+//color: Colors.white,
+//child: Text("Hello World"),
+//margin: EdgeInsets.all(32),
+//width: 64,
+//height: 64,
+//padding: EdgeInsets.all(8),
+//),
