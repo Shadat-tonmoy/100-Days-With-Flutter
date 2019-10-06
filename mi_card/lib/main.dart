@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 void main()
 {
@@ -31,11 +32,23 @@ class miCardApp extends StatelessWidget
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 32,
-                      fontWeight: FontWeight.bold
+                      fontWeight: FontWeight.bold,
+                      fontFamily: "Pacifico"
                     ),
 
                   ),
-                  padding: EdgeInsets.all(16),
+                  padding: EdgeInsets.all(2),
+                ),
+                Container(
+                  child: Text("Software Engineer",
+                    style: TextStyle(
+                      color: Colors.teal[100],
+                      fontSize: 16,
+                      letterSpacing: 2.5,
+                      fontFamily: 'SourceSansPro'
+                    ),
+
+                  ),
                 ),
 
               ],
