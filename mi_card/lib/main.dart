@@ -50,6 +50,73 @@ class miCardApp extends StatelessWidget
 
                   ),
                 ),
+                SizedBox(
+                  height: 20,
+                  child: Divider(
+                    color: Colors.teal[200],
+                    indent: 16,
+                    endIndent: 16,
+                  ),
+                ),
+                Container(
+                  margin: EdgeInsets.all(8),
+                  child: Card(
+                    child: Padding(
+                      padding: EdgeInsets.all(12),
+                      child: Row(
+                        children: <Widget>[
+                          Icon(
+                            Icons.phone,
+                            size: 24,
+                            color: Colors.teal[600],
+                          ),
+                          SizedBox(
+                            width: 8,
+                          ),
+                          Text(
+                            "+8801965036172",
+                            style: TextStyle(
+                              fontFamily: "SourceSansProRegular",
+                              fontSize: 16,
+                              color: Colors.teal[500]
+
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+                Container(
+                  margin: EdgeInsets.all(8),
+                  child: Card(
+                    child: Padding(
+                      padding: EdgeInsets.all(12.0),
+                      child: Row(
+                        children: <Widget>[
+                          Icon(
+                            Icons.mail,
+                            size: 24,
+                            color: Colors.teal[600],
+                          ),
+                          SizedBox(
+                            width: 8,
+                          ),
+                          Text(
+                            "shadat.tonmoy@gmail.com",
+                            style: TextStyle(
+                              color: Colors.teal[500],
+                              fontSize: 16,
+                              fontFamily: "SourceSansProRegular"
+                            ),
+                          )
+                        ],
+
+                      ),
+                    ),
+                  ),
+                ),
+
 
               ],
             ),

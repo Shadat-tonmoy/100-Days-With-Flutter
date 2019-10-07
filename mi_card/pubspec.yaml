@@ -51,6 +51,9 @@ flutter:
     - family: SourceSansPro
       fonts:
         - asset : fonts/source_sans_pro_black.ttf
+    - family: SourceSansProRegular
+      fonts:
+        - asset : fonts/SourceSansProRegular.ttf
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.io/assets-and-images/#resolution-aware.
