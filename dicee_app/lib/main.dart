@@ -16,8 +16,26 @@ class DicePage extends StatelessWidget
   @override
   Widget build(BuildContext context)
   {
-    // TODO: implement build
-    return Container();
+    return SafeArea(
+      child: Center(
+        child: Row(
+          children: <Widget>[
+            Expanded(
+              child: Padding(
+                padding: EdgeInsets.all(16.0),
+                child: Image.asset("images/dice1.png"),
+              ),
+              ),
+            Expanded(
+              child: Padding(
+                padding: EdgeInsets.all(16.0),
+                child : Image.asset("images/dice2.png"),
+              )
+            )
+          ],
+        ),
+      ),
+    );
   }
 
 }
