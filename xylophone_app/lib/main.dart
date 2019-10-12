@@ -6,11 +6,24 @@ void main() => runApp(XylophoneApp());
 class XylophoneApp extends StatelessWidget
 {
 
-  void playSound({int soundNumber})
+  void playSound(int soundNumber)
   {
     final AudioCache audioCache = new AudioCache();
     audioCache.play("note$soundNumber.wav");
   }
+
+  Widget buildKey({Color color, int soundNumber})
+  {
+    return FlatButton(
+      color: color,
+      onPressed: ()
+      {
+        playSound(soundNumber);
+      },
+    );
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -22,68 +35,25 @@ class XylophoneApp extends StatelessWidget
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
               Expanded( 
-                child: FlatButton(
-                  color: Colors.red,
-                  onPressed: ()
-                  {
-                    playSound(soundNumber: 1);
-
-                  },
-                ),
+                child: buildKey(color: Colors.red, soundNumber: 1),
               ),
               Expanded( 
-                child: FlatButton(
-                  color: Colors.orange,
-                  onPressed: ()
-                  {
-                    playSound(soundNumber: 2);
-                  },
-                ),
+                child: buildKey(color: Colors.orange,soundNumber: 2),
               ),
               Expanded( 
-                child: FlatButton(
-                  color: Colors.yellow,
-                  onPressed: ()
-                  {
-                    playSound(soundNumber: 3);
-                  },
-                ),
+                child: buildKey(color: Colors.yellow,soundNumber: 3),
               ),
               Expanded(
-                child: FlatButton(
-                  color: Colors.green,
-                  onPressed: ()
-                  {
-                    playSound(soundNumber: 4);
-                  },
-                ),
-              ),
-              Expanded( 
-                child: FlatButton( 
-                  color: Colors.teal,
-                  onPressed: ()
-                  {
-                    playSound(soundNumber: 5);
-                  },
-                ),
-              ),
-              Expanded( 
-                child: FlatButton(
-                  color: Colors.blue,
-                  onPressed: ()
-                  {
-                    playSound(soundNumber: 6);
-                  },
-                ),
+                  child: buildKey(color: Colors.green,soundNumber: 4),
               ),
               Expanded(
-                child: FlatButton(
-                  color: Colors.purple,
-                  onPressed: ()
-                  {
-                    playSound(soundNumber: 7);
-                  },
-                ),
+                child: buildKey(color: Colors.teal,soundNumber: 5),
+              ),
+              Expanded(
+                child: buildKey(color: Colors.blue,soundNumber: 6),
+              ),
+              Expanded(
+                child: buildKey(color: Colors.purple,soundNumber: 7),
               ),
             ],
           ),
