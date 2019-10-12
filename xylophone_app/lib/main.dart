@@ -8,7 +8,16 @@ class XylophoneApp extends StatelessWidget {
     return MaterialApp(
       home: Scaffold(
         body: SafeArea(
-          child: Container(),
+          child: Container(
+            child: FlatButton(
+              child: Text("Play Sound"),
+              onPressed: ()
+              {
+                print("Will Play Sound");
+                
+              },
+            ),
+          ),
         ),
       ),
     );
