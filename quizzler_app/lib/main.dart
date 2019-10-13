@@ -32,6 +32,14 @@ class _QuizzlerPageState extends State<QuizzlerPage>
     'What is the most unusual fear you have?',
     'What is your favorite TV show?'];
 
+  List<bool> answers = [
+    true,
+    false,
+    false,
+    true,
+    false,
+    false];
+
   void addScore(bool isCorrectAnswer)
   {
     setState(()
@@ -51,7 +59,11 @@ class _QuizzlerPageState extends State<QuizzlerPage>
         ));
       }
     });
+  }
 
+  bool checkAnswer(bool answer, int questionNumber)
+  {
+    return answer == answers[questionNumber];
   }
 
   void updateQuestion()
@@ -89,7 +101,7 @@ class _QuizzlerPageState extends State<QuizzlerPage>
             child: FlatButton(
               onPressed: ()
               {
-                addScore(true);
+                addScore(checkAnswer(true, questionIndex));
                 updateQuestion();
               },
               color: Colors.green,
@@ -110,7 +122,7 @@ class _QuizzlerPageState extends State<QuizzlerPage>
             child: FlatButton(
               onPressed: ()
               {
-               addScore(false);
+               addScore(checkAnswer(false, questionIndex));
                updateQuestion();
               },
               color: Colors.red,
