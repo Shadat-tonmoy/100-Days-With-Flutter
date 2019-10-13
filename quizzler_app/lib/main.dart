@@ -22,25 +22,45 @@ class QuizzlerPage extends StatefulWidget
 class _QuizzlerPageState extends State<QuizzlerPage>
 {
 
+  int questionIndex = 0;
   List<Widget> scoreList = [];
+  List<String> questions = [
+    'Where is the last place you would ever go?',
+    'What are you completely over and done with?',
+    'What memory do you just keep going back to?',
+    'What’s the most immature thing your parents do?',
+    'What is the most unusual fear you have?',
+    'What is your favorite TV show?'];
 
   void addScore(bool isCorrectAnswer)
   {
-    if(isCorrectAnswer)
+    setState(()
     {
-      scoreList.add(Icon(
-        Icons.check,
-        color: Colors.green,
-      ));
-    }
-    else
-    {
-      scoreList.add(Icon(
-        Icons.close,
-        color: Colors.red,
-      ));
+      if(isCorrectAnswer)
+      {
+        scoreList.add(Icon(
+          Icons.check,
+          color: Colors.green,
+        ));
+      }
+      else
+      {
+        scoreList.add(Icon(
+          Icons.close,
+          color: Colors.red,
+        ));
+      }
+    });
 
-    }
+  }
+
+  void updateQuestion()
+  {
+    questionIndex++;
+    setState(()
+    {
+      questionIndex = questionIndex >= questions.length ? 0 : questionIndex;
+    });
 
   }
 
@@ -55,7 +75,7 @@ class _QuizzlerPageState extends State<QuizzlerPage>
           flex: 8,
           child: Center(
             child: Text(
-              "Question Goes Here there....",
+              questions[questionIndex],
               style: TextStyle(
                 color: Colors.white
               ),
@@ -69,12 +89,8 @@ class _QuizzlerPageState extends State<QuizzlerPage>
             child: FlatButton(
               onPressed: ()
               {
-                setState(()
-                {
-                  addScore(true);
-                });
-
-
+                addScore(true);
+                updateQuestion();
               },
               color: Colors.green,
               child: Text(
@@ -94,10 +110,8 @@ class _QuizzlerPageState extends State<QuizzlerPage>
             child: FlatButton(
               onPressed: ()
               {
-                setState(()
-                {
-                  addScore(false);
-                });
+               addScore(false);
+               updateQuestion();
               },
               color: Colors.red,
               child: Text(
