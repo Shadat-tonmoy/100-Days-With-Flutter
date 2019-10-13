@@ -21,6 +21,30 @@ class QuizzlerPage extends StatefulWidget
 
 class _QuizzlerPageState extends State<QuizzlerPage>
 {
+
+  List<Widget> scoreList = [];
+
+  void addScore(bool isCorrectAnswer)
+  {
+    if(isCorrectAnswer)
+    {
+      scoreList.add(Icon(
+        Icons.check,
+        color: Colors.green,
+      ));
+    }
+    else
+    {
+      scoreList.add(Icon(
+        Icons.close,
+        color: Colors.red,
+      ));
+
+    }
+
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -41,11 +65,15 @@ class _QuizzlerPageState extends State<QuizzlerPage>
         Expanded(
           flex: 2,
           child: Padding(
-            padding: EdgeInsets.all(16.0),
+            padding: EdgeInsets.all(10.0),
             child: FlatButton(
               onPressed: ()
               {
-                print("Pressed");
+                setState(()
+                {
+                  addScore(true);
+                });
+
 
               },
               color: Colors.green,
@@ -62,11 +90,14 @@ class _QuizzlerPageState extends State<QuizzlerPage>
         Expanded(
           flex: 2,
           child: Padding(
-            padding: EdgeInsets.all(16.0),
+            padding: EdgeInsets.all(10.0),
             child: FlatButton(
               onPressed: ()
               {
-                print("Pressed");
+                setState(()
+                {
+                  addScore(false);
+                });
               },
               color: Colors.red,
               child: Text(
@@ -84,12 +115,7 @@ class _QuizzlerPageState extends State<QuizzlerPage>
           child: Padding(
             padding: EdgeInsets.all(8.0),
             child: Row(
-              children: <Widget>[
-                Icon(
-                  Icons.check,
-                  color: Colors.green,
-                )
-              ],
+              children: scoreList,
             ),
           ),
         )
