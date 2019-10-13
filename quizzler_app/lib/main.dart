@@ -73,13 +73,26 @@ class _QuizzlerPageState extends State<QuizzlerPage>
                 "False",
                 style: TextStyle(
                   color: Colors.white,
-                  fontSize: 16.0
+                  fontSize: 16.0,
                 ),
               ),
 
             ),
           ),
         ),
+        Expanded(
+          child: Padding(
+            padding: EdgeInsets.all(8.0),
+            child: Row(
+              children: <Widget>[
+                Icon(
+                  Icons.check,
+                  color: Colors.green,
+                )
+              ],
+            ),
+          ),
+        )
       ],
     );
   }
