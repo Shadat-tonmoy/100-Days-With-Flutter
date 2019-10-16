@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:quizzler_app/question.dart';
+import 'package:quizzler_app/questionBank.dart';
 
 
 void main()
@@ -22,23 +24,18 @@ class QuizzlerPage extends StatefulWidget
 class _QuizzlerPageState extends State<QuizzlerPage>
 {
 
-  int questionIndex = 0;
   List<Widget> scoreList = [];
-  List<String> questions = [
-    'Where is the last place you would ever go?',
-    'What are you completely over and done with?',
-    'What memory do you just keep going back to?',
-    'What’s the most immature thing your parents do?',
-    'What is the most unusual fear you have?',
-    'What is your favorite TV show?'];
+  QuestionBank questionBank = QuestionBank();
+  Question question;
 
-  List<bool> answers = [
-    true,
-    false,
-    false,
-    true,
-    false,
-    false];
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    question = questionBank.nextQuestion();
+  }
+
+
 
   void addScore(bool isCorrectAnswer)
   {
@@ -61,24 +58,23 @@ class _QuizzlerPageState extends State<QuizzlerPage>
     });
   }
 
-  bool checkAnswer(bool answer, int questionNumber)
+  bool checkAnswer(bool answer)
   {
-    return answer == answers[questionNumber];
+    return answer == question.getAnswer();
   }
 
   void updateQuestion()
   {
-    questionIndex++;
     setState(()
     {
-      questionIndex = questionIndex >= questions.length ? 0 : questionIndex;
+      question = questionBank.nextQuestion();
     });
 
   }
 
-
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context)
+  {
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -87,7 +83,7 @@ class _QuizzlerPageState extends State<QuizzlerPage>
           flex: 8,
           child: Center(
             child: Text(
-              questions[questionIndex],
+              question.getQuestionText(),
               style: TextStyle(
                 color: Colors.white
               ),
@@ -101,7 +97,7 @@ class _QuizzlerPageState extends State<QuizzlerPage>
             child: FlatButton(
               onPressed: ()
               {
-                addScore(checkAnswer(true, questionIndex));
+                addScore(checkAnswer(true));
                 updateQuestion();
               },
               color: Colors.green,
@@ -122,7 +118,7 @@ class _QuizzlerPageState extends State<QuizzlerPage>
             child: FlatButton(
               onPressed: ()
               {
-               addScore(checkAnswer(false, questionIndex));
+               addScore(checkAnswer(false));
                updateQuestion();
               },
               color: Colors.red,
