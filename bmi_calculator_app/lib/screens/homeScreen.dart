@@ -12,15 +12,73 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: AppBar(
         title: Text('BMI CALCULATOR'),
       ),
-      body: Center(
-        child: Text('Body Text'),
-      ),
-      floatingActionButton: Theme(
-        data: ThemeData(
-            accentColor: Colors.purple
-        ),
-        child: FloatingActionButton(
-          child: Icon(Icons.add),
+      body: Container(
+        child: Column(
+          children: <Widget>[
+            Expanded(
+              child: Row(
+                children: <Widget>[
+                  Expanded(
+                    child: Container(
+                      margin: EdgeInsets.all(10),
+                      decoration: BoxDecoration(
+                      color: Color(0xff1d1e33),
+                        borderRadius: BorderRadius.circular(15)
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    child: Container(
+                      margin: EdgeInsets.all(10),
+                      decoration: BoxDecoration(
+                      color: Color(0xff1d1e33),
+                        borderRadius: BorderRadius.circular(15) 
+                      ),
+                    ),
+                  )
+                ],
+              ),
+            ),
+            Expanded(
+              child: Row(
+                children: <Widget>[
+                  Expanded(
+                    child: Container(
+                      margin: EdgeInsets.all(10),
+                      decoration: BoxDecoration(
+                        color: Color(0xff1d1e33),
+                        borderRadius: BorderRadius.circular(15)
+                      ),
+                    ),
+                  )
+                ],
+              ),
+            ),
+            Expanded(
+              child: Row(
+                children: <Widget>[
+                  Expanded(
+                    child: Container(
+                      margin: EdgeInsets.all(10),
+                      decoration: BoxDecoration(
+                        color: Color(0xff1d1e33),
+                        borderRadius: BorderRadius.circular(15) 
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    child: Container(
+                      margin: EdgeInsets.all(10),
+                      decoration: BoxDecoration(
+                        color: Color(0xff1d1e33),
+                        borderRadius: BorderRadius.circular(15)
+                      ),
+                    ),
+                  )
+                ],
+              ),
+            )
+          ],
         ),
       ),
     );
