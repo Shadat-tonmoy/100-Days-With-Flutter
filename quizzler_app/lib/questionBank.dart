@@ -20,15 +20,25 @@ class QuestionBank
   Question nextQuestion()
   {
     _questionNumber++;
-    if(_questionNumber < _questionList.length - 1)
+    if(_questionNumber < _questionList.length)
     {
       return _questionList[_questionNumber];
     }
-    else
-    {
-      _questionNumber=0;
-      return _questionList[_questionNumber];
-    }
+  }
+
+  bool isQuizFinished()
+  {
+    return _questionNumber >= _questionList.length - 1;
+  }
+
+  void resetQuiz()
+  {
+    _questionNumber = -1;
+  }
+
+  int getQuestionNumber()
+  {
+    return _questionNumber;
   }
 
 

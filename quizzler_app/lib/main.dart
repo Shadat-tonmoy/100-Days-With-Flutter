@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:quizzler_app/question.dart';
 import 'package:quizzler_app/questionBank.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 
 
 void main()
@@ -65,8 +66,61 @@ class _QuizzlerPageState extends State<QuizzlerPage>
 
   void updateQuestion()
   {
-    setState(()
+    int qN =  questionBank.getQuestionNumber();
+    if(questionBank.isQuizFinished())
     {
+      showQuizFinishedAlert();
+    }
+    else
+    {
+      setState(()
+      {
+        question = questionBank.nextQuestion();
+      });
+    }
+
+
+  }
+
+  void showQuizFinishedAlert()
+  {
+    Alert(
+        context: context,
+        title: "Quiz Finished!",
+        desc: "Restart Quiz?",
+        buttons: [
+          DialogButton(
+            child: Text(
+              "No Thanks",
+              style: TextStyle(
+                color: Colors.white,
+              ),
+            ),
+            onPressed: () => Navigator.pop(context),
+          ),
+          DialogButton(
+            child: Text(
+              "Yes",
+              style: TextStyle(
+                  color: Colors.white
+              ),
+
+            ),
+            onPressed: () {
+              resetQuiz();
+              Navigator.pop(context);
+
+            },
+          )
+        ]
+    ).show();
+  }
+
+  void resetQuiz()
+  {
+    setState(() {
+      questionBank.resetQuiz();
+      scoreList.clear();
       question = questionBank.nextQuestion();
     });
 
