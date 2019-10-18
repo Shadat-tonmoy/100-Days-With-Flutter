@@ -42,7 +42,6 @@ class _HomeScreenState extends State<HomeScreen> {
   {
     femaleCardColor = Color(CARD_BACKGROUND_COLOR);
     maleCardColor = Color(ACTIVE_CARD_BACKGROUND_COLOR);
-
   }
 
   @override
@@ -58,27 +57,21 @@ class _HomeScreenState extends State<HomeScreen> {
               child: Row(
                 children: <Widget>[
                   Expanded(
-                    child: GestureDetector(
-                      onTap: (){
+                    child: InputCard(
+                      onPressed: (){
                         updateSelectedGenderColor(GenderType.MALE);
-                        print("Tapped on male");
                       },
-                      child: InputCard(
-                        color: maleCardColor,
-                        cardChild: IconWithLabel(icon: FontAwesomeIcons.mars, label: MALE,),
-                      ),
+                      color: maleCardColor,
+                      cardChild: IconWithLabel(icon: FontAwesomeIcons.mars, label: MALE,),
                     ),
                   ),
                   Expanded(
-                    child: GestureDetector(
-                      onTap: (){
-                        print("Tapped on female");
+                    child: InputCard(
+                      onPressed: (){
                         updateSelectedGenderColor(GenderType.FEMALE);
                       },
-                      child: InputCard(
-                        color: femaleCardColor,
-                        cardChild: IconWithLabel(icon: FontAwesomeIcons.venus, label: FEMALE),
-                      ),
+                      color: femaleCardColor,
+                      cardChild: IconWithLabel(icon: FontAwesomeIcons.venus, label: FEMALE),
                     ),
                   ),
                 ],
