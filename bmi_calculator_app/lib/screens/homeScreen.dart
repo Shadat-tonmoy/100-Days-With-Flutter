@@ -19,22 +19,10 @@ class _HomeScreenState extends State<HomeScreen> {
               child: Row(
                 children: <Widget>[
                   Expanded(
-                    child: Container(
-                      margin: EdgeInsets.all(10),
-                      decoration: BoxDecoration(
-                      color: Color(0xff1d1e33),
-                        borderRadius: BorderRadius.circular(15)
-                      ),
-                    ),
+                    child: InputCard(Color(0xff1d1e33)),
                   ),
                   Expanded(
-                    child: Container(
-                      margin: EdgeInsets.all(10),
-                      decoration: BoxDecoration(
-                      color: Color(0xff1d1e33),
-                        borderRadius: BorderRadius.circular(15) 
-                      ),
-                    ),
+                    child: InputCard(Color(0xff1d1e33)),
                   )
                 ],
               ),
@@ -43,13 +31,7 @@ class _HomeScreenState extends State<HomeScreen> {
               child: Row(
                 children: <Widget>[
                   Expanded(
-                    child: Container(
-                      margin: EdgeInsets.all(10),
-                      decoration: BoxDecoration(
-                        color: Color(0xff1d1e33),
-                        borderRadius: BorderRadius.circular(15)
-                      ),
-                    ),
+                    child: InputCard(Color(0xff1d1e33)),
                   )
                 ],
               ),
@@ -58,28 +40,35 @@ class _HomeScreenState extends State<HomeScreen> {
               child: Row(
                 children: <Widget>[
                   Expanded(
-                    child: Container(
-                      margin: EdgeInsets.all(10),
-                      decoration: BoxDecoration(
-                        color: Color(0xff1d1e33),
-                        borderRadius: BorderRadius.circular(15) 
-                      ),
-                    ),
+                    child: InputCard(Color(0xff1d1e33)),
                   ),
                   Expanded(
-                    child: Container(
-                      margin: EdgeInsets.all(10),
-                      decoration: BoxDecoration(
-                        color: Color(0xff1d1e33),
-                        borderRadius: BorderRadius.circular(15)
-                      ),
-                    ),
+                    child: InputCard(Color(0xff1d1e33)),
                   )
                 ],
               ),
             )
           ],
         ),
+      ),
+    );
+  }
+}
+
+class InputCard extends StatelessWidget {
+
+  Color color;
+
+  InputCard(this.color);
+
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.all(10),
+      decoration: BoxDecoration(
+        color: color,
+        borderRadius: BorderRadius.circular(15)
       ),
     );
   }
