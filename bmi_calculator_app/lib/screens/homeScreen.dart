@@ -1,5 +1,6 @@
 import 'package:bmi_calculator_app/constants/colorCodes.dart';
 import 'package:bmi_calculator_app/constants/dimentions.dart';
+import 'package:bmi_calculator_app/constants/strings.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -24,30 +25,13 @@ class _HomeScreenState extends State<HomeScreen> {
                   Expanded(
                     child: InputCard(
                       color: Color(CARD_BACKGROUND_COLOR),
-                      cardChild: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          Icon(
-                            FontAwesomeIcons.mars,
-                            size: INPUT_CARD_ICON_SIZE,
-                          ),
-                          SizedBox(
-                            height: DEFAULT_SPACE,
-                          ),
-                          Text(
-                            "MALE",
-                            style: TextStyle(
-                              color: Color(CARD_TEXT_COLOR)
-                            ),
-                          )
-                        ],
-                      ),
-
+                      cardChild: IconWithLabel(icon: FontAwesomeIcons.mars, label: MALE,),
                     ),
                   ),
                   Expanded(
                     child: InputCard(
                       color: Color(CARD_BACKGROUND_COLOR),
+                      cardChild: IconWithLabel(icon: FontAwesomeIcons.venus, label: FEMALE),
                     ),
                   ),
                 ],
@@ -89,6 +73,36 @@ class _HomeScreenState extends State<HomeScreen> {
           ],
         ),
       ),
+    );
+  }
+}
+
+class IconWithLabel extends StatelessWidget {
+
+  final IconData icon;
+  final String label;
+
+  IconWithLabel({@required this.icon, @required this.label});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        Icon(
+          icon,
+          size: INPUT_CARD_ICON_SIZE,
+        ),
+        SizedBox(
+          height: DEFAULT_SPACE,
+        ),
+        Text(
+          label,
+          style: TextStyle(
+            color: Color(CARD_TEXT_COLOR)
+          ),
+        )
+      ],
     );
   }
 }
