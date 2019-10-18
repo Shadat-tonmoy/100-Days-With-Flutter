@@ -1,0 +1,1 @@
+const double CALCULATE_BUTTON_HEIGHT = 80;

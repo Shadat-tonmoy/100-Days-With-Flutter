@@ -1,0 +1,2 @@
+const int CALCULATE_BUTTON_COLOR = 0xffEB4656;
+const int CARD_BACKGROUND_COLOR = 0xff1d1e33;

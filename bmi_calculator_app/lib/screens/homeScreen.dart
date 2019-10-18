@@ -1,4 +1,7 @@
+import 'package:bmi_calculator_app/constants/colorCodes.dart';
+import 'package:bmi_calculator_app/constants/dimentions.dart';
 import 'package:flutter/material.dart';
+
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -19,10 +22,10 @@ class _HomeScreenState extends State<HomeScreen> {
               child: Row(
                 children: <Widget>[
                   Expanded(
-                    child: InputCard(Color(0xff1d1e33)),
+                    child: InputCard(Color(CARD_BACKGROUND_COLOR)),
                   ),
                   Expanded(
-                    child: InputCard(Color(0xff1d1e33)),
+                    child: InputCard(Color(CARD_BACKGROUND_COLOR)),
                   )
                 ],
               ),
@@ -31,7 +34,7 @@ class _HomeScreenState extends State<HomeScreen> {
               child: Row(
                 children: <Widget>[
                   Expanded(
-                    child: InputCard(Color(0xff1d1e33)),
+                    child: InputCard(Color(CARD_BACKGROUND_COLOR)),
                   )
                 ],
               ),
@@ -40,13 +43,19 @@ class _HomeScreenState extends State<HomeScreen> {
               child: Row(
                 children: <Widget>[
                   Expanded(
-                    child: InputCard(Color(0xff1d1e33)),
+                    child: InputCard(Color(CARD_BACKGROUND_COLOR)),
                   ),
                   Expanded(
-                    child: InputCard(Color(0xff1d1e33)),
+                    child: InputCard(Color(CARD_BACKGROUND_COLOR)),
                   )
                 ],
               ),
+            ),
+            Container(
+              width: double.infinity,
+              height: CALCULATE_BUTTON_HEIGHT,
+              margin: EdgeInsets.only(top: 10.0),
+              color: Color(CALCULATE_BUTTON_COLOR),
             )
           ],
         ),
@@ -57,7 +66,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
 class InputCard extends StatelessWidget {
 
-  Color color;
+  final Color color;
 
   InputCard(this.color);
 
