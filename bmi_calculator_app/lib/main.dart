@@ -1,4 +1,4 @@
-import 'package:bmi_calculator_app/screens/homeScreen.dart';
+import 'package:bmi_calculator_app/view/screens/homeScreen.dart';
 import 'package:flutter/material.dart';
 
 void main() => runApp(BMICalculator());
