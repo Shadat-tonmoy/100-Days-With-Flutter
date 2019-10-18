@@ -1,5 +1,6 @@
 import 'package:bmi_calculator_app/constants/colorCodes.dart';
 import 'package:bmi_calculator_app/constants/dimentions.dart';
+import 'package:bmi_calculator_app/constants/enums.dart';
 import 'package:bmi_calculator_app/constants/strings.dart';
 import 'package:bmi_calculator_app/view/customWidgets/homeScreenCards.dart';
 import 'package:bmi_calculator_app/view/customWidgets/iconWithLabel.dart';
@@ -12,6 +13,27 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+
+  Color maleCardColor = Color(CARD_BACKGROUND_COLOR);
+  Color femaleCardColor = Color(CARD_BACKGROUND_COLOR);
+
+  void updateSelectedGenderColor(GenderType genderType)
+  {
+    setState(() {
+      switch(genderType)
+      {
+        case GenderType.MALE:
+          maleCardColor = Color(ACTIVE_CARD_BACKGROUND_COLOR);
+          femaleCardColor = Color(CARD_BACKGROUND_COLOR);
+          break;
+        case GenderType.FEMALE:
+          femaleCardColor = Color(ACTIVE_CARD_BACKGROUND_COLOR);
+          maleCardColor = Color(CARD_BACKGROUND_COLOR);
+          break;
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,15 +47,27 @@ class _HomeScreenState extends State<HomeScreen> {
               child: Row(
                 children: <Widget>[
                   Expanded(
-                    child: InputCard(
-                      color: Color(CARD_BACKGROUND_COLOR),
-                      cardChild: IconWithLabel(icon: FontAwesomeIcons.mars, label: MALE,),
+                    child: GestureDetector(
+                      onTap: (){
+                        updateSelectedGenderColor(GenderType.MALE);
+                        print("Tapped on male");
+                      },
+                      child: InputCard(
+                        color: maleCardColor,
+                        cardChild: IconWithLabel(icon: FontAwesomeIcons.mars, label: MALE,),
+                      ),
                     ),
                   ),
                   Expanded(
-                    child: InputCard(
-                      color: Color(CARD_BACKGROUND_COLOR),
-                      cardChild: IconWithLabel(icon: FontAwesomeIcons.venus, label: FEMALE),
+                    child: GestureDetector(
+                      onTap: (){
+                        print("Tapped on female");
+                        updateSelectedGenderColor(GenderType.FEMALE);
+                      },
+                      child: InputCard(
+                        color: femaleCardColor,
+                        cardChild: IconWithLabel(icon: FontAwesomeIcons.venus, label: FEMALE),
+                      ),
                     ),
                   ),
                 ],

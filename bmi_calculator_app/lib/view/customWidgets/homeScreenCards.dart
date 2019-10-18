@@ -10,8 +10,10 @@ class InputCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.all(10),
-      decoration:
-      BoxDecoration(color: color, borderRadius: BorderRadius.circular(15)),
+      decoration: BoxDecoration(
+        color: color,
+        borderRadius: BorderRadius.circular(15),
+      ),
       child: cardChild,
     );
   }
