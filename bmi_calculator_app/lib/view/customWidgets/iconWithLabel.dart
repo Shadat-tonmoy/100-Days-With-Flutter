@@ -1,5 +1,6 @@
 import 'package:bmi_calculator_app/constants/colorCodes.dart';
 import 'package:bmi_calculator_app/constants/dimentions.dart';
+import 'package:bmi_calculator_app/constants/styles.dart';
 import 'package:flutter/material.dart';
 
 class IconWithLabel extends StatelessWidget {
@@ -23,9 +24,8 @@ class IconWithLabel extends StatelessWidget {
         ),
         Text(
           label,
-          style: TextStyle(
-              color: Color(CARD_TEXT_COLOR)
-          ),
+          style: iconLabelStyle,
+
         )
       ],
     );
