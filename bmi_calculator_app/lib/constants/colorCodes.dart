@@ -1,2 +1,3 @@
 const int CALCULATE_BUTTON_COLOR = 0xffEB4656;
 const int CARD_BACKGROUND_COLOR = 0xff1d1e33;
+const int CARD_TEXT_COLOR = 0xff8d8398;

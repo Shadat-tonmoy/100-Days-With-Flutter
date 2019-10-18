@@ -1,7 +1,7 @@
 import 'package:bmi_calculator_app/constants/colorCodes.dart';
 import 'package:bmi_calculator_app/constants/dimentions.dart';
 import 'package:flutter/material.dart';
-
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -22,11 +22,34 @@ class _HomeScreenState extends State<HomeScreen> {
               child: Row(
                 children: <Widget>[
                   Expanded(
-                    child: InputCard(Color(CARD_BACKGROUND_COLOR)),
+                    child: InputCard(
+                      color: Color(CARD_BACKGROUND_COLOR),
+                      cardChild: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Icon(
+                            FontAwesomeIcons.mars,
+                            size: INPUT_CARD_ICON_SIZE,
+                          ),
+                          SizedBox(
+                            height: DEFAULT_SPACE,
+                          ),
+                          Text(
+                            "MALE",
+                            style: TextStyle(
+                              color: Color(CARD_TEXT_COLOR)
+                            ),
+                          )
+                        ],
+                      ),
+
+                    ),
                   ),
                   Expanded(
-                    child: InputCard(Color(CARD_BACKGROUND_COLOR)),
-                  )
+                    child: InputCard(
+                      color: Color(CARD_BACKGROUND_COLOR),
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -34,8 +57,10 @@ class _HomeScreenState extends State<HomeScreen> {
               child: Row(
                 children: <Widget>[
                   Expanded(
-                    child: InputCard(Color(CARD_BACKGROUND_COLOR)),
-                  )
+                    child: InputCard(
+                      color: Color(CARD_BACKGROUND_COLOR),
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -43,10 +68,14 @@ class _HomeScreenState extends State<HomeScreen> {
               child: Row(
                 children: <Widget>[
                   Expanded(
-                    child: InputCard(Color(CARD_BACKGROUND_COLOR)),
+                    child: InputCard(
+                      color: Color(CARD_BACKGROUND_COLOR),
+                    ),
                   ),
                   Expanded(
-                    child: InputCard(Color(CARD_BACKGROUND_COLOR)),
+                    child: InputCard(
+                      color: Color(CARD_BACKGROUND_COLOR),
+                    ),
                   )
                 ],
               ),
@@ -65,20 +94,18 @@ class _HomeScreenState extends State<HomeScreen> {
 }
 
 class InputCard extends StatelessWidget {
-
   final Color color;
+  final Widget cardChild;
 
-  InputCard(this.color);
-
+  InputCard({@required this.color, this.cardChild});
 
   @override
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.all(10),
-      decoration: BoxDecoration(
-        color: color,
-        borderRadius: BorderRadius.circular(15)
-      ),
+      decoration:
+          BoxDecoration(color: color, borderRadius: BorderRadius.circular(15)),
+      child: cardChild,
     );
   }
 }
