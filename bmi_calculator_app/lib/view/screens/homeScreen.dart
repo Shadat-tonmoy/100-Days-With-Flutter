@@ -23,15 +23,26 @@ class _HomeScreenState extends State<HomeScreen> {
       switch(genderType)
       {
         case GenderType.MALE:
-          maleCardColor = Color(ACTIVE_CARD_BACKGROUND_COLOR);
-          femaleCardColor = Color(CARD_BACKGROUND_COLOR);
+          selectMale();
           break;
         case GenderType.FEMALE:
-          femaleCardColor = Color(ACTIVE_CARD_BACKGROUND_COLOR);
-          maleCardColor = Color(CARD_BACKGROUND_COLOR);
+          selectFemale();
           break;
       }
     });
+  }
+
+  void selectFemale()
+  {
+    femaleCardColor = Color(ACTIVE_CARD_BACKGROUND_COLOR);
+    maleCardColor = Color(CARD_BACKGROUND_COLOR);
+  }
+
+  void selectMale()
+  {
+    femaleCardColor = Color(CARD_BACKGROUND_COLOR);
+    maleCardColor = Color(ACTIVE_CARD_BACKGROUND_COLOR);
+
   }
 
   @override
