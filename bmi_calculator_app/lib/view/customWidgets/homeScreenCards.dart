@@ -30,16 +30,12 @@ class InputCard extends StatelessWidget {
   }
 }
 
-
-
-
 class HomeScreenSlider extends StatelessWidget {
 
   final double height;
   final Function onChangedValue;
 
   HomeScreenSlider({@required this.height, this.onChangedValue});
-
 
   @override
   Widget build(BuildContext context) {
@@ -113,4 +109,48 @@ class RoundButton extends StatelessWidget {
       ),
     );
   }
+}
+
+class InputWithPlusMinus extends StatelessWidget{
+
+  final double value;
+  final Function incrementValue, decrementValue;
+  final String label;
+
+  InputWithPlusMinus({this.label, this.value, this.incrementValue, this.decrementValue});
+
+  @override
+  Widget build(BuildContext context) {
+
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        Text(
+          label,
+          style: iconLabelStyle,
+        ),
+        Text(
+          value.toString(),
+          style: homeNumberStyle,
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            RoundButton(
+              buttonType: ButtonType.PLUS,
+              onPressed: incrementValue
+            ),
+            SizedBox(
+              width: DEFAULT_SPACE,
+            ),
+            RoundButton(
+              buttonType: ButtonType.MINUS,
+              onPressed: decrementValue,
+            )
+          ],
+        )
+      ],
+    );
+  }
+
 }

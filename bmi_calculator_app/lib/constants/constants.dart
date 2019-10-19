@@ -4,3 +4,6 @@ const double MAXIMUM_HEIGHT = 220.0;
 const double DEFAULT_WEIGHT = 60.0;
 const double MAX_WEIGHT = 200.0;
 const double MIN_WEIGHT = 5.0;
+const double DEFAULT_AGE = 18.0;
+const double MIN_AGE = 1.0;
+const double MAX_AGE = 150.0;

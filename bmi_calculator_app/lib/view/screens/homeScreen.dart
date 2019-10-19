@@ -20,7 +20,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Color maleCardColor = Color(CARD_BACKGROUND_COLOR);
   Color femaleCardColor = Color(CARD_BACKGROUND_COLOR);
   GenderType selectedGender;
-  double height = DEFAULT_HEIGHT, weight = DEFAULT_WEIGHT;
+  double height = DEFAULT_HEIGHT, weight = DEFAULT_WEIGHT, age = DEFAULT_AGE;
 
   void updateSelectedGenderColor(GenderType genderType) {
     setState(() {
@@ -53,17 +53,27 @@ class _HomeScreenState extends State<HomeScreen> {
     });
   }
 
-  void updateWeight(ButtonType buttonType) {
+  void incrementWeight() {
     setState(() {
-      switch (buttonType) {
-        case ButtonType.PLUS:
-          weight = min(++weight, MAX_WEIGHT);
-//          print("Updated weight $weight");
-          break;
-        case ButtonType.MINUS:
-          weight = max(--weight, MIN_WEIGHT);
-          break;
-      }
+      weight = min(++weight, MAX_WEIGHT);
+    });
+  }
+
+  void decrementWeight() {
+    setState(() {
+      weight = max(--weight, MIN_WEIGHT);
+    });
+  }
+
+  void incrementAge() {
+    setState(() {
+      age = min(++age, MAX_AGE);
+    });
+  }
+
+  void decrementAge() {
+    setState(() {
+      age = max(--age, MIN_AGE);
     });
   }
 
@@ -126,44 +136,34 @@ class _HomeScreenState extends State<HomeScreen> {
                   Expanded(
                     child: InputCard(
                       color: Color(CARD_BACKGROUND_COLOR),
-                      cardChild: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          Text(
-                            WEIGHT,
-                            style: iconLabelStyle,
-                          ),
-                          Text(
-                            weight.toString(),
-                            style: homeNumberStyle,
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                              RoundButton(
-                                buttonType: ButtonType.PLUS,
-                                onPressed: (){
-                                  updateWeight(ButtonType.PLUS);
-                                },
-                              ),
-                              SizedBox(
-                                width: DEFAULT_SPACE,
-                              ),
-                              RoundButton(
-                                buttonType: ButtonType.MINUS,
-                                onPressed: (){
-                                  updateWeight(ButtonType.MINUS);
-                                },
-                              )
-                            ],
-                          )
-                        ],
+                      cardChild: InputWithPlusMinus(
+                        label: WEIGHT,
+                        value: weight,
+                        incrementValue: ()
+                        {
+                          incrementWeight();
+                        },
+                        decrementValue: ()
+                        {
+                          decrementWeight();
+                        },
                       ),
                     ),
                   ),
                   Expanded(
                     child: InputCard(
                       color: Color(CARD_BACKGROUND_COLOR),
+                      cardChild: InputWithPlusMinus(
+                        label: AGE,
+                        value: age,
+                        incrementValue: (){
+                          incrementAge();
+                        },
+                        decrementValue: (){
+                          decrementAge();
+                        },
+                      ),
+
                     ),
                   )
                 ],
