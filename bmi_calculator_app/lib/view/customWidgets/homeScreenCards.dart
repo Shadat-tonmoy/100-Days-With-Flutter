@@ -1,3 +1,8 @@
+import 'package:bmi_calculator_app/constants/colorCodes.dart';
+import 'package:bmi_calculator_app/constants/constants.dart';
+import 'package:bmi_calculator_app/constants/dimentions.dart';
+import 'package:bmi_calculator_app/constants/strings.dart';
+import 'package:bmi_calculator_app/constants/styles.dart';
 import 'package:flutter/material.dart';
 
 class InputCard extends StatelessWidget {
@@ -21,4 +26,68 @@ class InputCard extends StatelessWidget {
       ),
     );
   }
+}
+
+
+
+
+class HomeScreenSlider extends StatelessWidget {
+
+  final double height;
+  final Function onChangedValue;
+
+  HomeScreenSlider({@required this.height, this.onChangedValue});
+
+
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Text(
+            HEIGHT,
+            style: iconLabelStyle,
+            textAlign: TextAlign.start,
+          ),
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.baseline,
+          textBaseline: TextBaseline.alphabetic,
+          children: <Widget>[
+            Text(
+              height.toString(),
+//              height.toString(),
+              style: homeNumberStyle,
+            ),
+            SizedBox(
+              width: SPACE_BETWEEN_HEIGHT_UNIT,
+            ),
+            Text(
+              "cm",
+              style: iconLabelStyle,
+            )
+          ],
+        ),
+        SliderTheme(
+          data: SliderThemeData(
+              thumbColor: Color(CALCULATE_BUTTON_COLOR),
+              activeTrackColor: Colors.white,
+              inactiveTrackColor: Color(CARD_TEXT_COLOR),
+              overlayColor:
+              Color(CALCULATE_BUTTON_COLOR_TRANS)),
+          child: Slider(
+            value: height,
+            min: MINIMUM_HEIGHT,
+            max: MAXIMUM_HEIGHT,
+            onChanged: onChangedValue,
+          ),
+        )
+      ],
+    );
+  }
+
 }

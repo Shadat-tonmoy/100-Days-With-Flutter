@@ -15,17 +15,14 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-
   Color maleCardColor = Color(CARD_BACKGROUND_COLOR);
   Color femaleCardColor = Color(CARD_BACKGROUND_COLOR);
   GenderType selectedGender;
   double height = DEFAULT_HEIGHT;
 
-  void updateSelectedGenderColor(GenderType genderType)
-  {
+  void updateSelectedGenderColor(GenderType genderType) {
     setState(() {
-      switch(genderType)
-      {
+      switch (genderType) {
         case GenderType.MALE:
           selectMale();
           break;
@@ -36,18 +33,24 @@ class _HomeScreenState extends State<HomeScreen> {
     });
   }
 
-  void selectFemale()
-  {
+  void selectFemale() {
     femaleCardColor = Color(ACTIVE_CARD_BACKGROUND_COLOR);
     maleCardColor = Color(CARD_BACKGROUND_COLOR);
     selectedGender = GenderType.FEMALE;
   }
 
-  void selectMale()
-  {
+  void selectMale() {
     femaleCardColor = Color(CARD_BACKGROUND_COLOR);
     maleCardColor = Color(ACTIVE_CARD_BACKGROUND_COLOR);
     selectedGender = GenderType.MALE;
+  }
+
+  void updateHeight(double height)
+  {
+    setState(() {
+      this.height = height.roundToDouble();
+    });
+
   }
 
   @override
@@ -64,20 +67,24 @@ class _HomeScreenState extends State<HomeScreen> {
                 children: <Widget>[
                   Expanded(
                     child: InputCard(
-                      onPressed: (){
+                      onPressed: () {
                         updateSelectedGenderColor(GenderType.MALE);
                       },
                       color: maleCardColor,
-                      cardChild: IconWithLabel(icon: FontAwesomeIcons.mars, label: MALE,),
+                      cardChild: IconWithLabel(
+                        icon: FontAwesomeIcons.mars,
+                        label: MALE,
+                      ),
                     ),
                   ),
                   Expanded(
                     child: InputCard(
-                      onPressed: (){
+                      onPressed: () {
                         updateSelectedGenderColor(GenderType.FEMALE);
                       },
                       color: femaleCardColor,
-                      cardChild: IconWithLabel(icon: FontAwesomeIcons.venus, label: FEMALE),
+                      cardChild: IconWithLabel(
+                          icon: FontAwesomeIcons.venus, label: FEMALE),
                     ),
                   ),
                 ],
@@ -89,53 +96,10 @@ class _HomeScreenState extends State<HomeScreen> {
                   Expanded(
                     child: InputCard(
                       color: Color(CARD_BACKGROUND_COLOR),
-                      cardChild: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Text(
-                              HEIGHT,
-                              style: iconLabelStyle,
-                              textAlign: TextAlign.start,
-                            ),
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.baseline,
-                            textBaseline: TextBaseline.alphabetic,
-                            children: <Widget>[
-                              Text(
-                                height.toString(),
-                                style: homeNumberStyle,
+                      cardChild: HomeScreenSlider(height: height,onChangedValue : (double value){
+                        updateHeight(value);
 
-                              ),
-                              SizedBox(
-                                width: SPACE_BETWEEN_HEIGHT_UNIT,
-                              ),
-                              Text(
-                                "cm",
-                                style: iconLabelStyle,
-                              )
-                            ],
-                          ),
-                          Slider(
-                            value: height,
-                            min: MINIMUM_HEIGHT,
-                            max: MAXIMUM_HEIGHT,
-                            activeColor: Color(CALCULATE_BUTTON_COLOR),
-                            inactiveColor: Color(CARD_TEXT_COLOR),
-                            onChanged: (double value)
-                            {
-                              setState(() {
-                                height = value.roundToDouble();
-                              });
-
-
-                            },
-                          )
-                        ],
-                      ),
+                      }),
                     ),
                   ),
                 ],
@@ -169,5 +133,3 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 }
-
-
