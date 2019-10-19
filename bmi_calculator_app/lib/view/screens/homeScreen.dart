@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:bmi_calculator_app/constants/colorCodes.dart';
 import 'package:bmi_calculator_app/constants/constants.dart';
 import 'package:bmi_calculator_app/constants/dimentions.dart';
@@ -18,7 +20,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Color maleCardColor = Color(CARD_BACKGROUND_COLOR);
   Color femaleCardColor = Color(CARD_BACKGROUND_COLOR);
   GenderType selectedGender;
-  double height = DEFAULT_HEIGHT;
+  double height = DEFAULT_HEIGHT, weight = DEFAULT_WEIGHT;
 
   void updateSelectedGenderColor(GenderType genderType) {
     setState(() {
@@ -45,12 +47,24 @@ class _HomeScreenState extends State<HomeScreen> {
     selectedGender = GenderType.MALE;
   }
 
-  void updateHeight(double height)
-  {
+  void updateHeight(double height) {
     setState(() {
       this.height = height.roundToDouble();
     });
+  }
 
+  void updateWeight(ButtonType buttonType) {
+    setState(() {
+      switch (buttonType) {
+        case ButtonType.PLUS:
+          weight = min(++weight, MAX_WEIGHT);
+//          print("Updated weight $weight");
+          break;
+        case ButtonType.MINUS:
+          weight = max(--weight, MIN_WEIGHT);
+          break;
+      }
+    });
   }
 
   @override
@@ -96,10 +110,11 @@ class _HomeScreenState extends State<HomeScreen> {
                   Expanded(
                     child: InputCard(
                       color: Color(CARD_BACKGROUND_COLOR),
-                      cardChild: HomeScreenSlider(height: height,onChangedValue : (double value){
-                        updateHeight(value);
-
-                      }),
+                      cardChild: HomeScreenSlider(
+                          height: height,
+                          onChangedValue: (double value) {
+                            updateHeight(value);
+                          }),
                     ),
                   ),
                 ],
@@ -111,6 +126,39 @@ class _HomeScreenState extends State<HomeScreen> {
                   Expanded(
                     child: InputCard(
                       color: Color(CARD_BACKGROUND_COLOR),
+                      cardChild: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Text(
+                            WEIGHT,
+                            style: iconLabelStyle,
+                          ),
+                          Text(
+                            weight.toString(),
+                            style: homeNumberStyle,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              RoundButton(
+                                buttonType: ButtonType.PLUS,
+                                onPressed: (){
+                                  updateWeight(ButtonType.PLUS);
+                                },
+                              ),
+                              SizedBox(
+                                width: DEFAULT_SPACE,
+                              ),
+                              RoundButton(
+                                buttonType: ButtonType.MINUS,
+                                onPressed: (){
+                                  updateWeight(ButtonType.MINUS);
+                                },
+                              )
+                            ],
+                          )
+                        ],
+                      ),
                     ),
                   ),
                   Expanded(
@@ -133,3 +181,5 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 }
+
+

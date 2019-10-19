@@ -1,9 +1,11 @@
 import 'package:bmi_calculator_app/constants/colorCodes.dart';
 import 'package:bmi_calculator_app/constants/constants.dart';
 import 'package:bmi_calculator_app/constants/dimentions.dart';
+import 'package:bmi_calculator_app/constants/enums.dart';
 import 'package:bmi_calculator_app/constants/strings.dart';
 import 'package:bmi_calculator_app/constants/styles.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class InputCard extends StatelessWidget {
   final Color color;
@@ -90,4 +92,25 @@ class HomeScreenSlider extends StatelessWidget {
     );
   }
 
+}
+
+class RoundButton extends StatelessWidget {
+  final ButtonType buttonType;
+  final Function onPressed;
+
+  RoundButton({this.buttonType, this.onPressed});
+
+  @override
+  Widget build(BuildContext context) {
+    return RawMaterialButton(
+      fillColor: Color(ROUND_BUTTON_BACKGROUND_COLOR),
+      shape: CircleBorder(),
+      constraints: BoxConstraints.tightFor(width: 56.0, height: 56.0),
+      onPressed: onPressed,
+      elevation: 6.0,
+      child: Icon(
+          buttonType == ButtonType.PLUS ? FontAwesomeIcons.plus : FontAwesomeIcons.minus
+      ),
+    );
+  }
 }
