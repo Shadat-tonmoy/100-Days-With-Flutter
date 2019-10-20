@@ -11,6 +11,8 @@ import 'package:bmi_calculator_app/view/customWidgets/iconWithLabel.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+import 'outputScreen.dart';
+
 class HomeScreen extends StatefulWidget {
   @override
   _HomeScreenState createState() => _HomeScreenState();
@@ -75,6 +77,17 @@ class _HomeScreenState extends State<HomeScreen> {
     setState(() {
       age = max(--age, MIN_AGE);
     });
+  }
+
+  void gotoOutputScreen()
+  {
+    Navigator.push(context, MaterialPageRoute(
+      builder: (context){
+        return BMIResult();
+      }
+    ));
+
+
   }
 
   @override
@@ -174,6 +187,20 @@ class _HomeScreenState extends State<HomeScreen> {
               height: CALCULATE_BUTTON_HEIGHT,
               margin: EdgeInsets.only(top: 8.0),
               color: Color(CALCULATE_BUTTON_COLOR),
+              child: Center(
+                child: GestureDetector(
+                  onTap: (){
+                    gotoOutputScreen();
+                  },
+                  child: Text(
+                    CALCULATE,
+                    style: TextStyle(
+                      fontSize: 16.0,
+                      fontWeight: FontWeight.bold
+                    ),
+                  ),
+                ),
+              ),
             )
           ],
         ),
