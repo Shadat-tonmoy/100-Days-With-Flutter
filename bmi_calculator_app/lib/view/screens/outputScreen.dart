@@ -10,18 +10,16 @@ class _BMIResultState extends State<BMIResult> {
   @override
   Widget build(BuildContext context)
   {
-    return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text(
-            "Calculation Result"
-          ),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          "Calculation Result",
         ),
-        body: Container(
-          child: Center(
-            child: Text(
+      ),
+      body: Container(
+        child: Center(
+          child: Text(
               "Your Result Goes Here"
-            ),
           ),
         ),
       ),

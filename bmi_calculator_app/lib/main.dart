@@ -1,4 +1,5 @@
 import 'package:bmi_calculator_app/view/screens/homeScreen.dart';
+import 'package:bmi_calculator_app/view/screens/outputScreen.dart';
 import 'package:flutter/material.dart';
 
 void main() => runApp(BMICalculator());
@@ -16,7 +17,13 @@ class BMICalculator extends StatelessWidget {
               )
           )
       ),
-      home: HomeScreen(),
+      initialRoute: "/",
+//      home: HomeScreen(),
+    //only one can exists between home and initial route
+      routes: {
+        "/" : (context) => HomeScreen(),
+        "/result" : (context) => BMIResult()
+      },
     );
   }
 }

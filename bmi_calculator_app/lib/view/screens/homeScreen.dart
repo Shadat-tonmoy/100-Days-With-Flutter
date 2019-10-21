@@ -81,11 +81,16 @@ class _HomeScreenState extends State<HomeScreen> {
 
   void gotoOutputScreen()
   {
-    Navigator.push(context, MaterialPageRoute(
+    //navigating with material page route
+    /*Navigator.push(context, MaterialPageRoute(
       builder: (context){
         return BMIResult();
       }
-    ));
+    ));*/
+
+    //navigating with route name
+
+    Navigator.pushNamed(context, "/result");
 
 
   }
@@ -176,22 +181,21 @@ class _HomeScreenState extends State<HomeScreen> {
                           decrementAge();
                         },
                       ),
-
                     ),
                   )
                 ],
               ),
             ),
-            Container(
-              width: double.infinity,
-              height: CALCULATE_BUTTON_HEIGHT,
-              margin: EdgeInsets.only(top: 8.0),
-              color: Color(CALCULATE_BUTTON_COLOR),
-              child: Center(
-                child: GestureDetector(
-                  onTap: (){
-                    gotoOutputScreen();
-                  },
+            GestureDetector(
+              onTap: (){
+                gotoOutputScreen();
+              },
+              child: Container(
+                width: double.infinity,
+                height: CALCULATE_BUTTON_HEIGHT,
+                margin: EdgeInsets.only(top: 8.0),
+                color: Color(CALCULATE_BUTTON_COLOR),
+                child: Center(
                   child: Text(
                     CALCULATE,
                     style: TextStyle(
