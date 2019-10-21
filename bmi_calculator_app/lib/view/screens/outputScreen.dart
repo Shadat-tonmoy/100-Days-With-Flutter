@@ -1,3 +1,7 @@
+import 'package:bmi_calculator_app/constants/colorCodes.dart';
+import 'package:bmi_calculator_app/constants/dimentions.dart';
+import 'package:bmi_calculator_app/constants/styles.dart';
+import 'package:bmi_calculator_app/view/customWidgets/homeScreenCards.dart';
 import 'package:flutter/material.dart';
 
 class BMIResult extends StatefulWidget
@@ -16,12 +20,107 @@ class _BMIResultState extends State<BMIResult> {
           "Calculation Result",
         ),
       ),
-      body: Container(
-        child: Center(
-          child: Text(
-              "Your Result Goes Here"
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: <Widget>[
+          Expanded(
+            flex: 5,
+            child: Padding(
+              padding: EdgeInsets.all(16.0),
+              child: InputCard(
+                color: Color(CARD_BACKGROUND_COLOR),
+                cardChild: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: <Widget>[
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.all(32.0),
+                        child: Text(
+                          "NORMAL",
+                          style: TextStyle(
+                            color: Colors.green,
+                            fontSize: 20.0,
+                            fontWeight: FontWeight.bold
+                          ),
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: Text(
+                        "22.1",
+                        style: TextStyle(
+                          fontSize: 75.0,
+                          fontWeight: FontWeight.w900
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: Column(
+                        children: <Widget>[
+                          Text(
+                            "Normal BMI range:",
+                            style: TextStyle(
+                              fontSize: 20.0,
+                              color: Colors.grey
+                            ),
+                          ),
+                          SizedBox(
+                            height: 4.0,
+                          ),
+                          Text(
+                            "18, 5 - 25 kg/m2",
+                            style: TextStyle(
+                              fontSize: 16.0,
+                              fontWeight: FontWeight.bold
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                    Expanded(
+                      child: Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: Text(
+                          "You have a normal body weight. Good job!",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontSize: 18.0,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    )
+                  ],
+
+                ),
+
+              ),
+            ),
           ),
-        ),
+          Expanded(
+            child: GestureDetector(
+              onTap: (){
+                Navigator.pop(context);
+              },
+              child: Container(
+                width: double.infinity,
+                color: Color(CALCULATE_BUTTON_COLOR),
+                height: CALCULATE_BUTTON_HEIGHT,
+                margin: EdgeInsets.only(top: 24.0),
+                child: Center(
+                  child: Text(
+                    "RE-CALCULATE YOUR BMI",
+                    style: TextStyle(
+                      fontSize: 16.0,
+                      fontWeight: FontWeight.bold
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          )
+        ],
       ),
     );
   }
