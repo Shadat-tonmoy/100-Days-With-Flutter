@@ -5,12 +5,14 @@ import 'package:bmi_calculator_app/constants/strings.dart';
 
 class BMICalculationTask
 {
-  final int height;
-  final int weight;
-
-  BMICalculationTask({this.height,this.weight});
-
+  final double height;
+  final double weight;
   double _bmi;
+
+  BMICalculationTask({this.height,this.weight})
+  {
+    calculateBMI();
+  }
 
   String calculateBMI()
   {

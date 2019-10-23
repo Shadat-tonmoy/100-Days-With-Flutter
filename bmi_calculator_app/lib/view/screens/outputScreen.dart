@@ -1,6 +1,5 @@
 import 'package:bmi_calculator_app/constants/colorCodes.dart';
 import 'package:bmi_calculator_app/constants/dimentions.dart';
-import 'package:bmi_calculator_app/constants/styles.dart';
 import 'package:bmi_calculator_app/tasks/calculationTask.dart';
 import 'package:bmi_calculator_app/view/customWidgets/homeScreenCards.dart';
 import 'package:flutter/material.dart';
@@ -8,14 +7,18 @@ import 'package:flutter/material.dart';
 class BMIResult extends StatelessWidget
 {
 
-
   final double weight, height;
-  BMIResult({this.weight, this.height});
+  BMICalculationTask _bmiCalculationTask;
+  BMIResult({this.weight,this.height})
+  {
+    _bmiCalculationTask = BMICalculationTask(height: height, weight: weight);
+  }
+
 
   @override
   Widget build(BuildContext context)
   {
-    print("Received Data Height $height Weight $weight");
+
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -39,7 +42,7 @@ class BMIResult extends StatelessWidget
                       child: Padding(
                         padding: const EdgeInsets.all(32.0),
                         child: Text(
-                          "NORMAL",
+                          _bmiCalculationTask.getResult(),
                           style: TextStyle(
                               color: Colors.green,
                               fontSize: 20.0,
@@ -50,7 +53,7 @@ class BMIResult extends StatelessWidget
                     ),
                     Expanded(
                       child: Text(
-                        "22.1",
+                        _bmiCalculationTask.calculateBMI(),
                         style: TextStyle(
                             fontSize: 75.0,
                             fontWeight: FontWeight.w900
@@ -84,7 +87,7 @@ class BMIResult extends StatelessWidget
                       child: Padding(
                         padding: EdgeInsets.all(8.0),
                         child: Text(
-                          "You have a normal body weight. Good job!",
+                          _bmiCalculationTask.getMessage(),
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             fontSize: 18.0,
