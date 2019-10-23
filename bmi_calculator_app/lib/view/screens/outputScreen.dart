@@ -1,19 +1,21 @@
 import 'package:bmi_calculator_app/constants/colorCodes.dart';
 import 'package:bmi_calculator_app/constants/dimentions.dart';
 import 'package:bmi_calculator_app/constants/styles.dart';
+import 'package:bmi_calculator_app/tasks/calculationTask.dart';
 import 'package:bmi_calculator_app/view/customWidgets/homeScreenCards.dart';
 import 'package:flutter/material.dart';
 
-class BMIResult extends StatefulWidget
+class BMIResult extends StatelessWidget
 {
-  @override
-  _BMIResultState createState() => _BMIResultState();
-}
 
-class _BMIResultState extends State<BMIResult> {
+
+  final double weight, height;
+  BMIResult({this.weight, this.height});
+
   @override
   Widget build(BuildContext context)
   {
+    print("Received Data Height $height Weight $weight");
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -39,9 +41,9 @@ class _BMIResultState extends State<BMIResult> {
                         child: Text(
                           "NORMAL",
                           style: TextStyle(
-                            color: Colors.green,
-                            fontSize: 20.0,
-                            fontWeight: FontWeight.bold
+                              color: Colors.green,
+                              fontSize: 20.0,
+                              fontWeight: FontWeight.bold
                           ),
                         ),
                       ),
@@ -50,8 +52,8 @@ class _BMIResultState extends State<BMIResult> {
                       child: Text(
                         "22.1",
                         style: TextStyle(
-                          fontSize: 75.0,
-                          fontWeight: FontWeight.w900
+                            fontSize: 75.0,
+                            fontWeight: FontWeight.w900
                         ),
                       ),
                     ),
@@ -61,8 +63,8 @@ class _BMIResultState extends State<BMIResult> {
                           Text(
                             "Normal BMI range:",
                             style: TextStyle(
-                              fontSize: 20.0,
-                              color: Colors.grey
+                                fontSize: 20.0,
+                                color: Colors.grey
                             ),
                           ),
                           SizedBox(
@@ -71,8 +73,8 @@ class _BMIResultState extends State<BMIResult> {
                           Text(
                             "18, 5 - 25 kg/m2",
                             style: TextStyle(
-                              fontSize: 16.0,
-                              fontWeight: FontWeight.bold
+                                fontSize: 16.0,
+                                fontWeight: FontWeight.bold
                             ),
                           )
                         ],
@@ -112,8 +114,8 @@ class _BMIResultState extends State<BMIResult> {
                   child: Text(
                     "RE-CALCULATE YOUR BMI",
                     style: TextStyle(
-                      fontSize: 16.0,
-                      fontWeight: FontWeight.bold
+                        fontSize: 16.0,
+                        fontWeight: FontWeight.bold
                     ),
                   ),
                 ),
@@ -122,6 +124,7 @@ class _BMIResultState extends State<BMIResult> {
           )
         ],
       ),
-    );
+    );;
   }
+
 }

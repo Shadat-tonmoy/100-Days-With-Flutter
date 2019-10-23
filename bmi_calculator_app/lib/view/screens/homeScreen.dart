@@ -82,15 +82,16 @@ class _HomeScreenState extends State<HomeScreen> {
   void gotoOutputScreen()
   {
     //navigating with material page route
-    /*Navigator.push(context, MaterialPageRoute(
+    Navigator.push(context, MaterialPageRoute(
       builder: (context){
-        return BMIResult();
+        print("Passing Data Height $height Weight $weight");
+        return BMIResult(height: height,weight: weight,);
       }
-    ));*/
+    ));
 
     //navigating with route name
 
-    Navigator.pushNamed(context, "/result");
+//    Navigator.pushNamed(context, "/result", arguments: BMIResult(height: height, weight: weight));
 
 
   }
