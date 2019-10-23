@@ -4,3 +4,6 @@ const String HEIGHT = "HEIGHT";
 const String WEIGHT = "WEIGHT";
 const String AGE = "AGE";
 const String CALCULATE = "CALCULATE YOUR BMI";
+const String OVERWEIGHT = "Over-weight";
+const String NORMAL = "Normal";
+const String UNDERWEIGHT = "Under-weight";

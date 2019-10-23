@@ -7,3 +7,5 @@ const double MIN_WEIGHT = 5.0;
 const double DEFAULT_AGE = 18.0;
 const double MIN_AGE = 1.0;
 const double MAX_AGE = 150.0;
+const double OVERWEIGHT_BMI_THRESHOLD = 25.0;
+const double NORMAL_BMI_THRESHOLD = 18.5;
