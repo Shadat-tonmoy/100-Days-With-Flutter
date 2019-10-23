@@ -31,4 +31,17 @@ class BMICalculationTask
     else return UNDERWEIGHT;
   }
 
+  String getMessage()
+  {
+    if(_bmi >= OVERWEIGHT_BMI_THRESHOLD)
+    {
+      return OVERWEIGHT_BMI_MESSAGE;
+    }
+    else if(_bmi > NORMAL_BMI_THRESHOLD)
+    {
+      return NORMAL_BMI_MESSAGE;
+    }
+    else return UNDERWEIGHT_BMI_MESSAGE;
+  }
+
 }
