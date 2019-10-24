@@ -3,15 +3,15 @@ import 'package:geolocator/geolocator.dart';
 
 void main()
 {
-  runApp(ClimaApp());
+  runApp(MyApp());
 }
 
-class ClimaApp extends StatefulWidget {
+class MyApp extends StatefulWidget {
   @override
-  _ClimaAppState createState() => _ClimaAppState();
+  _MyAppState createState() => _MyAppState();
 }
 
-class _ClimaAppState extends State<ClimaApp> {
+class _MyAppState extends State<MyApp> {
 
   void getLocation() async
   {
@@ -34,7 +34,7 @@ class _ClimaAppState extends State<ClimaApp> {
           child: Center(
             child: RaisedButton(
               onPressed: (){
-                //get location here
+                getLocation();
               },
               child: Text(
                   "Get Location"
