@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
 
 void main()
 {
@@ -11,6 +12,14 @@ class ClimaApp extends StatefulWidget {
 }
 
 class _ClimaAppState extends State<ClimaApp> {
+
+  void getLocation() async
+  {
+    Position position = await Geolocator().getCurrentPosition(desiredAccuracy: LocationAccuracy.low);
+    print(position);
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
