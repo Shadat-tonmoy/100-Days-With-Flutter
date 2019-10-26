@@ -6,7 +6,16 @@ class HomeScreen extends StatefulWidget {
   _HomeScreenState createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _HomeScreenState extends State<HomeScreen>
+{
+
+  void gotoSecondScreen()
+  {
+    Navigator.pushNamed(context, "/second");
+
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -14,18 +23,16 @@ class _HomeScreenState extends State<HomeScreen> {
         title: Text(
             "Clima"
         ),
-        backgroundColor: Colors.purple,
       ),
       body: Container(
         child: Center(
           child: RaisedButton(
             onPressed: ()
             {
-              print("Raised Button Tapped!");
-//              getLocation();
+              gotoSecondScreen();
             },
             child: Text(
-                "Get Location"
+                "Go to second screen"
             ),
           ),
         ),

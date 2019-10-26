@@ -1,4 +1,5 @@
 import 'package:clima_weather_app/homeScreen.dart';
+import 'package:clima_weather_app/secondScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 
@@ -12,7 +13,17 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: HomeScreen()
+      theme: ThemeData.light(
+
+      ).copyWith(
+        primaryColor: Colors.purple
+      ),
+      initialRoute: "/",
+      routes:
+      {
+        "/" : (context) => HomeScreen(),
+        "/second" : (context) => SecondScreen()
+      },
     );
   }
 
