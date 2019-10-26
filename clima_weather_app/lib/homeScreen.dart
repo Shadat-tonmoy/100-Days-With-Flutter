@@ -1,6 +1,3 @@
-
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 
@@ -9,67 +6,57 @@ class HomeScreen extends StatefulWidget {
   _HomeScreenState createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen>
-{
+class _HomeScreenState extends State<HomeScreen> {
+  Position position;
+  String currentPositionMessage = "Getting Current Location....";
 
-  void gotoSecondScreen()
-  {
+  void gotoSecondScreen() {
     Navigator.pushNamed(context, "/second");
   }
 
-  void getLocation() async
-  {
-    Position position= await Geolocator().getCurrentPosition(desiredAccuracy: LocationAccuracy.low);
-    print("Current Location $position");
-    
-
+  void getLocation() async {
+    try {
+      position = await Geolocator()
+          .getCurrentPosition(desiredAccuracy: LocationAccuracy.low);
+      setState(() {
+        currentPositionMessage = "Location is $position";
+      });
+    } catch (exception) {
+      print(exception);
+    }
   }
 
   @override
   void initState() {
-
     super.initState();
     getLocation();
   }
 
-
   @override
-  Widget build(BuildContext context)
-  {
-
-    String marginInput = '32.0';
-    double scaffoldMargin;
-
-    try
-    {
-      scaffoldMargin = double.parse(marginInput);
-    }
-    catch(e)
-    {
-      scaffoldMargin = 20.0;
-
-    }
-
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-            "Clima"
-        ),
+        title: Text("Clima"),
       ),
-      body: Container(
-        color: Colors.grey,
-        margin: EdgeInsets.all(scaffoldMargin ?? 50.0),
-        child: Center(
-          child: RaisedButton(
-            onPressed: ()
-            {
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: <Widget>[
+          RaisedButton(
+            onPressed: () {
               gotoSecondScreen();
             },
-            child: Text(
-                "Go to second screen"
+            child: Center(
+              child: Text("Go to second screen"),
             ),
           ),
-        ),
+          Padding(
+            padding: EdgeInsets.all(16.0),
+            child: Text(
+              currentPositionMessage,
+            ),
+          )
+        ],
       ),
     );
   }
