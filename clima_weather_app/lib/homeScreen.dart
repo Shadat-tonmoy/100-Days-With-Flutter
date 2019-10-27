@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:clima_weather_app/model/location.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -32,7 +34,17 @@ class _HomeScreenState extends State<HomeScreen> {
     http.Response response = await http.get(url);
     if(response.statusCode == 200)
     {
-      print("API Response ${response.body}");
+      String apiResponse = response.body;
+      dynamic responseJSON = jsonDecode(apiResponse);
+      double longitude = responseJSON["coord"]["lon"];
+      double latitude = responseJSON["coord"]["lat"];
+      String weatherTitle = responseJSON["weather"][0]["main"];
+      double temperature = responseJSON["main"]["temp"];
+      double pressure = responseJSON["main"]["pressure"];
+      int humidity = responseJSON["main"]["humidity"];
+      print("Longitude : $longitude\nLatitude : $latitude\nTitle : $weatherTitle\nTemparature : $temperature\n"
+          "Pressure : $pressure\nHumidity : $humidity");
+
     }
     else
     {
