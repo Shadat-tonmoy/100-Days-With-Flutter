@@ -1,3 +1,4 @@
+import 'package:clima_weather_app/model/location.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 
@@ -7,23 +8,22 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  Position position;
+  Location location;
   String currentPositionMessage = "Getting Current Location....";
 
   void gotoSecondScreen() {
     Navigator.pushNamed(context, "/second");
   }
 
-  void getLocation() async {
-    try {
-      position = await Geolocator()
-          .getCurrentPosition(desiredAccuracy: LocationAccuracy.low);
-      setState(() {
-        currentPositionMessage = "Location is $position";
-      });
-    } catch (exception) {
-      print(exception);
-    }
+  void getLocation() async
+  {
+    location = Location();
+    await location.getLocation();
+
+    setState(()
+    {
+      currentPositionMessage = "Your Current Location\n Longitude ${location.longitude} And Latitude ${location.latitude}";
+    });
   }
 
   @override
@@ -54,6 +54,7 @@ class _HomeScreenState extends State<HomeScreen> {
             padding: EdgeInsets.all(16.0),
             child: Text(
               currentPositionMessage,
+              textAlign: TextAlign.center,
             ),
           )
         ],
