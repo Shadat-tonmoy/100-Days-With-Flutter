@@ -1,6 +1,6 @@
 import 'package:clima_weather_app/model/location.dart';
 import 'package:flutter/material.dart';
-import 'package:geolocator/geolocator.dart';
+import 'package:http/http.dart' as http;
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -26,6 +26,22 @@ class _HomeScreenState extends State<HomeScreen> {
     });
   }
 
+  void getWeather() async
+  {
+    String url = "https://samples.openweathermap.org/data/2.5/weather?lat=35&lon=139&appid=b6907d289e10d714a6e88b30761fae22";
+    http.Response response = await http.get(url);
+    if(response.statusCode == 200)
+    {
+      print("API Response ${response.body}");
+    }
+    else
+    {
+      print("Error in api ${response.statusCode}");
+
+    }
+
+  }
+
   @override
   void initState() {
     super.initState();
@@ -33,7 +49,11 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context)
+  {
+
+    getWeather();
+
     return Scaffold(
       appBar: AppBar(
         title: Text("Clima"),
