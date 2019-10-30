@@ -34,6 +34,8 @@ class _HomeScreenState extends State<HomeScreen> {
     String apiResponse = await weatherInfoFetchingTask.fetchWeatherInfo();
     setState(() {
       weatherInfo = apiResponse;
+      print("WeatherInfoFetched as $weatherInfo");
+      gotoSecondScreen();
     });
   }
 
@@ -70,6 +72,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   size: 48.0,
                   color: Colors.white,
                 ),
+              ),
+              SizedBox(
+                height: 24.0,
               ),
               Text(
                 "Fetching Data. Please Wait...",
