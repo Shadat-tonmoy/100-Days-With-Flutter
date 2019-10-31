@@ -1,6 +1,13 @@
+import 'package:clima_weather_app/model/WeatherData.dart';
 import 'package:flutter/material.dart';
 
-class SecondScreen extends StatefulWidget {
+class SecondScreen extends StatefulWidget
+{
+
+  final WeatherData weatherData;
+
+  SecondScreen({this.weatherData});
+
   @override
   _SecondScreenState createState() => _SecondScreenState();
 }
@@ -8,11 +15,14 @@ class SecondScreen extends StatefulWidget {
 class _SecondScreenState extends State<SecondScreen>
 {
 
+  WeatherData weatherData;
+
   @override
   void initState()
   {
     super.initState();
-    print("Mathod Called Init State");
+    weatherData = widget.weatherData;
+    print("Mathod Called Init State Weather Data ${weatherData.toString()}");
   }
 
 

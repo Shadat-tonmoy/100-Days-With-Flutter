@@ -1,5 +1,7 @@
 import 'package:clima_weather_app/WeatherInfoFetchingTask.dart';
+import 'package:clima_weather_app/model/WeatherData.dart';
 import 'package:clima_weather_app/model/location.dart';
+import 'package:clima_weather_app/secondScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
@@ -12,9 +14,13 @@ class _HomeScreenState extends State<HomeScreen> {
   Location location;
   String currentPositionMessage = "Getting Current Location....",weatherInfo = "Fetching Weather Info...";
 
-  void gotoSecondScreen()
+  void gotoSecondScreen(WeatherData weatherData)
   {
-    Navigator.pushNamed(context, "/second");
+//    Navigator.pushNamed(context, "/second");
+    Navigator.push(context, MaterialPageRoute(builder: (context)
+    {
+      return SecondScreen(weatherData: weatherData,);
+    }));
   }
 
   void getLocation() async
@@ -31,11 +37,11 @@ class _HomeScreenState extends State<HomeScreen> {
   void getWeather() async
   {
     WeatherInfoFetchingTask weatherInfoFetchingTask = WeatherInfoFetchingTask(location);
-    String apiResponse = await weatherInfoFetchingTask.fetchWeatherInfo();
+    WeatherData weatherData = await weatherInfoFetchingTask.fetchWeatherInfo();
     setState(() {
-      weatherInfo = apiResponse;
-      print("WeatherInfoFetched as $weatherInfo");
-      gotoSecondScreen();
+//      weatherInfo = apiResponse;
+      print("WeatherInfoFetched as ${weatherData.toString()}");
+      gotoSecondScreen(weatherData);
     });
   }
 
