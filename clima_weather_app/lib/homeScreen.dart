@@ -3,6 +3,7 @@ import 'package:clima_weather_app/model/WeatherData.dart';
 import 'package:clima_weather_app/model/location.dart';
 import 'package:clima_weather_app/secondScreen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' as prefix0;
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -16,11 +17,14 @@ class _HomeScreenState extends State<HomeScreen> {
 
   void gotoSecondScreen(WeatherData weatherData)
   {
-//    Navigator.pushNamed(context, "/second");
-    Navigator.push(context, MaterialPageRoute(builder: (context)
-    {
-      return SecondScreen(weatherData: weatherData,);
-    }));
+//    Navigator.pushNamed(context, "/second");\
+
+
+
+  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)
+  {
+    return SecondScreen(weatherData: weatherData,);
+  }));
   }
 
   void getLocation() async
