@@ -1,5 +1,5 @@
-import 'package:clima_weather_app/homeScreen.dart';
-import 'package:clima_weather_app/secondScreen.dart';
+import 'package:clima_weather_app/screens/homeScreen.dart';
+import 'package:clima_weather_app/screens/weatherInfoScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 

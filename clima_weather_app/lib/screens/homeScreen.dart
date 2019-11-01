@@ -1,7 +1,7 @@
 import 'package:clima_weather_app/WeatherInfoFetchingTask.dart';
 import 'package:clima_weather_app/model/WeatherData.dart';
 import 'package:clima_weather_app/model/location.dart';
-import 'package:clima_weather_app/secondScreen.dart';
+import 'package:clima_weather_app/screens/weatherInfoScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/material.dart' as prefix0;
 import 'package:flutter_spinkit/flutter_spinkit.dart';

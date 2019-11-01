@@ -1,8 +1,9 @@
 import 'package:clima_weather_app/constants/strings.dart';
 import 'package:clima_weather_app/model/WeatherData.dart';
+import 'package:clima_weather_app/screens/searchCityScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'customWidgets/weatherInfoScreenWidets.dart';
+import '../customWidgets/weatherInfoScreenWidets.dart';
 
 class SecondScreen extends StatefulWidget {
   final WeatherData weatherData;
@@ -39,12 +40,20 @@ class _SecondScreenState extends State<SecondScreen> {
     super.deactivate();
     print("Method Called Deactivate");
   }
+
 }
 
 class SecondScreenBody extends StatelessWidget {
   final WeatherData weatherData;
 
   SecondScreenBody({this.weatherData});
+
+  void moveToSearchCityScreen(BuildContext context)
+  {
+    Navigator.push(context, MaterialPageRoute(
+        builder: (context) => SearchCityScreen()
+    ));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -82,7 +91,7 @@ class SecondScreenBody extends StatelessWidget {
                     ),
                     GestureDetector(
                       onTap: (){
-                        print("Tapped On Location ICOn");
+                        moveToSearchCityScreen(context);
                       },
                       child: Container(
                         margin: EdgeInsets.only(top: 16.0),
