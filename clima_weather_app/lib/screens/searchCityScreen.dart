@@ -1,5 +1,6 @@
 import 'package:clima_weather_app/constants/styles.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 String _cityName;
 
@@ -84,7 +85,21 @@ class _SearchCityScreenState extends State<SearchCityScreen>
                       color: Colors.green[700],
                       onPressed: ()
                       {
-                        print("City Name Enterred $_cityName");
+                        if(_cityName!=null && _cityName.length > 0 )
+                          Navigator.pop(context, _cityName);
+                        else
+                        {
+                          Fluttertoast.showToast(
+                              msg: "Please Enter A Valid City Name",
+                              toastLength: Toast.LENGTH_SHORT,
+                              gravity: ToastGravity.BOTTOM,
+                              timeInSecForIos: 1,
+                              backgroundColor: Colors.black,
+                              textColor: Colors.white,
+                              fontSize: 12.0
+                          );
+
+                        }
 
                       },
                       child: Text(

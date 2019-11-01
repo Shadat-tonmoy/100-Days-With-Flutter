@@ -43,16 +43,18 @@ class _SecondScreenState extends State<SecondScreen> {
 
 }
 
-class SecondScreenBody extends StatelessWidget {
+class SecondScreenBody extends StatelessWidget
+{
   final WeatherData weatherData;
 
   SecondScreenBody({this.weatherData});
 
-  void moveToSearchCityScreen(BuildContext context)
+  void moveToSearchCityScreen(BuildContext context) async
   {
-    Navigator.push(context, MaterialPageRoute(
+    var updatedWeatherData = await Navigator.push(context, MaterialPageRoute(
         builder: (context) => SearchCityScreen()
     ));
+    print("Updated Location Data $updatedWeatherData");
   }
 
   @override
