@@ -124,53 +124,55 @@ class SecondScreenBody extends StatelessWidget {
                   elevation: 16.0,
                   child: Container(
                     color: Colors.white,
-                    child: Column(
-                      children: <Widget>[
-                        SizedBox(
-                          height: 16.0,
-                        ),
-                        SubInfoText(
-                          title: LOCATION,
-                          text: weatherData.location.cityName,
-                          icon: FontAwesomeIcons.mapMarkerAlt,
-                        ),
-                        LineDivider(),
-                        SubInfoText(
-                          title: SKY,
-                          text: weatherData.weatherTitle,
-                          icon: FontAwesomeIcons.cloudSunRain,
-                        ),
-                        LineDivider(),
-                        SubInfoText(
-                          title: TEMPERATURE,
-                          text: weatherData.temperature.toString() + TEMPERATURE_UNIT,
-                          icon: FontAwesomeIcons.temperatureHigh,
-                        ),
-                        LineDivider(),
-                        SubInfoText(
-                          title: HUMIDITY,
-                          text: weatherData.humidity.toString() + HUMIDITY_UNIT,
-                          icon: FontAwesomeIcons.pooStorm,
-                        ),
-                        LineDivider(),
-                        SubInfoText(
-                          title: WIND_SPEED,
-                          text: weatherData.windSpeed.toString() + WIND_SPEED_UNIT,
-                          icon: FontAwesomeIcons.wind,
-                        ),
-                        LineDivider(),
-                        SubInfoText(
-                          title: PRESSURE,
-                          text: weatherData.pressure.toString() + PRESSURE_UNIT,
-                          icon: FontAwesomeIcons.meteor
-                        ),
-                        Text(
-                          COPYRIGHT_MESSAGE,
-                          style: TextStyle(
-                            fontSize: 8.0,
+                    child: SingleChildScrollView(
+                      child: Column(
+                        children: <Widget>[
+                          SizedBox(
+                            height: 16.0,
                           ),
-                        )
-                      ],
+                          SubInfoText(
+                            title: LOCATION,
+                            text: weatherData.location.cityName,
+                            icon: FontAwesomeIcons.mapMarkerAlt,
+                          ),
+                          LineDivider(),
+                          SubInfoText(
+                            title: SKY,
+                            text: weatherData.weatherTitle,
+                            icon: FontAwesomeIcons.cloudSunRain,
+                          ),
+                          LineDivider(),
+                          SubInfoText(
+                            title: TEMPERATURE,
+                            text: weatherData.temperature.toString() + TEMPERATURE_UNIT,
+                            icon: FontAwesomeIcons.temperatureHigh,
+                          ),
+                          LineDivider(),
+                          SubInfoText(
+                            title: HUMIDITY,
+                            text: weatherData.humidity.toString() + HUMIDITY_UNIT,
+                            icon: FontAwesomeIcons.pooStorm,
+                          ),
+                          LineDivider(),
+                          SubInfoText(
+                            title: WIND_SPEED,
+                            text: weatherData.windSpeed.toString() + WIND_SPEED_UNIT,
+                            icon: FontAwesomeIcons.wind,
+                          ),
+                          LineDivider(),
+                          SubInfoText(
+                            title: PRESSURE,
+                            text: weatherData.pressure.toString() + PRESSURE_UNIT,
+                            icon: FontAwesomeIcons.meteor
+                          ),
+                          Text(
+                            COPYRIGHT_MESSAGE,
+                            style: TextStyle(
+                              fontSize: 8.0,
+                            ),
+                          )
+                        ],
+                      ),
                     ),
                   ),
                 ),
