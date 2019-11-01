@@ -32,12 +32,13 @@ class WeatherInfoFetchingTask
       String weatherTitle = responseJSON["weather"][0]["main"];
       String cityName = responseJSON["name"];
       double temperature = responseJSON["main"]["temp"];
+      double windSpeed = responseJSON["wind"]["speed"];
       int pressure = responseJSON["main"]["pressure"];
       int humidity = responseJSON["main"]["humidity"];
       weatherInfo = "Longitude : $longitude\nLatitude : $latitude\nTitle : $weatherTitle\nTemparature : $temperature\n"
           "Pressure : $pressure\nHumidity : $humidity";
       _location.cityName = cityName;
-      weatherData  = WeatherData(_location,weatherTitle,temperature,pressure,humidity);
+      weatherData  = WeatherData(_location,weatherTitle,temperature,pressure,humidity,windSpeed);
     }
     else
     {

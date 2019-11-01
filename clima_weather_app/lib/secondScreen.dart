@@ -1,6 +1,8 @@
+import 'package:clima_weather_app/constants/strings.dart';
 import 'package:clima_weather_app/model/WeatherData.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:charcode/ascii.dart';
 
 class SecondScreen extends StatefulWidget {
   final WeatherData weatherData;
@@ -64,16 +66,17 @@ class SecondScreenBody extends StatelessWidget {
               Expanded(
                 flex: 3,
                 child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     MainInfoText(
                       infoText: weatherData.location.cityName,
                       fontSize: 24.0,
                       color: Colors.white,
-                      padding: 16.0,
+                      padding: 8.0,
                     ),
                     MainInfoText(
-                      infoText: weatherData.temperature.toString(),
-                      fontSize: 64.0,
+                      infoText: weatherData.temperature.toString() + String.fromCharCode(0x00B0) + "C",
+                      fontSize: 56.0,
                       color: Colors.white,
                       padding: 0.0,
                     )
@@ -81,14 +84,14 @@ class SecondScreenBody extends StatelessWidget {
                 ),
               ),
               Expanded(
-                flex: 3,
+                flex: 4,
                 child: Card(
                   clipBehavior: Clip.hardEdge,
                   margin: EdgeInsets.all(0.0),
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(24.0),
-                    topRight: Radius.circular(24.0),
+                    topLeft: Radius.circular(16.0),
+                    topRight: Radius.circular(16.0),
                   )),
                   elevation: 16.0,
                   child: Container(
@@ -99,20 +102,48 @@ class SecondScreenBody extends StatelessWidget {
                           height: 16.0,
                         ),
                         SubInfoText(
+                          title: LOCATION,
                           text: weatherData.location.cityName,
                           icon: FontAwesomeIcons.mapMarkerAlt,
                         ),
                         LineDivider(),
                         SubInfoText(
+                          title: SKY,
                           text: weatherData.weatherTitle,
                           icon: FontAwesomeIcons.cloudSunRain,
                         ),
                         LineDivider(),
                         SubInfoText(
-                          text: weatherData.humidity.toString(),
+                          title: TEMPERATURE,
+                          text: weatherData.temperature.toString() + TEMPERATURE_UNIT,
+                          icon: FontAwesomeIcons.temperatureHigh,
+                        ),
+                        LineDivider(),
+                        SubInfoText(
+                          title: HUMIDITY,
+                          text: weatherData.humidity.toString() + HUMIDITY_UNIT,
+                          icon: FontAwesomeIcons.pooStorm,
+                        ),
+                        LineDivider(),
+                        SubInfoText(
+                          title: WIND_SPEED,
+                          text: weatherData.windSpeed.toString() + WIND_SPEED_UNIT,
                           icon: FontAwesomeIcons.wind,
-
+                        ),
+                        LineDivider(),
+                        SubInfoText(
+                          title: PRESSURE,
+                          text: weatherData.pressure.toString() + PRESSURE_UNIT,
+                          icon: FontAwesomeIcons.meteor
+                        ),
+                        Text(
+                          COPYRIGHT_MESSAGE,
+                          style: TextStyle(
+                            fontSize: 8.0,
+                          ),
                         )
+
+
                       ],
                     ),
                   ),
@@ -142,10 +173,11 @@ class LineDivider extends StatelessWidget {
 }
 
 class SubInfoText extends StatelessWidget {
-  final String text;
+  final String title,text;
   final IconData icon;
 
-  SubInfoText({this.text, this.icon});
+
+  SubInfoText({this.text, this.icon,this.title});
 
   @override
   Widget build(BuildContext context) {
@@ -158,17 +190,27 @@ class SubInfoText extends StatelessWidget {
           ),
           Icon(
             icon,
-            size: 24.0,
+            size: 18.0,
             color: Colors.grey[700],
           ),
           SizedBox(
             width: 16.0,
           ),
           Text(
-            text,
-            style: TextStyle(
-              fontSize: 18.0,
+            title
+          ),
+          Expanded(
+            child: Text(
+              text,
+              textAlign: TextAlign.end,
+              style: TextStyle(
+                fontSize: 16.0,
+                fontWeight: FontWeight.bold
+              ),
             ),
+          ),
+          SizedBox(
+            width: 16.0,
           )
         ],
       ),

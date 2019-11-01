@@ -1,0 +1,11 @@
+const String LOCATION = "Location";
+const String SKY = "Sky";
+const String TEMPERATURE = "Temperature";
+final String TEMPERATURE_UNIT = String.fromCharCode(0x00B0) + "C";
+const String HUMIDITY = "Humidity";
+const String HUMIDITY_UNIT = " %rh";
+const String WIND_SPEED = "Wind Speed";
+const String WIND_SPEED_UNIT = " km/h";
+const String PRESSURE = "Pressure";
+const String PRESSURE_UNIT = " hPa";
+const String COPYRIGHT_MESSAGE = "\u00a9 Open Weather Map API";
