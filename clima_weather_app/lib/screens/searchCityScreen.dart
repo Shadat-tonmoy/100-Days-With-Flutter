@@ -28,9 +28,37 @@ class _SearchCityScreenState extends State<SearchCityScreen>
           ),
           SafeArea(
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
+                Padding(
+                  padding: EdgeInsets.all(10.0),
+                  child: GestureDetector(
+                    onTap: (){
+                      Navigator.pop(context);
+                    },
+                    child: Row(
+                      children: <Widget>[
+                        Icon(
+                          Icons.arrow_back_ios,
+                          color: Colors.white,
+                        ),
+                        SizedBox(
+                          width: 8.0,
+                        ),
+                        Text(
+                          "BACK",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16.0
+                          ),
+                        )
+                      ],
+                    ),
+                  )
+                ),
                 SizedBox(
-                  height: 24.0,
+                  height: 16.0,
                 ),
                 Padding(
                   padding: EdgeInsets.all(16.0),
