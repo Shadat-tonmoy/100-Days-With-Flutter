@@ -217,27 +217,7 @@ class _SecondScreenBodyState extends State<SecondScreenBody>
           visible: loadingVisibility,
           maintainAnimation: true,
           maintainState: true,
-          child: Container(
-            color: Color.fromARGB(170, 0, 0, 0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                SpinKitWave(
-                  color: Colors.white,
-                  size: 32.0,
-                ),
-                Padding(
-                  padding: EdgeInsets.all(16.0),
-                  child: Text(
-                    FETCHING_DATA,
-                    style: TextStyle(
-                        color: Colors.white
-                    ),
-                  ),
-                )
-              ],
-            ),
-          ),
+          child: WeatherInfoLoadingView(),
         )
       ],
     );;

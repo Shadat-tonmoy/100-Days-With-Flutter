@@ -32,10 +32,19 @@ class Location
     _cityName = value;
   }
 
+
+  set longitude(double value) {
+    _longitude = value;
+  }
+
   @override
   String toString()
   {
     return 'Location{_longitude: $_longitude, _latitude: $_latitude, _cityName: $_cityName}';
+  }
+
+  set latitude(value) {
+    _latitude = value;
   }
 
 
