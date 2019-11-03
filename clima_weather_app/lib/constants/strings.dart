@@ -9,3 +9,4 @@ const String WIND_SPEED_UNIT = " km/h";
 const String PRESSURE = "Pressure";
 const String PRESSURE_UNIT = " hPa";
 const String COPYRIGHT_MESSAGE = "\u00a9 Open Weather Map API";
+const String FETCHING_DATA = "Fetching Data. Please wait...";
