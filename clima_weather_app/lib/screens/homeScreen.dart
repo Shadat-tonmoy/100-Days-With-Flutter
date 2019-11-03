@@ -40,8 +40,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
   void getWeather() async
   {
-    WeatherInfoFetchingTask weatherInfoFetchingTask = WeatherInfoFetchingTask(location);
-    WeatherData weatherData = await weatherInfoFetchingTask.fetchWeatherInfo();
+    WeatherInfoFetchingTask weatherInfoFetchingTask = WeatherInfoFetchingTask();
+    WeatherData weatherData = await weatherInfoFetchingTask.fetchWeatherInfoByLocation(location);
     setState(() {
 //      weatherInfo = apiResponse;
       print("WeatherInfoFetched as ${weatherData.toString()}");

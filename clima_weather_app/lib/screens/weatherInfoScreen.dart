@@ -1,3 +1,4 @@
+import 'package:clima_weather_app/WeatherInfoFetchingTask.dart';
 import 'package:clima_weather_app/constants/strings.dart';
 import 'package:clima_weather_app/model/WeatherData.dart';
 import 'package:clima_weather_app/screens/searchCityScreen.dart';
@@ -68,14 +69,26 @@ class _SecondScreenBodyState extends State<SecondScreenBody>
 
   void moveToSearchCityScreen(BuildContext context) async
   {
-    var updatedWeatherData = await Navigator.push(context, MaterialPageRoute(
+    var cityName = await Navigator.push(context, MaterialPageRoute(
         builder: (context) => SearchCityScreen()
     ));
-    print("Updated Location Data $updatedWeatherData");
-    setState(() {
+    print("Updated Location Data $cityName");
+    setState(() 
+    {
       loadingVisibility = true;
     });
-
+    updateWeatherDataByCityName(cityName);
+  }
+  
+  void updateWeatherDataByCityName(String cityName) async
+  {
+    WeatherInfoFetchingTask weatherInfoFetchingTask = WeatherInfoFetchingTask();
+    WeatherData weatherData = await weatherInfoFetchingTask.fetchWeatherInfoByCityName(cityName);
+    setState(() {
+      this.weatherData = weatherData;
+      loadingVisibility = false;
+    });
+    
   }
 
 
