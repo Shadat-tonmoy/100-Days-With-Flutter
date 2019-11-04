@@ -115,3 +115,45 @@ class WeatherInfoLoadingView extends StatelessWidget
     );
   }
 }
+
+class WeatherInfoFetchingButton extends StatelessWidget
+{
+
+  final Function onTapFunction;
+  final String text;
+  final IconData icon;
+
+  WeatherInfoFetchingButton({this.icon, this.text, this.onTapFunction});
+
+
+  @override
+  Widget build(BuildContext context) {
+
+    return GestureDetector(
+      onTap: onTapFunction,
+      child: Container(
+          margin: EdgeInsets.only(top: 16.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              Icon(
+                icon,
+                color: Colors.white,
+                size: 24.0,
+              ),
+              SizedBox(
+                width: 16.0,
+              ),
+              Text(
+                text,
+                style: TextStyle(
+                    color: Colors.white
+                ),
+              )
+            ],
+          )
+      ),
+    );
+  }
+}

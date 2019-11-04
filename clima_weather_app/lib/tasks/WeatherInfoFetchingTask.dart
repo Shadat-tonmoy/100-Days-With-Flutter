@@ -49,7 +49,7 @@ class WeatherInfoFetchingTask
     double latitude = responseJSON["coord"]["lat"];
     String weatherTitle = responseJSON["weather"][0]["main"];
     String cityName = responseJSON["name"];
-    double temperature = responseJSON["main"]["temp"];
+    var temperature = responseJSON["main"]["temp"];
     var windSpeed = responseJSON["wind"]["speed"];
     int pressure = responseJSON["main"]["pressure"];
     int humidity = responseJSON["main"]["humidity"];

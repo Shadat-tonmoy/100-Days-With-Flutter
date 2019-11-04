@@ -1,4 +1,4 @@
-import 'package:clima_weather_app/WeatherInfoFetchingTask.dart';
+import 'package:clima_weather_app/tasks/WeatherInfoFetchingTask.dart';
 import 'package:clima_weather_app/model/WeatherData.dart';
 import 'package:clima_weather_app/model/location.dart';
 import 'package:clima_weather_app/screens/weatherInfoScreen.dart';

@@ -1,4 +1,5 @@
-import 'package:clima_weather_app/WeatherInfoFetchingTask.dart';
+import 'package:clima_weather_app/model/location.dart';
+import 'package:clima_weather_app/tasks/WeatherInfoFetchingTask.dart';
 import 'package:clima_weather_app/constants/strings.dart';
 import 'package:clima_weather_app/model/WeatherData.dart';
 import 'package:clima_weather_app/screens/searchCityScreen.dart';
@@ -44,8 +45,7 @@ class _SecondScreenState extends State<SecondScreen> {
   }
 }
 
-class SecondScreenBody extends StatefulWidget
-{
+class SecondScreenBody extends StatefulWidget {
   final WeatherData weatherData;
   final bool loadingVisibility = false;
   SecondScreenBody({this.weatherData});
@@ -54,45 +54,55 @@ class SecondScreenBody extends StatefulWidget
   _SecondScreenBodyState createState() => _SecondScreenBodyState();
 }
 
-class _SecondScreenBodyState extends State<SecondScreenBody>
-{
-
+class _SecondScreenBodyState extends State<SecondScreenBody> {
   WeatherData weatherData;
-  bool loadingVisibility = false;
+  bool loadingVisibility = false,isCurrentLocation = true;
+  Location currentLocation = Location();
+
 
   @override
-  void initState()
-  {
+  void initState() {
     super.initState();
     weatherData = widget.weatherData;
   }
 
-  void moveToSearchCityScreen(BuildContext context) async
-  {
-    var cityName = await Navigator.push(context, MaterialPageRoute(
-        builder: (context) => SearchCityScreen()
-    ));
+  void moveToSearchCityScreen(BuildContext context) async {
+    var cityName = await Navigator.push(
+        context, MaterialPageRoute(builder: (context) => SearchCityScreen()));
     print("Updated Location Data $cityName");
-    if(cityName!=null)
-    {
+    if (cityName != null) {
       updateWeatherDataByCityName(cityName);
     }
   }
-  
-  void updateWeatherDataByCityName(String cityName) async
-  {
-    setState((){loadingVisibility = true;});
+
+  void updateWeatherDataByCityName(String cityName) async {
+    setState(() {
+      loadingVisibility = true;
+      isCurrentLocation = false;
+    });
     WeatherInfoFetchingTask weatherInfoFetchingTask = WeatherInfoFetchingTask();
-    WeatherData weatherData = await weatherInfoFetchingTask.fetchWeatherInfoByCityName(cityName);
-    setState(()
-    {
-      if(weatherData!=null)
-        this.weatherData = weatherData;
+    WeatherData weatherData =
+        await weatherInfoFetchingTask.fetchWeatherInfoByCityName(cityName);
+    setState(() {
+      if (weatherData != null) this.weatherData = weatherData;
       loadingVisibility = false;
     });
-    
   }
 
+  void updateWeatherDataByCurrentLocation() async
+  {
+    setState(() {loadingVisibility = true;});
+    currentLocation = Location();
+    await currentLocation.getLocation();
+    WeatherInfoFetchingTask weatherInfoFetchingTask = WeatherInfoFetchingTask();
+    WeatherData weatherData = await weatherInfoFetchingTask.fetchWeatherInfoByLocation(currentLocation);
+    setState(() {
+      if (weatherData != null) this.weatherData = weatherData;
+      loadingVisibility = false;
+      isCurrentLocation = true;
+    });
+
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -123,37 +133,30 @@ class _SecondScreenBodyState extends State<SecondScreenBody>
                       padding: 8.0,
                     ),
                     MainInfoText(
-                      infoText: weatherData.temperature.toString() + String.fromCharCode(0x00B0) + "C",
+                      infoText: weatherData.temperature.toString() +
+                          String.fromCharCode(0x00B0) +
+                          "C",
                       fontSize: 56.0,
                       color: Colors.white,
                       padding: 0.0,
                     ),
-                    GestureDetector(
-                      onTap: (){
+                    WeatherInfoFetchingButton(
+                      text: SEARCH_FOR_OTHER_CITY,
+                      icon: FontAwesomeIcons.locationArrow,
+                      onTapFunction: (){
                         moveToSearchCityScreen(context);
-                      },
-                      child: Container(
-                          margin: EdgeInsets.only(top: 16.0),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: <Widget>[
-                              Icon(
-                                FontAwesomeIcons.locationArrow,
-                                color: Colors.white,
-                                size: 24.0,
-                              ),
-                              SizedBox(
-                                width: 16.0,
-                              ),
-                              Text(
-                                "Search For Other City",
-                                style: TextStyle(
-                                    color: Colors.white
-                                ),
-                              )
-                            ],
-                          )
+                      }
+                    ),
+                    Visibility(
+                      maintainState: true,
+                      maintainAnimation: true,
+                      visible: !isCurrentLocation,
+                      child: WeatherInfoFetchingButton(
+                        text: GET_CURRENT_LOCATION,
+                        icon: FontAwesomeIcons.mapMarked,
+                        onTapFunction: (){
+                          updateWeatherDataByCurrentLocation();
+                        },
                       ),
                     )
                   ],
@@ -166,9 +169,9 @@ class _SecondScreenBodyState extends State<SecondScreenBody>
                   margin: EdgeInsets.all(0.0),
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(16.0),
-                        topRight: Radius.circular(16.0),
-                      )),
+                    topLeft: Radius.circular(16.0),
+                    topRight: Radius.circular(16.0),
+                  )),
                   elevation: 16.0,
                   child: Container(
                     color: Colors.white,
@@ -192,27 +195,30 @@ class _SecondScreenBodyState extends State<SecondScreenBody>
                           LineDivider(),
                           SubInfoText(
                             title: TEMPERATURE,
-                            text: weatherData.temperature.toString() + TEMPERATURE_UNIT,
+                            text: weatherData.temperature.toString() +
+                                TEMPERATURE_UNIT,
                             icon: FontAwesomeIcons.temperatureHigh,
                           ),
                           LineDivider(),
                           SubInfoText(
                             title: HUMIDITY,
-                            text: weatherData.humidity.toString() + HUMIDITY_UNIT,
+                            text:
+                                weatherData.humidity.toString() + HUMIDITY_UNIT,
                             icon: FontAwesomeIcons.pooStorm,
                           ),
                           LineDivider(),
                           SubInfoText(
                             title: WIND_SPEED,
-                            text: weatherData.windSpeed.toString() + WIND_SPEED_UNIT,
+                            text: weatherData.windSpeed.toString() +
+                                WIND_SPEED_UNIT,
                             icon: FontAwesomeIcons.wind,
                           ),
                           LineDivider(),
                           SubInfoText(
                               title: PRESSURE,
-                              text: weatherData.pressure.toString() + PRESSURE_UNIT,
-                              icon: FontAwesomeIcons.meteor
-                          ),
+                              text: weatherData.pressure.toString() +
+                                  PRESSURE_UNIT,
+                              icon: FontAwesomeIcons.meteor),
                           Text(
                             COPYRIGHT_MESSAGE,
                             style: TextStyle(
@@ -235,7 +241,6 @@ class _SecondScreenBodyState extends State<SecondScreenBody>
           child: WeatherInfoLoadingView(),
         )
       ],
-    );;
+    );
   }
 }
-
