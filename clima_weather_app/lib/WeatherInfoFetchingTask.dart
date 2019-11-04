@@ -50,7 +50,7 @@ class WeatherInfoFetchingTask
     String weatherTitle = responseJSON["weather"][0]["main"];
     String cityName = responseJSON["name"];
     double temperature = responseJSON["main"]["temp"];
-    double windSpeed = responseJSON["wind"]["speed"];
+    var windSpeed = responseJSON["wind"]["speed"];
     int pressure = responseJSON["main"]["pressure"];
     int humidity = responseJSON["main"]["humidity"];
     _location.longitude = longitude;

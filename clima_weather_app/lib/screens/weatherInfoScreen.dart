@@ -73,19 +73,21 @@ class _SecondScreenBodyState extends State<SecondScreenBody>
         builder: (context) => SearchCityScreen()
     ));
     print("Updated Location Data $cityName");
-    setState(() 
+    if(cityName!=null)
     {
-      loadingVisibility = true;
-    });
-    updateWeatherDataByCityName(cityName);
+      updateWeatherDataByCityName(cityName);
+    }
   }
   
   void updateWeatherDataByCityName(String cityName) async
   {
+    setState((){loadingVisibility = true;});
     WeatherInfoFetchingTask weatherInfoFetchingTask = WeatherInfoFetchingTask();
     WeatherData weatherData = await weatherInfoFetchingTask.fetchWeatherInfoByCityName(cityName);
-    setState(() {
-      this.weatherData = weatherData;
+    setState(()
+    {
+      if(weatherData!=null)
+        this.weatherData = weatherData;
       loadingVisibility = false;
     });
     

@@ -3,7 +3,7 @@ import 'package:clima_weather_app/model/location.dart';
 class WeatherData
 {
   String _weatherTitle;
-  double _temperature,_windSpeed;
+  var _temperature,_windSpeed;
   int _pressure;
   int _humidity;
   Location _location;
@@ -23,9 +23,9 @@ class WeatherData
     _pressure = value;
   }
 
-  double get temperature => _temperature;
+  get temperature => _temperature;
 
-  set temperature(double value)
+  set temperature(value)
   {
     _temperature = value;
   }
