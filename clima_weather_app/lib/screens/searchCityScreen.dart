@@ -2,8 +2,6 @@ import 'package:clima_weather_app/constants/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
-String _cityName;
-
 class SearchCityScreen extends StatefulWidget
 {
   @override
@@ -12,6 +10,7 @@ class SearchCityScreen extends StatefulWidget
 
 class _SearchCityScreenState extends State<SearchCityScreen>
 {
+  String _cityName;
   @override
   Widget build(BuildContext context) {
     return Scaffold(

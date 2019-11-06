@@ -5,6 +5,7 @@ import 'package:clima_weather_app/model/WeatherData.dart';
 import 'package:clima_weather_app/screens/searchCityScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../customWidgets/weatherInfoScreenWidets.dart';
 
@@ -56,7 +57,7 @@ class SecondScreenBody extends StatefulWidget {
 
 class _SecondScreenBodyState extends State<SecondScreenBody> {
   WeatherData weatherData;
-  bool loadingVisibility = false,isCurrentLocation = true;
+  bool loadingVisibility = false,isCurrentLocation = true, invalidWeatherData = false;
   Location currentLocation = Location();
 
 
@@ -79,14 +80,33 @@ class _SecondScreenBodyState extends State<SecondScreenBody> {
     setState(() {
       loadingVisibility = true;
       isCurrentLocation = false;
+      invalidWeatherData = false;
     });
     WeatherInfoFetchingTask weatherInfoFetchingTask = WeatherInfoFetchingTask();
     WeatherData weatherData =
         await weatherInfoFetchingTask.fetchWeatherInfoByCityName(cityName);
     setState(() {
       if (weatherData != null) this.weatherData = weatherData;
+      else
+      {
+        invalidWeatherData = true;
+        showInvalidWeatherDataToast();
+      }
       loadingVisibility = false;
     });
+  }
+
+  void showInvalidWeatherDataToast()
+  {
+    Fluttertoast.showToast(
+        msg: "No Data Found!!",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIos: 1,
+        backgroundColor: Colors.black,
+        textColor: Colors.white,
+        fontSize: 12.0
+    );
   }
 
   void updateWeatherDataByCurrentLocation() async
