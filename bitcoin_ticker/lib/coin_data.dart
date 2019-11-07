@@ -43,4 +43,12 @@ class CoinData {
     }
     return dropDownMenuItems;
   }
+
+  List<Widget> getCupertinoPickerItemsFromCoins() {
+    List<Widget> cupertinoPickerItems = [];
+    for (String currency in currenciesList) {
+      cupertinoPickerItems.add(Text(currency));
+    }
+    return cupertinoPickerItems;
+  }
 }
