@@ -1,3 +1,4 @@
+import 'package:bitcoin_ticker/PriceRateFetchingTask.dart';
 import 'package:bitcoin_ticker/coin_data.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -10,7 +11,7 @@ class PriceScreen extends StatefulWidget {
 
 class _PriceScreenState extends State<PriceScreen>
 {
-  String selectedCurrency = INITIAL_CURRENCY;
+  String selectedCurrency = INITIAL_CURRENCY, bitCoinValue = "?";
 
   DropdownButton<String> getAndroidDropdownPicker()
   {
@@ -48,6 +49,24 @@ class _PriceScreenState extends State<PriceScreen>
     return null;
   }
 
+  Future<void> getPriceRate() async
+  {
+    PriceRateFetchingTask priceRateFetchingTask = PriceRateFetchingTask();
+    String lastPrice = await priceRateFetchingTask.fetchPriceRate();
+    setState(()
+    {
+      bitCoinValue = lastPrice;
+    });
+    print("Last Price From Price Screen $lastPrice");
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getPriceRate();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -69,7 +88,7 @@ class _PriceScreenState extends State<PriceScreen>
               child: Padding(
                 padding: EdgeInsets.symmetric(vertical: 15.0, horizontal: 28.0),
                 child: Text(
-                  '1 BTC = ? USD',
+                  '1 BTC = $bitCoinValue $selectedCurrency',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 20.0,
