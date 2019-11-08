@@ -32,7 +32,10 @@ const List<String> cryptoList = [
   'LTC',
 ];
 
-class CoinData {
+class CoinData
+{
+
+
   List<DropdownMenuItem<String> > getDropDownButtonsFromCoins() {
     List<DropdownMenuItem<String> > dropDownMenuItems = [];
     for (String currency in currenciesList) {

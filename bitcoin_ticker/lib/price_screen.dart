@@ -1,14 +1,52 @@
 import 'package:bitcoin_ticker/coin_data.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'dart:io' show Platform;
 
 class PriceScreen extends StatefulWidget {
   @override
   _PriceScreenState createState() => _PriceScreenState();
 }
 
-class _PriceScreenState extends State<PriceScreen> {
+class _PriceScreenState extends State<PriceScreen>
+{
   String selectedCurrency = INITIAL_CURRENCY;
+
+  DropdownButton<String> getAndroidDropdownPicker()
+  {
+    return DropdownButton<String>(
+      items: CoinData().getDropDownButtonsFromCoins(),
+      value: selectedCurrency,
+      onChanged: (value) {
+        setState(() {
+          selectedCurrency = value;
+        });
+        print("Selected Value $value");
+      },
+    );
+  }
+
+  CupertinoPicker getIOSCupertinoPicker()
+  {
+    return CupertinoPicker(
+      itemExtent: 32.0,
+      onSelectedItemChanged: (selectedItemPosition) {
+        print("SelectedCoin ${currenciesList[selectedItemPosition]}");
+
+      },
+      backgroundColor: Colors.lightBlue,
+      children: CoinData().getCupertinoPickerItemsFromCoins(),
+    );
+  }
+
+  Widget getCurrencyPicker()
+  {
+    if(Platform.isAndroid)
+      return getAndroidDropdownPicker();
+    else if(Platform.isIOS)
+      return getIOSCupertinoPicker();
+    return null;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -46,15 +84,7 @@ class _PriceScreenState extends State<PriceScreen> {
             alignment: Alignment.center,
             padding: EdgeInsets.only(bottom: 30.0),
             color: Colors.lightBlue,
-            child: CupertinoPicker(
-              itemExtent: 32.0,
-              onSelectedItemChanged: (selectedItemPosition) {
-                print("SelectedCoin ${currenciesList[selectedItemPosition]}");
-
-              },
-              backgroundColor: Colors.lightBlue,
-              children: CoinData().getCupertinoPickerItemsFromCoins(),
-            ),
+            child: getCurrencyPicker(),
           ),
         ],
       ),
@@ -62,14 +92,4 @@ class _PriceScreenState extends State<PriceScreen> {
   }
 }
 
-/*
-DropdownButton<String>(
-items: CoinData().getDropDownButtonsFromCoins(),
-value: selectedCurrency,
-onChanged: (value) {
-setState(() {
-selectedCurrency = value;
-});
-print("Selected Value $value");
-},
-)*/
+
