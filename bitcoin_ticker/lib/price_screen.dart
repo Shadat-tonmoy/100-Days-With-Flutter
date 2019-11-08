@@ -4,6 +4,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'dart:io' show Platform;
 
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+
 class PriceScreen extends StatefulWidget {
   @override
   _PriceScreenState createState() => _PriceScreenState();
@@ -12,6 +14,7 @@ class PriceScreen extends StatefulWidget {
 class _PriceScreenState extends State<PriceScreen>
 {
   String selectedCurrency = INITIAL_CURRENCY, bitCoinValue = "?";
+  bool showLoadingWidget = true;
 
   DropdownButton<String> getAndroidDropdownPicker()
   {
@@ -56,6 +59,7 @@ class _PriceScreenState extends State<PriceScreen>
     setState(()
     {
       bitCoinValue = lastPrice;
+      showLoadingWidget = false;
     });
     print("Last Price From Price Screen $lastPrice");
   }
@@ -96,6 +100,28 @@ class _PriceScreenState extends State<PriceScreen>
                   ),
                 ),
               ),
+            ),
+          ),
+          Visibility(
+            maintainState: true,
+            maintainAnimation: true,
+            visible: showLoadingWidget,
+            child: Column(
+              children: <Widget>[
+                SpinKitRing(
+                  color: Colors.lightBlueAccent,
+                  size: 100.0,
+                ),
+                SizedBox(
+                  height: 24.0,
+                ),
+                Text(
+                  "Fetching Crypto Currency Value",
+                  style: TextStyle(
+                    color: Colors.grey[600]
+                  ),
+                )
+              ],
             ),
           ),
           Container(
