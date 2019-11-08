@@ -36,7 +36,8 @@ class _PriceScreenState extends State<PriceScreen>
     return CupertinoPicker(
       itemExtent: 32.0,
       onSelectedItemChanged: (selectedItemPosition) {
-        print("SelectedCoin ${currenciesList[selectedItemPosition]}");
+         selectedCurrency = currenciesList[selectedItemPosition];
+         getPriceRate();
 
       },
       backgroundColor: Colors.lightBlue,
