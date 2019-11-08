@@ -25,6 +25,7 @@ class _PriceScreenState extends State<PriceScreen>
         setState(() {
           selectedCurrency = value;
         });
+        getPriceRate();
         print("Selected Value $value");
       },
     );
@@ -54,8 +55,13 @@ class _PriceScreenState extends State<PriceScreen>
 
   Future<void> getPriceRate() async
   {
+    setState(()
+    {
+      showLoadingWidget = true;
+      bitCoinValue = "?";
+    });
     PriceRateFetchingTask priceRateFetchingTask = PriceRateFetchingTask();
-    String lastPrice = await priceRateFetchingTask.fetchPriceRate();
+    String lastPrice = await priceRateFetchingTask.fetchPriceRate(selectedCurrency);
     setState(()
     {
       bitCoinValue = lastPrice;

@@ -3,9 +3,9 @@ import 'dart:convert';
 class PriceRateFetchingTask
 {
 
-  Future<String> fetchPriceRate() async
+  Future<String> fetchPriceRate(String currency) async
   {
-    String url = "https://apiv2.bitcoinaverage.com/indices/global/ticker/BTCUSD";
+    String url = "https://apiv2.bitcoinaverage.com/indices/global/ticker/BTC$currency";
     http.Response response = await http.get(url);
     String responseJSON = response.body;
 
