@@ -1,4 +1,4 @@
-import 'package:flash_chat/constants/screen_routes.dart';
+import 'package:flash_chat/constants/constant_values.dart';
 import 'package:flutter/material.dart';
 import 'package:flash_chat/screens/welcome_screen.dart';
 import 'package:flash_chat/screens/login_screen.dart';

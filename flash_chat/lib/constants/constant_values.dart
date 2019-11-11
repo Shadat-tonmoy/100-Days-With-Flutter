@@ -5,6 +5,9 @@ class ScreenRoutes
   static const String LOGIN_SCREEN = "/login";
   static const String REGISTRATION_SCREEN = "/registration";
   static const String CHAT_SCREEN = "/chats";
+}
 
-
+class AnimationTags
+{
+  static const String ANIMATED_LOGO = "logo";
 }
