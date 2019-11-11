@@ -1,3 +1,4 @@
+import 'package:flash_chat/constants/screen_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flash_chat/screens/welcome_screen.dart';
 import 'package:flash_chat/screens/login_screen.dart';
@@ -17,10 +18,10 @@ class FlashChat extends StatelessWidget {
       ),
       initialRoute: "/",
       routes: {
-        "/": (context) => WelcomeScreen(),
-        "/login" : (context) => LoginScreen(),
-        "/registration" : (context) => RegistrationScreen(),
-        "/chats" : (context) => ChatScreen()
+        ScreenRoutes.WELCOME_SCREEN: (context) => WelcomeScreen(),
+        ScreenRoutes.LOGIN_SCREEN : (context) => LoginScreen(),
+        ScreenRoutes.REGISTRATION_SCREEN : (context) => RegistrationScreen(),
+        ScreenRoutes.CHAT_SCREEN : (context) => ChatScreen()
       },
     );
   }
