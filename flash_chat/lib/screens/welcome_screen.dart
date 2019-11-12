@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flash_chat/constants/constant_values.dart';
 import 'package:flutter/material.dart';
 
@@ -16,10 +18,21 @@ class _WelcomeScreenState extends State<WelcomeScreen> with SingleTickerProvider
     super.initState();
     animationController = AnimationController(
       duration: Duration(seconds: 1),
-      vsync: this
+      vsync: this,
+      upperBound: 60.0
     );
 
-    animationController.forward();
+   /* animationController.forward();
+    animationController.addStatusListener((status){
+      if(status == AnimationStatus.completed){
+        animationController.reverse(from: 60.0);
+      }
+      else if(status == AnimationStatus.dismissed){
+        animationController.forward();
+      }
+    });*/
+
+
 
 
     animationController.addListener(()
