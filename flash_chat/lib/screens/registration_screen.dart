@@ -1,5 +1,6 @@
 import 'package:flash_chat/constants/constant_values.dart';
 import 'package:flash_chat/customWidgets/buttonWidgets.dart';
+import 'package:flash_chat/styles.dart';
 import 'package:flutter/material.dart';
 
 class RegistrationScreen extends StatefulWidget {
@@ -12,78 +13,52 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 24.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: <Widget>[
-            Hero(
-              tag: AnimationTags.ANIMATED_LOGO,
-              child: Container(
-                height: 200.0,
-                child: Image.asset('images/logo.png'),
-              ),
-            ),
-            SizedBox(
-              height: 48.0,
-            ),
-            TextField(
-              onChanged: (value) {
-                //Do something with the user input.
-              },
-              decoration: InputDecoration(
-                hintText: 'Enter your email',
-                contentPadding:
-                    EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(32.0)),
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 24.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: <Widget>[
+                Hero(
+                  tag: AnimationTags.ANIMATED_LOGO,
+                  child: Container(
+                    height: 200.0,
+                    child: Image.asset('images/logo.png'),
+                  ),
                 ),
-                enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.blueAccent, width: 1.0),
-                  borderRadius: BorderRadius.all(Radius.circular(32.0)),
+                SizedBox(
+                  height: 48.0,
                 ),
-                focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.blueAccent, width: 2.0),
-                  borderRadius: BorderRadius.all(Radius.circular(32.0)),
+                TextField(
+                  onChanged: (value) {
+                    //Do something with the user input.
+                  },
+                  decoration: kInputFieldDecoration.copyWith(hintText: "Enter your email"),
                 ),
-              ),
-            ),
-            SizedBox(
-              height: 8.0,
-            ),
-            TextField(
-              onChanged: (value) {
-                //Do something with the user input.
-              },
-              decoration: InputDecoration(
-                hintText: 'Enter your password',
-                contentPadding:
-                    EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(32.0)),
+                SizedBox(
+                  height: 8.0,
                 ),
-                enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.blueAccent, width: 1.0),
-                  borderRadius: BorderRadius.all(Radius.circular(32.0)),
+                TextField(
+                  onChanged: (value) {
+                    //Do something with the user input.
+                  },
+                  decoration: kInputFieldDecoration.copyWith(hintText: "Enter your password"),
                 ),
-                focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.blueAccent, width: 2.0),
-                  borderRadius: BorderRadius.all(Radius.circular(32.0)),
+                SizedBox(
+                  height: 24.0,
                 ),
-              ),
+                AppMaterialButton(
+                  color: Colors.blueAccent,
+                  text: "Register",
+                  onPressedCallback: (){
+                    //implementation of registration functionalities
+                  },
+                ),
+              ],
             ),
-            SizedBox(
-              height: 24.0,
-            ),
-            AppMaterialButton(
-              color: Colors.blueAccent,
-              text: "Register",
-              onPressedCallback: (){
-                //implementation of registration functionalities
-              },
-            ),
-          ],
+          ),
         ),
       ),
     );
