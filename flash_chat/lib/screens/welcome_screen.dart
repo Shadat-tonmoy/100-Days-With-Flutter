@@ -1,7 +1,6 @@
-import 'dart:io';
-
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flash_chat/constants/constant_values.dart';
+import 'package:flash_chat/customWidgets/buttonWidgets.dart';
 import 'package:flutter/material.dart';
 
 class WelcomeScreen extends StatefulWidget {
@@ -36,14 +35,12 @@ class _WelcomeScreenState extends State<WelcomeScreen> with SingleTickerProvider
    animationController.forward();
    animation = ColorTween(begin: Colors.blue[300], end: Colors.white).animate(animationController);
 
-
-
     animationController.addListener(()
     {
       setState(() {
 
       });
-      print(animationController.value);
+//      print(animationController.value);
     });
   }
 
@@ -79,41 +76,19 @@ class _WelcomeScreenState extends State<WelcomeScreen> with SingleTickerProvider
             SizedBox(
               height: 48.0,
             ),
-            Padding(
-              padding: EdgeInsets.symmetric(vertical: 16.0),
-              child: Material(
-                elevation: 5.0,
-                color: Colors.lightBlueAccent,
-                borderRadius: BorderRadius.circular(30.0),
-                child: MaterialButton(
-                  onPressed: () {
-                    Navigator.pushNamed(context, ScreenRoutes.LOGIN_SCREEN);
-                  },
-                  minWidth: 200.0,
-                  height: 42.0,
-                  child: Text(
-                    'Log In',
-                  ),
-                ),
-              ),
+            AppMaterialButton(
+              color: Colors.lightBlueAccent,
+              text: "Log In",
+              onPressedCallback: (){
+                Navigator.pushNamed(context, ScreenRoutes.LOGIN_SCREEN);
+              },
             ),
-            Padding(
-              padding: EdgeInsets.symmetric(vertical: 16.0),
-              child: Material(
-                color: Colors.blueAccent,
-                borderRadius: BorderRadius.circular(30.0),
-                elevation: 5.0,
-                child: MaterialButton(
-                  onPressed: () {
-                    Navigator.pushNamed(context, ScreenRoutes.REGISTRATION_SCREEN);
-                  },
-                  minWidth: 200.0,
-                  height: 42.0,
-                  child: Text(
-                    'Register',
-                  ),
-                ),
-              ),
+            AppMaterialButton(
+              color: Colors.blueAccent,
+              text: "Register",
+              onPressedCallback: (){
+                Navigator.pushNamed(context, ScreenRoutes.REGISTRATION_SCREEN);
+              },
             ),
           ],
         ),
@@ -121,3 +96,6 @@ class _WelcomeScreenState extends State<WelcomeScreen> with SingleTickerProvider
     );
   }
 }
+
+
+
