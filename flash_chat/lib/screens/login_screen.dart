@@ -35,6 +35,10 @@ class _LoginScreenState extends State<LoginScreen> {
                   onChanged: (value) {
                     //Do something with the user input.
                   },
+                  style: TextStyle(
+                    color: Colors.grey[800]
+                  ),
+                  keyboardType: TextInputType.emailAddress,
                   decoration: kInputFieldDecoration.copyWith(hintText: "Enter your email."),
                 ),
                 SizedBox(
@@ -44,6 +48,10 @@ class _LoginScreenState extends State<LoginScreen> {
                   onChanged: (value) {
                     //Do something with the user input.
                   },
+                  style: TextStyle(
+                    color: Colors.grey[800]
+                  ),
+                  obscureText: true,
                   decoration: kInputFieldDecoration.copyWith(hintText: "Enter your password."),
                 ),
                 SizedBox(
