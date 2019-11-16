@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flash_chat/constants/constant_values.dart';
 import 'package:flash_chat/customWidgets/buttonWidgets.dart';
 import 'package:flash_chat/styles.dart';
@@ -8,7 +9,41 @@ class LoginScreen extends StatefulWidget {
   _LoginScreenState createState() => _LoginScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _LoginScreenState extends State<LoginScreen>
+{
+
+  String _email, _password;
+  FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+
+  Future<void> loginUser() async
+  {
+    FirebaseUser firebaseUser = await _firebaseAuth.currentUser();
+    if(firebaseUser == null)
+    {
+        AuthResult authResult = await _firebaseAuth.signInWithEmailAndPassword(email: _email, password: _password);
+        firebaseUser = authResult.user;
+        if(firebaseUser!=null) {
+          Navigator.pushNamed(context, ScreenRoutes.CHAT_SCREEN);
+        }
+        else {
+          print("Login error ${authResult.toString()}");
+        }
+    }
+    else {
+      Navigator.pushNamed(context, ScreenRoutes.CHAT_SCREEN);
+    }
+
+
+  }
+
+  @override
+  void initState()
+  {
+    super.initState();
+    _firebaseAuth = FirebaseAuth.instance;
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,7 +68,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 TextField(
                   onChanged: (value) {
-                    //Do something with the user input.
+                    _email = value;
                   },
                   style: TextStyle(
                     color: Colors.grey[800]
@@ -46,7 +81,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 TextField(
                   onChanged: (value) {
-                    //Do something with the user input.
+                    _password = value;
                   },
                   style: TextStyle(
                     color: Colors.grey[800]
@@ -61,7 +96,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   color: Colors.lightBlueAccent,
                   text: "Log In",
                   onPressedCallback: (){
-                    //implementation of login functionalities
+                    loginUser();
                   },
                 ),
               ],
