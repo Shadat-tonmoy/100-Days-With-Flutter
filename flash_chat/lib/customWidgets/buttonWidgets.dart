@@ -22,7 +22,10 @@ class AppMaterialButton extends StatelessWidget {
           minWidth: 200.0,
           height: 42.0,
           child: Text(
-              text
+              text,
+            style: TextStyle(
+              color: Colors.white
+            ),
           ),
         ),
       ),

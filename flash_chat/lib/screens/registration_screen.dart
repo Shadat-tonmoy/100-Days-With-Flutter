@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flash_chat/constants/constant_values.dart';
 import 'package:flash_chat/customWidgets/buttonWidgets.dart';
 import 'package:flash_chat/styles.dart';
@@ -12,10 +13,31 @@ class _RegistrationScreenState extends State<RegistrationScreen>
 {
 
   String email, password;
+  FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+
+  Future<void> signupWithEmailAndPassword() async {
+    print("Grabbed Valeu $email password $password instance $_firebaseAuth");
+    try
+    {
+      if(_firebaseAuth==null)
+        _firebaseAuth = FirebaseAuth.instance;
+      final newUser = await _firebaseAuth.createUserWithEmailAndPassword(email: email, password: password);
+      if(newUser != null)
+        Navigator.pushNamed(context, ScreenRoutes.CHAT_SCREEN);
+    }
+    catch(e)
+    {
+      print("Exception "+e.toString());
+
+    }
+
+
+  }
 
 
   @override
   Widget build(BuildContext context) {
+    print("FirebaseAuth $_firebaseAuth");
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
@@ -65,8 +87,11 @@ class _RegistrationScreenState extends State<RegistrationScreen>
                 AppMaterialButton(
                   color: Colors.blueAccent,
                   text: "Register",
-                  onPressedCallback: (){
-                    print("Email $email and Password $password");
+                  onPressedCallback: () async
+                  {
+                    await signupWithEmailAndPassword();
+
+
                   },
                 ),
               ],
