@@ -20,17 +20,22 @@ class _ChatScreenState extends State<ChatScreen>
       print("Current Logged In User "+loggedinUser.toString());
   }
 
+  Future<void> logoutUser () async
+  {
+    await _firebaseAuth.signOut();
+    Navigator.pop(context);
+  }
+
   @override
   void initState()
   {
     super.initState();
-
+    getCurrentLoggedInUser();
 
   }
 
   @override
   Widget build(BuildContext context) {
-    getCurrentLoggedInUser();
     return Scaffold(
       appBar: AppBar(
         leading: null,
@@ -38,7 +43,7 @@ class _ChatScreenState extends State<ChatScreen>
           IconButton(
               icon: Icon(Icons.close),
               onPressed: () {
-                //Implement logout functionality
+                logoutUser();
               }),
         ],
         title: Text('⚡️Chat'),
