@@ -11,3 +11,10 @@ class AnimationTags
 {
   static const String ANIMATED_LOGO = "logo";
 }
+
+class DatabasePaths
+{
+  static const String MESSAGE_ROOT = "messages";
+  static const String MESSAGE_TEXT_ROOT = "text";
+  static const String MESSAGE_SENDER_ROOT = "sender";
+}
