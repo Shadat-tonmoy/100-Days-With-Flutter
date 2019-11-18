@@ -10,40 +10,55 @@ class ChatScreen extends StatefulWidget {
   _ChatScreenState createState() => _ChatScreenState();
 }
 
-class _ChatScreenState extends State<ChatScreen>
-{
-
+class _ChatScreenState extends State<ChatScreen> {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
   final Firestore firestore = Firestore.instance;
   FirebaseUser loggedinUser;
-  String _message,_userEmail;
+  String _message, _userEmail;
 
-  Future<void> getCurrentLoggedInUser () async
-  {
+  Future<void> getCurrentLoggedInUser() async {
     loggedinUser = await _firebaseAuth.currentUser();
-    if(loggedinUser!=null){
+    if (loggedinUser != null) {
       _userEmail = loggedinUser.email;
     }
   }
 
-  Future<void> logoutUser () async
-  {
+  Future<void> logoutUser() async {
     await _firebaseAuth.signOut();
     Navigator.pop(context);
   }
-  
-  void sendMessageToFireStore()
+
+  void sendMessageToFireStore() {
+    firestore.collection(DatabasePaths.MESSAGE_ROOT).add(
+        MessageHelper.getMessageForDB(message: _message, sender: _userEmail));
+  }
+
+  void getMessages() async {
+    final messages =
+        await firestore.collection(DatabasePaths.MESSAGE_ROOT).getDocuments();
+    for (var message in messages.documents) {
+      print("Message ${message.data}");
+    }
+  }
+
+  void getMessageStream() async
   {
-    firestore.collection(DatabasePaths.MESSAGE_ROOT)
-        .add(MessageHelper.getMessageForDB(message:_message, sender: _userEmail));
+    await for(var snapshot in firestore.collection(DatabasePaths.MESSAGE_ROOT).snapshots())
+    {
+      for(var message in snapshot.documents)
+      {
+        print(message.data);
+
+      }
+    }
+
+
   }
 
   @override
-  void initState()
-  {
+  void initState() {
     super.initState();
     getCurrentLoggedInUser();
-
   }
 
   @override
@@ -52,6 +67,11 @@ class _ChatScreenState extends State<ChatScreen>
       appBar: AppBar(
         leading: null,
         actions: <Widget>[
+          IconButton(
+              icon: Icon(Icons.refresh),
+              onPressed: () {
+                getMessageStream();
+              }),
           IconButton(
               icon: Icon(Icons.close),
               onPressed: () {
@@ -77,9 +97,7 @@ class _ChatScreenState extends State<ChatScreen>
                         _message = value;
                       },
                       decoration: kMessageTextFieldDecoration,
-                      style: TextStyle(
-                        color: Colors.grey[800]
-                      ),
+                      style: TextStyle(color: Colors.grey[800]),
                     ),
                   ),
                   FlatButton(
