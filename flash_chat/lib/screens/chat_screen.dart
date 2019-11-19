@@ -43,7 +43,8 @@ class _ChatScreenState extends State<ChatScreen> {
 
   void getMessageStream() async
   {
-    await for(var snapshot in firestore.collection(DatabasePaths.MESSAGE_ROOT).snapshots())
+    Stream<QuerySnapshot> messageStream = firestore.collection(DatabasePaths.MESSAGE_ROOT).snapshots();
+    await for(var snapshot in messageStream)
     {
       for(var message in snapshot.documents)
       {
@@ -86,6 +87,27 @@ class _ChatScreenState extends State<ChatScreen> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
+            StreamBuilder<QuerySnapshot>(
+              stream: firestore.collection(DatabasePaths.MESSAGE_ROOT).snapshots(),
+              builder: (context, snapshot){
+                if(snapshot.hasData){
+                  final messages = snapshot.data.documents;
+                  List<Text> messageWidgets = [];
+                  for(var message in messages)
+                  {
+                    var text = message.data[DatabasePaths.MESSAGE_TEXT_ROOT];
+                    var sender = message.data[DatabasePaths.MESSAGE_SENDER_ROOT];
+                    messageWidgets.add(Text("Text : $text, Sender : $sender"));
+                  }
+                  return Column(
+                    children: messageWidgets,
+                  );
+                }
+                else return Text("No Recent Chats");
+
+
+              },
+            ),
             Container(
               decoration: kMessageContainerDecoration,
               child: Row(
@@ -112,6 +134,7 @@ class _ChatScreenState extends State<ChatScreen> {
                 ],
               ),
             ),
+
           ],
         ),
       ),
