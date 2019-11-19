@@ -15,6 +15,7 @@ class _ChatScreenState extends State<ChatScreen> {
   final Firestore firestore = Firestore.instance;
   FirebaseUser loggedinUser;
   String _message, _userEmail;
+  final TextEditingController messageTextEditingController = TextEditingController();
 
   Future<void> getCurrentLoggedInUser() async {
     loggedinUser = await _firebaseAuth.currentUser();
@@ -41,19 +42,14 @@ class _ChatScreenState extends State<ChatScreen> {
     }
   }
 
-  void getMessageStream() async
-  {
-    Stream<QuerySnapshot> messageStream = firestore.collection(DatabasePaths.MESSAGE_ROOT).snapshots();
-    await for(var snapshot in messageStream)
-    {
-      for(var message in snapshot.documents)
-      {
+  void getMessageStream() async {
+    Stream<QuerySnapshot> messageStream =
+        firestore.collection(DatabasePaths.MESSAGE_ROOT).snapshots();
+    await for (var snapshot in messageStream) {
+      for (var message in snapshot.documents) {
         print(message.data);
-
       }
     }
-
-
   }
 
   @override
@@ -87,27 +83,7 @@ class _ChatScreenState extends State<ChatScreen> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            StreamBuilder<QuerySnapshot>(
-              stream: firestore.collection(DatabasePaths.MESSAGE_ROOT).snapshots(),
-              builder: (context, snapshot){
-                if(snapshot.hasData){
-                  final messages = snapshot.data.documents;
-                  List<Text> messageWidgets = [];
-                  for(var message in messages)
-                  {
-                    var text = message.data[DatabasePaths.MESSAGE_TEXT_ROOT];
-                    var sender = message.data[DatabasePaths.MESSAGE_SENDER_ROOT];
-                    messageWidgets.add(Text("Text : $text, Sender : $sender"));
-                  }
-                  return Column(
-                    children: messageWidgets,
-                  );
-                }
-                else return Text("No Recent Chats");
-
-
-              },
-            ),
+            MessageStream(firestore: firestore),
             Container(
               decoration: kMessageContainerDecoration,
               child: Row(
@@ -115,6 +91,7 @@ class _ChatScreenState extends State<ChatScreen> {
                 children: <Widget>[
                   Expanded(
                     child: TextField(
+                      controller: messageTextEditingController,
                       onChanged: (value) {
                         _message = value;
                       },
@@ -124,6 +101,7 @@ class _ChatScreenState extends State<ChatScreen> {
                   ),
                   FlatButton(
                     onPressed: () {
+                      messageTextEditingController.clear();
                       sendMessageToFireStore();
                     },
                     child: Text(
@@ -134,10 +112,90 @@ class _ChatScreenState extends State<ChatScreen> {
                 ],
               ),
             ),
-
           ],
         ),
       ),
+    );
+  }
+}
+
+class MessageStream extends StatelessWidget
+{
+  final Firestore firestore;
+
+  MessageStream({this.firestore});
+
+  @override
+  Widget build(BuildContext context) {
+    return StreamBuilder<QuerySnapshot>(
+      stream:
+      firestore.collection(DatabasePaths.MESSAGE_ROOT).snapshots(),
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          final messages = snapshot.data.documents;
+          List<Widget> messageWidgets = [];
+          for (var message in messages) {
+            var text = message.data[DatabasePaths.MESSAGE_TEXT_ROOT];
+            var sender =
+            message.data[DatabasePaths.MESSAGE_SENDER_ROOT];
+            messageWidgets
+                .add(MessageBubble(text: text, sender: sender));
+          }
+          return Expanded(
+            child: ListView(
+              padding: EdgeInsets.symmetric(
+                  horizontal: 10.0, vertical: 10.0),
+              children: messageWidgets,
+            ),
+          );
+        } else
+          return Text("No Recent Chats");
+      },
+    );
+  }
+}
+
+
+
+class MessageBubble extends StatelessWidget {
+  final String text, sender;
+  MessageBubble({this.text, this.sender});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.end,
+      children: <Widget>[
+        Padding(
+          padding: EdgeInsets.all(2.0),
+          child: Text(
+            sender,
+            style: TextStyle(
+              fontSize: 12.0
+            ),
+          ),
+        ),
+        Container(
+          padding: EdgeInsets.all(10.0),
+          decoration: BoxDecoration(
+            color: Colors.lightBlue,
+            shape: BoxShape.rectangle,
+            borderRadius: BorderRadius.circular(24.0),
+            boxShadow: [
+              BoxShadow(color: Colors.grey,blurRadius: 5.0),]
+
+          ),
+          child: Text(
+            text,
+            style: TextStyle(
+              color: Colors.white,
+            ),
+          ),
+        ),
+        SizedBox(
+          height: 16.0,
+        )
+      ],
     );
   }
 }
