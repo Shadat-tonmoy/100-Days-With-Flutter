@@ -45,7 +45,7 @@ class _LoginScreenState extends State<LoginScreen>
           if(firebaseUser!=null)
           {
             updateLoadingIndicatorState(false);
-            Navigator.pushNamed(context, ScreenRoutes.CHAT_SCREEN);
+            Navigator.pushReplacementNamed(context, ScreenRoutes.CHAT_SCREEN);
           }
         }
         catch(e)
@@ -56,10 +56,16 @@ class _LoginScreenState extends State<LoginScreen>
         }
     }
     else {
-      Navigator.pushNamed(context, ScreenRoutes.CHAT_SCREEN);
+      updateLoadingIndicatorState(false);
+      Navigator.pushReplacementNamed(context, ScreenRoutes.CHAT_SCREEN);
     }
+  }
 
-
+  void checkAlreadyLoggedInUser() async
+  {
+    FirebaseUser firebaseUser = await _firebaseAuth.currentUser();
+    if(firebaseUser!=null)
+      Navigator.pushReplacementNamed(context, ScreenRoutes.CHAT_SCREEN);
   }
 
   @override
@@ -67,6 +73,7 @@ class _LoginScreenState extends State<LoginScreen>
   {
     super.initState();
     _firebaseAuth = FirebaseAuth.instance;
+    checkAlreadyLoggedInUser();
   }
 
 

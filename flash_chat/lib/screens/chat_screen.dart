@@ -5,22 +5,24 @@ import 'package:flutter/material.dart';
 import 'package:flash_chat/styles.dart';
 import 'package:flash_chat/constants/constant_values.dart';
 
+final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+FirebaseUser _loggedInUser;
+
+
 class ChatScreen extends StatefulWidget {
   @override
   _ChatScreenState createState() => _ChatScreenState();
 }
 
 class _ChatScreenState extends State<ChatScreen> {
-  final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
   final Firestore firestore = Firestore.instance;
-  FirebaseUser loggedinUser;
   String _message, _userEmail;
   final TextEditingController messageTextEditingController = TextEditingController();
 
   Future<void> getCurrentLoggedInUser() async {
-    loggedinUser = await _firebaseAuth.currentUser();
-    if (loggedinUser != null) {
-      _userEmail = loggedinUser.email;
+    _loggedInUser = await _firebaseAuth.currentUser();
+    if (_loggedInUser!= null) {
+      _userEmail = _loggedInUser.email;
     }
   }
 
@@ -64,11 +66,6 @@ class _ChatScreenState extends State<ChatScreen> {
       appBar: AppBar(
         leading: null,
         actions: <Widget>[
-          IconButton(
-              icon: Icon(Icons.refresh),
-              onPressed: () {
-                getMessageStream();
-              }),
           IconButton(
               icon: Icon(Icons.close),
               onPressed: () {
@@ -158,13 +155,19 @@ class MessageStream extends StatelessWidget
 
 
 class MessageBubble extends StatelessWidget {
+
+  bool isCurrentUser()
+  {
+    return sender == _loggedInUser.email;
+  }
+
   final String text, sender;
   MessageBubble({this.text, this.sender});
 
   @override
   Widget build(BuildContext context) {
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.end,
+      crossAxisAlignment: isCurrentUser() ? CrossAxisAlignment.end : CrossAxisAlignment.start,
       children: <Widget>[
         Padding(
           padding: EdgeInsets.all(2.0),
@@ -178,9 +181,14 @@ class MessageBubble extends StatelessWidget {
         Container(
           padding: EdgeInsets.all(10.0),
           decoration: BoxDecoration(
-            color: Colors.lightBlue,
+            color: isCurrentUser() ? Colors.lightBlue : Colors.white,
             shape: BoxShape.rectangle,
-            borderRadius: BorderRadius.circular(24.0),
+            borderRadius: BorderRadius.only(
+              topLeft: isCurrentUser() ? Radius.circular(30.0) : Radius.zero,
+              topRight: isCurrentUser() ? Radius.zero : Radius.circular(30.0),
+              bottomLeft: Radius.circular(30.0),
+              bottomRight: Radius.circular(30.0)
+            ),
             boxShadow: [
               BoxShadow(color: Colors.grey,blurRadius: 5.0),]
 
@@ -188,7 +196,7 @@ class MessageBubble extends StatelessWidget {
           child: Text(
             text,
             style: TextStyle(
-              color: Colors.white,
+              color: isCurrentUser() ? Colors.white : Colors.grey[800],
             ),
           ),
         ),
