@@ -129,7 +129,7 @@ class MessageStream extends StatelessWidget
       firestore.collection(DatabasePaths.MESSAGE_ROOT).snapshots(),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
-          final messages = snapshot.data.documents;
+          final messages = snapshot.data.documents.reversed;
           List<Widget> messageWidgets = [];
           for (var message in messages) {
             var text = message.data[DatabasePaths.MESSAGE_TEXT_ROOT];
@@ -140,6 +140,7 @@ class MessageStream extends StatelessWidget
           }
           return Expanded(
             child: ListView(
+              reverse: true,
               padding: EdgeInsets.symmetric(
                   horizontal: 10.0, vertical: 10.0),
               children: messageWidgets,
