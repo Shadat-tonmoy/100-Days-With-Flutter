@@ -78,72 +78,72 @@ class _LoginScreenState extends State<LoginScreen>
         child: SafeArea(
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: 24.0),
-            child: SingleChildScrollView(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: <Widget>[
-                  Hero(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: <Widget>[
+                Flexible(
+                  child: Hero(
                     tag: AnimationTags.ANIMATED_LOGO,
                     child: Container(
                       height: 200.0,
                       child: Image.asset('images/logo.png'),
                     ),
                   ),
-                  SizedBox(
-                    height: 32.0,
-                  ),
-                  Visibility(
-                    maintainAnimation: true,
-                    maintainState: true,
-                    visible: _authResultVisibility,
-                    child: Text(
-                      "Login Failed! Please Check Your Email and Password and Try Again!",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: Colors.red
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 24.0,
-                  ),
-                  TextField(
-                    onChanged: (value) {
-                      _email = value;
-                    },
+                ),
+                SizedBox(
+                  height: 32.0,
+                ),
+                Visibility(
+                  maintainAnimation: true,
+                  maintainState: true,
+                  visible: _authResultVisibility,
+                  child: Text(
+                    "Login Failed! Please Check Your Email and Password and Try Again!",
+                    textAlign: TextAlign.center,
                     style: TextStyle(
-                      color: Colors.grey[800]
+                      fontWeight: FontWeight.bold,
+                      color: Colors.red
                     ),
-                    keyboardType: TextInputType.emailAddress,
-                    decoration: kInputFieldDecoration.copyWith(hintText: "Enter your email."),
                   ),
-                  SizedBox(
-                    height: 8.0,
+                ),
+                SizedBox(
+                  height: 24.0,
+                ),
+                TextField(
+                  onChanged: (value) {
+                    _email = value;
+                  },
+                  style: TextStyle(
+                    color: Colors.grey[800]
                   ),
-                  TextField(
-                    onChanged: (value) {
-                      _password = value;
-                    },
-                    style: TextStyle(
-                      color: Colors.grey[800]
-                    ),
-                    obscureText: true,
-                    decoration: kInputFieldDecoration.copyWith(hintText: "Enter your password."),
+                  keyboardType: TextInputType.emailAddress,
+                  decoration: kInputFieldDecoration.copyWith(hintText: "Enter your email."),
+                ),
+                SizedBox(
+                  height: 8.0,
+                ),
+                TextField(
+                  onChanged: (value) {
+                    _password = value;
+                  },
+                  style: TextStyle(
+                    color: Colors.grey[800]
                   ),
-                  SizedBox(
-                    height: 24.0,
-                  ),
-                  AppMaterialButton(
-                    color: Colors.lightBlueAccent,
-                    text: "Log In",
-                    onPressedCallback: (){
-                      loginUser();
-                    },
-                  ),
-                ],
-              ),
+                  obscureText: true,
+                  decoration: kInputFieldDecoration.copyWith(hintText: "Enter your password."),
+                ),
+                SizedBox(
+                  height: 24.0,
+                ),
+                AppMaterialButton(
+                  color: Colors.lightBlueAccent,
+                  text: "Log In",
+                  onPressedCallback: (){
+                    loginUser();
+                  },
+                ),
+              ],
             ),
           ),
         ),
