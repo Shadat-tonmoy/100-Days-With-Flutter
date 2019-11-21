@@ -126,10 +126,12 @@ class MessageStream extends StatelessWidget
   Widget build(BuildContext context) {
     return StreamBuilder<QuerySnapshot>(
       stream:
-      firestore.collection(DatabasePaths.MESSAGE_ROOT).snapshots(),
+      firestore.collection(DatabasePaths.MESSAGE_ROOT).orderBy(DatabasePaths.MESSAGE_SENT_TIME,descending: true).snapshots(),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
-          final messages = snapshot.data.documents.reversed;
+          final messages = snapshot.data.documents;
+          for(var message in messages)
+            print("Message ${message.data}");
           List<Widget> messageWidgets = [];
           for (var message in messages) {
             var text = message.data[DatabasePaths.MESSAGE_TEXT_ROOT];

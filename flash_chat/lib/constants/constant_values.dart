@@ -17,4 +17,5 @@ class DatabasePaths
   static const String MESSAGE_ROOT = "messages";
   static const String MESSAGE_TEXT_ROOT = "text";
   static const String MESSAGE_SENDER_ROOT = "sender";
+  static const String MESSAGE_SENT_TIME= "timestamp";
 }
