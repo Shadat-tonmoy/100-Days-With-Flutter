@@ -68,8 +68,37 @@ class HomeScreen extends StatelessWidget
                       color: Colors.white,
                       borderRadius: BorderRadius.only(topLeft: Radius.circular(16.0), topRight: Radius.circular(16.0))
                   ),
-
+                  child: ListView(
+                    padding: EdgeInsets.only(top: 8.0,bottom: 64.0),
+                    children: <Widget>[
+                      TODOItem(
+                        title: "Task 1",
+                        isDone: true,
+                      ),
+                      TODOItem(
+                        title: "Task 2",
+                        isDone: false,
+                      ),
+                      TODOItem(
+                        title: "Task 3",
+                        isDone: true,
+                      ),
+                      TODOItem(
+                        title: "Task 1",
+                        isDone: true,
+                      ),
+                      TODOItem(
+                        title: "Task 2",
+                        isDone: false,
+                      ),
+                      TODOItem(
+                        title: "Task 3",
+                        isDone: true,
+                      ),
+                    ],
+                  ),
                 ),
+
 
 
               )
@@ -80,6 +109,46 @@ class HomeScreen extends StatelessWidget
         ),
       ),
 
+    );
+  }
+}
+
+class TODOItem extends StatelessWidget
+{
+
+  final String title;
+  final bool isDone;
+  final Function onCheckBoxClicked;
+
+  TODOItem({this.title,this.isDone,this.onCheckBoxClicked});
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 16.0),
+      child: Column(
+        children: <Widget>[
+          Row(
+            children: <Widget>[
+              Expanded(
+                child: Text(
+                    title
+                ),
+              ),
+              Checkbox(
+                onChanged: (value){
+
+                },
+                value: isDone,
+              )
+
+            ],
+          ),
+          Divider(
+            color: Colors.grey[400],
+          )
+        ],
+      ),
     );
   }
 }
