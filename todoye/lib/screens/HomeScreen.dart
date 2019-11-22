@@ -1,20 +1,21 @@
 import 'dart:ffi';
 
 import 'package:flutter/material.dart';
+import 'package:todoye/widgets/HomeScreenWidgets.dart';
 
-class HomeScreen extends StatelessWidget
-{
+class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-        onPressed: (){
-
+        onPressed: () {
+          showModalBottomSheet(
+              context: context,
+              builder: (context) => ModalBottomSheetBuilder(),
+              isScrollControlled: true);
         },
         backgroundColor: Colors.blueAccent,
-        child: Icon(
-            Icons.add
-        ),
+        child: Icon(Icons.add),
       ),
       body: Container(
         width: double.infinity,
@@ -48,16 +49,11 @@ class HomeScreen extends StatelessWidget
                       style: TextStyle(
                           color: Colors.white,
                           fontSize: 40.0,
-                          fontWeight: FontWeight.bold
-                      ),
+                          fontWeight: FontWeight.bold),
                     ),
                     Text(
                       "12 Task",
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 16.0
-                      ),
-
+                      style: TextStyle(color: Colors.white, fontSize: 16.0),
                     )
                   ],
                 ),
@@ -66,10 +62,11 @@ class HomeScreen extends StatelessWidget
                 child: Container(
                   decoration: BoxDecoration(
                       color: Colors.white,
-                      borderRadius: BorderRadius.only(topLeft: Radius.circular(16.0), topRight: Radius.circular(16.0))
-                  ),
+                      borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(16.0),
+                          topRight: Radius.circular(16.0))),
                   child: ListView(
-                    padding: EdgeInsets.only(top: 8.0,bottom: 64.0),
+                    padding: EdgeInsets.only(top: 8.0, bottom: 64.0),
                     children: <Widget>[
                       TODOItem(
                         title: "Task 1",
@@ -98,56 +95,10 @@ class HomeScreen extends StatelessWidget
                     ],
                   ),
                 ),
-
-
-
               )
-
-
             ],
           ),
         ),
-      ),
-
-    );
-  }
-}
-
-class TODOItem extends StatelessWidget
-{
-
-  final String title;
-  final bool isDone;
-  final Function onCheckBoxClicked;
-
-  TODOItem({this.title,this.isDone,this.onCheckBoxClicked});
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 16.0),
-      child: Column(
-        children: <Widget>[
-          Row(
-            children: <Widget>[
-              Expanded(
-                child: Text(
-                    title
-                ),
-              ),
-              Checkbox(
-                onChanged: (value){
-
-                },
-                value: isDone,
-              )
-
-            ],
-          ),
-          Divider(
-            color: Colors.grey[400],
-          )
-        ],
       ),
     );
   }
