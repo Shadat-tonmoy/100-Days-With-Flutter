@@ -55,6 +55,7 @@ class ModalBottomSheetBuilder extends StatelessWidget
             color: Colors.white,
           ),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             Container(
               width: double.infinity,
@@ -105,6 +106,28 @@ class ModalBottomSheetBuilder extends StatelessWidget
                 autofocus: true,
 
 
+              ),
+            ),
+            SizedBox(
+              height: 24.0,
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 32.0),
+              child: MaterialButton(
+                padding: EdgeInsets.all(16.0),
+                shape: RoundedRectangleBorder(
+                 borderRadius: BorderRadius.circular(16.0)
+                ),
+                color: Colors.blueAccent,
+                onPressed: (){
+
+                },
+                child: Text(
+                  "Add Task",
+                  style: TextStyle(
+                    color: Colors.white
+                  ),
+                ),
               ),
             )
           ],
