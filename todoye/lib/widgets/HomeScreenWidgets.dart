@@ -4,10 +4,9 @@ class TODOItem extends StatelessWidget
 {
 
   final String title;
-  final bool isDone;
   final Function onCheckBoxClicked;
 
-  TODOItem({this.title,this.isDone,this.onCheckBoxClicked});
+  TODOItem({this.title,this.onCheckBoxClicked});
 
   @override
   Widget build(BuildContext context) {
@@ -22,13 +21,7 @@ class TODOItem extends StatelessWidget
                     title
                 ),
               ),
-              Checkbox(
-                onChanged: (value){
-
-                },
-                value: isDone,
-              )
-
+              TaskCheckBox()
             ],
           ),
           Divider(
@@ -39,6 +32,33 @@ class TODOItem extends StatelessWidget
     );
   }
 }
+
+class TaskCheckBox extends StatefulWidget {
+  @override
+  _TaskCheckBoxState createState() => _TaskCheckBoxState();
+}
+
+class _TaskCheckBoxState extends State<TaskCheckBox>
+{
+
+  bool isChecked = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return Checkbox(
+      onChanged: (value)
+      {
+
+        setState(() {
+          isChecked = value;
+        });
+
+      },
+      value: isChecked,
+    );
+  }
+}
+
 
 class ModalBottomSheetBuilder extends StatelessWidget
 {

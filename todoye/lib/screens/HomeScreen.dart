@@ -70,27 +70,21 @@ class HomeScreen extends StatelessWidget {
                     children: <Widget>[
                       TODOItem(
                         title: "Task 1",
-                        isDone: true,
                       ),
                       TODOItem(
                         title: "Task 2",
-                        isDone: false,
                       ),
                       TODOItem(
                         title: "Task 3",
-                        isDone: true,
                       ),
                       TODOItem(
                         title: "Task 1",
-                        isDone: true,
                       ),
                       TODOItem(
                         title: "Task 2",
-                        isDone: false,
                       ),
                       TODOItem(
                         title: "Task 3",
-                        isDone: true,
                       ),
                     ],
                   ),
