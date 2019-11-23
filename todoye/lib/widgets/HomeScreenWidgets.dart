@@ -1,12 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:todoye/helpers/DateTimeHelper.dart';
 
-class TODOItem extends StatelessWidget
+class TODOItem extends StatefulWidget
 {
 
   final String title;
   final Function onCheckBoxClicked;
 
   TODOItem({this.title,this.onCheckBoxClicked});
+
+  @override
+  _TODOItemState createState() => _TODOItemState();
+}
+
+class _TODOItemState extends State<TODOItem>
+{
+  bool isChecked = false;
+
+  void onCheckboxStateChanged(bool checkBoxState)
+  {
+    setState(() {isChecked = checkBoxState;});
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -17,11 +31,22 @@ class TODOItem extends StatelessWidget
           Row(
             children: <Widget>[
               Expanded(
-                child: Text(
-                    title
-                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Text(widget.title),
+                    Text(
+                       isChecked ? "Last Done at : ${DateTimeHelper.getCurrentTimeString()}" : "Not Done",
+                      style: TextStyle(
+                        color: Colors.grey[600]
+                      ),
+
+                    )
+                  ],
+
+                )
               ),
-              TaskCheckBox()
+              TaskCheckBox(isChecked: isChecked,checkboxStateChangeCallback: onCheckboxStateChanged,)
             ],
           ),
           Divider(
@@ -33,30 +58,22 @@ class TODOItem extends StatelessWidget
   }
 }
 
-class TaskCheckBox extends StatefulWidget {
-  @override
-  _TaskCheckBoxState createState() => _TaskCheckBoxState();
-}
-
-class _TaskCheckBoxState extends State<TaskCheckBox>
+class TaskCheckBox extends StatelessWidget
 {
+  final bool isChecked;
+  final Function checkboxStateChangeCallback;
 
-  bool isChecked = false;
+  TaskCheckBox({@required this.isChecked, @required this.checkboxStateChangeCallback});
 
   @override
   Widget build(BuildContext context) {
+    // TODO: implement build
     return Checkbox(
-      onChanged: (value)
-      {
-
-        setState(() {
-          isChecked = value;
-        });
-
-      },
+      onChanged: checkboxStateChangeCallback,
       value: isChecked,
     );
   }
+
 }
 
 
