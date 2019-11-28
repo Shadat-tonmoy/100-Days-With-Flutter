@@ -36,7 +36,7 @@ class TODOItem extends StatelessWidget
                   )
               ),
               Checkbox(
-//                onChanged: checkboxStateChangeCallback,
+                onChanged: onCheckBoxClicked,
                 value: isChecked,
               )
             ],
@@ -149,9 +149,14 @@ class ModalBottomSheetBuilder extends StatelessWidget
   }
 }
 
-class TodoItemList extends StatelessWidget
+class TodoItemList extends StatefulWidget
 {
 
+  @override
+  _TodoItemListState createState() => _TodoItemListState();
+}
+
+class _TodoItemListState extends State<TodoItemList> {
   final List<Task> taskList = [
     Task(
       title: "Task 1",
@@ -173,31 +178,28 @@ class TodoItemList extends StatelessWidget
     )
   ];
 
+  void toggleTaskState(int index)
+  {
+    setState(() {
+      taskList[index].toggleIsDone();
+    });
+
+  }
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
+    return ListView.builder(
       padding: EdgeInsets.only(top: 8.0, bottom: 64.0),
-      children: <Widget>[
-        TODOItem(
-          title: taskList[0].title,
-        ),
-        TODOItem(
-          title: taskList[1].title,
-        ),
-        TODOItem(
-          title: taskList[2].title,
-        ),
-        TODOItem(
-          title: taskList[3].title,
-        ),
-        TODOItem(
-          title: taskList[4].title,
-        ),
-        TODOItem(
-          title: taskList[5].title,
-        )
-      ],
+      itemBuilder: (context, index){
+        return TODOItem(
+          title: taskList[index].title,
+          isChecked: taskList[index].isDone,
+          onCheckBoxClicked: (bool state){
+            toggleTaskState(index);
+          },
+        );
+      },
+      itemCount: taskList.length,
     );
   }
 }
