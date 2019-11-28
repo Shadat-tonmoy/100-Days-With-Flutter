@@ -1,9 +1,46 @@
 import 'dart:ffi';
 
 import 'package:flutter/material.dart';
+import 'package:todoye/models/Task.dart';
 import 'package:todoye/widgets/HomeScreenWidgets.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
+  @override
+  _HomeScreenState createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen>
+{
+
+  final List<Task> taskList = [
+    Task(
+      title: "Task 1",
+    ),
+    Task(
+      title: "Task 2",
+    ),
+    Task(
+      title: "Task 3",
+    ),
+    Task(
+      title: "Task 1",
+    ),
+    Task(
+      title: "Task 2",
+    ),
+    Task(
+      title: "Task 3",
+    )
+  ];
+
+  void addNewTask(Task task)
+  {
+    setState(() {
+      taskList.insert(0, task);
+    });
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -11,7 +48,7 @@ class HomeScreen extends StatelessWidget {
         onPressed: () {
           showModalBottomSheet(
               context: context,
-              builder: (context) => ModalBottomSheetBuilder(),
+              builder: (context) => ModalBottomSheetBuilder(onTaskAddedCallback: addNewTask,),
               isScrollControlled: true);
         },
         backgroundColor: Colors.blueAccent,
@@ -52,7 +89,7 @@ class HomeScreen extends StatelessWidget {
                           fontWeight: FontWeight.bold),
                     ),
                     Text(
-                      "12 Task",
+                      "${taskList.length} Task",
                       style: TextStyle(color: Colors.white, fontSize: 16.0),
                     )
                   ],
@@ -65,7 +102,7 @@ class HomeScreen extends StatelessWidget {
                       borderRadius: BorderRadius.only(
                           topLeft: Radius.circular(16.0),
                           topRight: Radius.circular(16.0))),
-                  child: TodoItemList(),
+                  child: TodoItemList(taskList: taskList),
                 ),
               )
             ],

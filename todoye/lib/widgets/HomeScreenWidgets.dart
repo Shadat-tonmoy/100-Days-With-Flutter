@@ -54,9 +54,15 @@ class TODOItem extends StatelessWidget
 class ModalBottomSheetBuilder extends StatelessWidget
 {
 
+  final Function onTaskAddedCallback;
+
+  ModalBottomSheetBuilder({this.onTaskAddedCallback});
+
   @override
-  Widget build(BuildContext context) {
-    // TODO: implement build
+  Widget build(BuildContext context)
+  {
+    String taskTitle;
+
     return Container(
      color: Colors.blueAccent,
       child: Container(
@@ -115,6 +121,10 @@ class ModalBottomSheetBuilder extends StatelessWidget
                   hintText: "Enter Task Name",
                 ),
                 autofocus: true,
+                onChanged: (newText)
+                {
+                  taskTitle = newText;
+                },
 
 
               ),
@@ -131,7 +141,8 @@ class ModalBottomSheetBuilder extends StatelessWidget
                 ),
                 color: Colors.blueAccent,
                 onPressed: (){
-
+                  onTaskAddedCallback(new Task(title: taskTitle));
+                  Navigator.pop(context);
                 },
                 child: Text(
                   "Add Task",
@@ -151,32 +162,23 @@ class ModalBottomSheetBuilder extends StatelessWidget
 
 class TodoItemList extends StatefulWidget
 {
+  final List<Task> taskList;
+
+  TodoItemList({this.taskList});
 
   @override
   _TodoItemListState createState() => _TodoItemListState();
 }
 
 class _TodoItemListState extends State<TodoItemList> {
-  final List<Task> taskList = [
-    Task(
-      title: "Task 1",
-    ),
-    Task(
-      title: "Task 2",
-    ),
-    Task(
-      title: "Task 3",
-    ),
-    Task(
-      title: "Task 1",
-    ),
-    Task(
-      title: "Task 2",
-    ),
-    Task(
-      title: "Task 3",
-    )
-  ];
+  List<Task> taskList;
+
+  @override
+  void initState()
+  {
+    super.initState();
+    taskList = widget.taskList;
+  }
 
   void toggleTaskState(int index)
   {
