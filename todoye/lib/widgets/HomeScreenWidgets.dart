@@ -1,26 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:todoye/helpers/DateTimeHelper.dart';
+import 'package:todoye/models/Task.dart';
 
-class TODOItem extends StatefulWidget
+class TODOItem extends StatelessWidget
 {
 
   final String title;
   final Function onCheckBoxClicked;
+  final bool isChecked;
 
-  TODOItem({this.title,this.onCheckBoxClicked});
-
-  @override
-  _TODOItemState createState() => _TODOItemState();
-}
-
-class _TODOItemState extends State<TODOItem>
-{
-  bool isChecked = false;
-
-  void onCheckboxStateChanged(bool checkBoxState)
-  {
-    setState(() {isChecked = checkBoxState;});
-  }
+  TODOItem({this.title,this.onCheckBoxClicked, this.isChecked = false});
 
   @override
   Widget build(BuildContext context) {
@@ -31,22 +20,25 @@ class _TODOItemState extends State<TODOItem>
           Row(
             children: <Widget>[
               Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Text(widget.title),
-                    Text(
-                       isChecked ? "Last Done at : ${DateTimeHelper.getCurrentTimeString()}" : "Not Done",
-                      style: TextStyle(
-                        color: Colors.grey[600]
-                      ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Text(title),
+                      Text(
+                        isChecked ? "Last Done at : ${DateTimeHelper.getCurrentTimeString()}" : "Not Done",
+                        style: TextStyle(
+                            color: Colors.grey[600]
+                        ),
 
-                    )
-                  ],
+                      )
+                    ],
 
-                )
+                  )
               ),
-              TaskCheckBox(isChecked: isChecked,checkboxStateChangeCallback: onCheckboxStateChanged,)
+              Checkbox(
+//                onChanged: checkboxStateChangeCallback,
+                value: isChecked,
+              )
             ],
           ),
           Divider(
@@ -56,24 +48,6 @@ class _TODOItemState extends State<TODOItem>
       ),
     );
   }
-}
-
-class TaskCheckBox extends StatelessWidget
-{
-  final bool isChecked;
-  final Function checkboxStateChangeCallback;
-
-  TaskCheckBox({@required this.isChecked, @required this.checkboxStateChangeCallback});
-
-  @override
-  Widget build(BuildContext context) {
-    // TODO: implement build
-    return Checkbox(
-      onChanged: checkboxStateChangeCallback,
-      value: isChecked,
-    );
-  }
-
 }
 
 
@@ -173,6 +147,57 @@ class ModalBottomSheetBuilder extends StatelessWidget
       ),
     );
   }
+}
+
+class TodoItemList extends StatelessWidget
+{
+
+  final List<Task> taskList = [
+    Task(
+      title: "Task 1",
+    ),
+    Task(
+      title: "Task 2",
+    ),
+    Task(
+      title: "Task 3",
+    ),
+    Task(
+      title: "Task 1",
+    ),
+    Task(
+      title: "Task 2",
+    ),
+    Task(
+      title: "Task 3",
+    )
+  ];
 
 
+  @override
+  Widget build(BuildContext context) {
+    return ListView(
+      padding: EdgeInsets.only(top: 8.0, bottom: 64.0),
+      children: <Widget>[
+        TODOItem(
+          title: taskList[0].title,
+        ),
+        TODOItem(
+          title: taskList[1].title,
+        ),
+        TODOItem(
+          title: taskList[2].title,
+        ),
+        TODOItem(
+          title: taskList[3].title,
+        ),
+        TODOItem(
+          title: taskList[4].title,
+        ),
+        TODOItem(
+          title: taskList[5].title,
+        )
+      ],
+    );
+  }
 }

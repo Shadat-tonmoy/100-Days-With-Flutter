@@ -65,29 +65,7 @@ class HomeScreen extends StatelessWidget {
                       borderRadius: BorderRadius.only(
                           topLeft: Radius.circular(16.0),
                           topRight: Radius.circular(16.0))),
-                  child: ListView(
-                    padding: EdgeInsets.only(top: 8.0, bottom: 64.0),
-                    children: <Widget>[
-                      TODOItem(
-                        title: "Task 1",
-                      ),
-                      TODOItem(
-                        title: "Task 2",
-                      ),
-                      TODOItem(
-                        title: "Task 3",
-                      ),
-                      TODOItem(
-                        title: "Task 1",
-                      ),
-                      TODOItem(
-                        title: "Task 2",
-                      ),
-                      TODOItem(
-                        title: "Task 3",
-                      ),
-                    ],
-                  ),
+                  child: TodoItemList(),
                 ),
               )
             ],
@@ -97,3 +75,5 @@ class HomeScreen extends StatelessWidget {
     );
   }
 }
+
+
