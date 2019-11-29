@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:todoye/helpers/DateTimeHelper.dart';
 import 'package:todoye/models/Task.dart';
+
 
 class TODOItem extends StatelessWidget
 {
@@ -53,10 +55,6 @@ class TODOItem extends StatelessWidget
 
 class ModalBottomSheetBuilder extends StatelessWidget
 {
-
-  final Function onTaskAddedCallback;
-
-  ModalBottomSheetBuilder({this.onTaskAddedCallback});
 
   @override
   Widget build(BuildContext context)
@@ -140,8 +138,9 @@ class ModalBottomSheetBuilder extends StatelessWidget
                  borderRadius: BorderRadius.circular(16.0)
                 ),
                 color: Colors.blueAccent,
-                onPressed: (){
-                  onTaskAddedCallback(new Task(title: taskTitle));
+                onPressed: ()
+                {
+                  Provider.of<TaskData>(context).addTask(new Task(title: taskTitle));
                   Navigator.pop(context);
                 },
                 child: Text(
@@ -160,33 +159,8 @@ class ModalBottomSheetBuilder extends StatelessWidget
   }
 }
 
-class TodoItemList extends StatefulWidget
+class TodoItemList extends StatelessWidget
 {
-  final List<Task> taskList;
-
-  TodoItemList({this.taskList});
-
-  @override
-  _TodoItemListState createState() => _TodoItemListState();
-}
-
-class _TodoItemListState extends State<TodoItemList> {
-  List<Task> taskList;
-
-  @override
-  void initState()
-  {
-    super.initState();
-    taskList = widget.taskList;
-  }
-
-  void toggleTaskState(int index)
-  {
-    setState(() {
-      taskList[index].toggleIsDone();
-    });
-
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -194,14 +168,15 @@ class _TodoItemListState extends State<TodoItemList> {
       padding: EdgeInsets.only(top: 8.0, bottom: 64.0),
       itemBuilder: (context, index){
         return TODOItem(
-          title: taskList[index].title,
-          isChecked: taskList[index].isDone,
+          title: Provider.of<TaskData>(context).taskList[index].title,
+          isChecked: Provider.of<TaskData>(context).taskList[index].isDone,
           onCheckBoxClicked: (bool state){
-            toggleTaskState(index);
+            /*toggleTaskState(index);*/
+            Provider.of<TaskData>(context).toggleTaskState(index);
           },
         );
       },
-      itemCount: taskList.length,
+      itemCount: Provider.of<TaskData>(context).taskList.length,
     );
   }
 }

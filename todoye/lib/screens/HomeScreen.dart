@@ -1,46 +1,12 @@
 import 'dart:ffi';
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:todoye/models/Task.dart';
 import 'package:todoye/widgets/HomeScreenWidgets.dart';
 
-class HomeScreen extends StatefulWidget {
-  @override
-  _HomeScreenState createState() => _HomeScreenState();
-}
-
-class _HomeScreenState extends State<HomeScreen>
+class HomeScreen extends StatelessWidget
 {
-
-  final List<Task> taskList = [
-    Task(
-      title: "Task 1",
-    ),
-    Task(
-      title: "Task 2",
-    ),
-    Task(
-      title: "Task 3",
-    ),
-    Task(
-      title: "Task 1",
-    ),
-    Task(
-      title: "Task 2",
-    ),
-    Task(
-      title: "Task 3",
-    )
-  ];
-
-  void addNewTask(Task task)
-  {
-    setState(() {
-      taskList.insert(0, task);
-    });
-  }
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -48,7 +14,7 @@ class _HomeScreenState extends State<HomeScreen>
         onPressed: () {
           showModalBottomSheet(
               context: context,
-              builder: (context) => ModalBottomSheetBuilder(onTaskAddedCallback: addNewTask,),
+              builder: (context) => ModalBottomSheetBuilder(),
               isScrollControlled: true);
         },
         backgroundColor: Colors.blueAccent,
@@ -89,7 +55,7 @@ class _HomeScreenState extends State<HomeScreen>
                           fontWeight: FontWeight.bold),
                     ),
                     Text(
-                      "${taskList.length} Task",
+                      "${Provider.of<TaskData>(context).totalTask} Task",
                       style: TextStyle(color: Colors.white, fontSize: 16.0),
                     )
                   ],
@@ -102,7 +68,7 @@ class _HomeScreenState extends State<HomeScreen>
                       borderRadius: BorderRadius.only(
                           topLeft: Radius.circular(16.0),
                           topRight: Radius.circular(16.0))),
-                  child: TodoItemList(taskList: taskList),
+                  child: TodoItemList(),
                 ),
               )
             ],
@@ -112,5 +78,6 @@ class _HomeScreenState extends State<HomeScreen>
     );
   }
 }
+
 
 
