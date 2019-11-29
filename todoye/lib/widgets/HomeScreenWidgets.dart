@@ -164,19 +164,23 @@ class TodoItemList extends StatelessWidget
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      padding: EdgeInsets.only(top: 8.0, bottom: 64.0),
-      itemBuilder: (context, index){
-        return TODOItem(
-          title: Provider.of<TaskData>(context).taskList[index].title,
-          isChecked: Provider.of<TaskData>(context).taskList[index].isDone,
-          onCheckBoxClicked: (bool state){
-            /*toggleTaskState(index);*/
-            Provider.of<TaskData>(context).toggleTaskState(index);
+    return Consumer<TaskData>(
+      builder: (context,taskData,child){
+        return ListView.builder(
+          padding: EdgeInsets.only(top: 8.0, bottom: 64.0),
+          itemBuilder: (context, index){
+            return TODOItem(
+              title: taskData.taskList[index].title,
+              isChecked: taskData.taskList[index].isDone,
+              onCheckBoxClicked: (bool state){
+                /*toggleTaskState(index);*/
+                taskData.toggleTaskState(index);
+              },
+            );
           },
+          itemCount: Provider.of<TaskData>(context).taskList.length,
         );
-      },
-      itemCount: Provider.of<TaskData>(context).taskList.length,
+      }
     );
   }
 }
