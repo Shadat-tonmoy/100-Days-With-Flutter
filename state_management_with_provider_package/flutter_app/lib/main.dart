@@ -6,36 +6,42 @@ void main() => runApp(MyApp());
 class MyApp extends StatelessWidget
 {
 
-  String data = "My Top Secret Data";
 //  String data = "123456";
 
   @override
   Widget build(BuildContext context) {
-    return Provider<String>(
-      builder: (context) => data,
+    return ChangeNotifierProvider<Data> (
+      builder: (context) => Data(),
       child: MaterialApp(
         home: Scaffold(
           appBar: AppBar(
-            title: Text(data),
+            title: AppbarText(),
           ),
           body: Column(
             children: <Widget>[
               Level1(),
-              Container(
-                margin: EdgeInsets.symmetric(horizontal: 16.0,vertical: 32.0),
-                child: TextField(
-                  onChanged: (newText){
-
-                  },
-                  decoration: InputDecoration(
-                    hintText: "Enter Text Here"
-                  ),
-
-                ),
-              )
+              AppTextField(),
             ],
           ),
         ),
+      ),
+    );
+  }
+}
+class AppTextField extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.symmetric(horizontal: 16.0,vertical: 32.0),
+      child: TextField(
+        onChanged: (newText){
+          Provider.of<Data>(context).updateData(newText);
+
+        },
+        decoration: InputDecoration(
+            hintText: "Enter Text Here"
+        ),
+
       ),
     );
   }
@@ -70,9 +76,32 @@ class Level3 extends StatelessWidget
   Widget build(BuildContext context) {
     return Container(
       child: Text(
-        Provider.of<String>(context)
+        Provider.of<Data>(context).data
       ),
     );
+  }
+}
+
+class AppbarText extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      Provider.of<Data>(context).data
+    );
+  }
+}
+
+
+class Data extends ChangeNotifier
+{
+  String data = "My Top Secret Data";
+
+  void updateData(String newData)
+  {
+    data = newData;
+    if(newData.length == 0)
+      data = "My Top Secret Data";
+    notifyListeners();
   }
 }
 
