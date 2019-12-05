@@ -4,7 +4,15 @@ import 'package:flutter/material.dart';
 
 void main() => runApp(MyApp());
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget
+{
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp>
+{
+  List<FoodItemCard> foodItems = [FoodItemCard()];
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -12,13 +20,17 @@ class MyApp extends StatelessWidget {
         appBar: AppBar(
           title: Text("Easy List"),
         ),
-        body: HomeScreen(),
+        body: HomeScreen(foodItems: foodItems,),
         floatingActionButton: FloatingActionButton(
           child: Icon(
             Icons.add,
           ),
-          onPressed: (){
-            print("Will Add New Card");
+          onPressed: ()
+          {
+            print("Adding New Item");
+            setState(() {
+              foodItems.add(FoodItemCard());
+            });
           },
           backgroundColor: Colors.deepOrange,
         ),
@@ -27,20 +39,35 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatelessWidget
+{
+
+  final List<FoodItemCard> foodItems;
+
+  HomeScreen({this.foodItems});
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView(
+      children: foodItems,
+    );
+  }
+}
+
+
+class FoodItemCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-        child: Column(
-      children: <Widget>[
-        Image.asset("assets/images/food.jpg"),
-        SizedBox(
-          height: 20,
-        ),
-        Text(
-          "Food Paradise"
-        )
-      ],
-    ));
+      child: Column(
+        children: <Widget>[
+          Image.asset("assets/images/food.jpg"),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text("Food Paradise"),
+          )
+        ],
+      ),
+    );
   }
 }
