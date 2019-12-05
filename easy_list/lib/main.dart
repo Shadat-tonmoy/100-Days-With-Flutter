@@ -13,6 +13,15 @@ class MyApp extends StatelessWidget {
           title: Text("Easy List"),
         ),
         body: HomeScreen(),
+        floatingActionButton: FloatingActionButton(
+          child: Icon(
+            Icons.add,
+          ),
+          onPressed: (){
+            print("Will Add New Card");
+          },
+          backgroundColor: Colors.deepOrange,
+        ),
       ),
     );
   }
