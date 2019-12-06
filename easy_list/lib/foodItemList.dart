@@ -20,3 +20,31 @@ class FoodItemList extends StatelessWidget
     );
   }
 }
+
+
+class FoodAddButton extends StatelessWidget
+{
+
+
+  final Function addNewFoodCallback;
+
+  FoodAddButton(this.addNewFoodCallback);
+
+
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    return FloatingActionButton(
+      child: Icon(
+        Icons.add,
+      ),
+      onPressed: ()
+      {
+        addNewFoodCallback(FoodItemCard());
+        print("Adding New Item");
+
+      },
+      backgroundColor: Theme.of(context).accentColor,
+    );
+  }
+}

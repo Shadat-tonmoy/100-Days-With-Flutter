@@ -16,27 +16,25 @@ class MyApp extends StatefulWidget
 class _MyAppState extends State<MyApp>
 {
   List<FoodItemCard> foodItems = [FoodItemCard()];
+
+  void addNewFood(FoodItemCard foodItemCard)
+  {
+    setState(() => foodItems.add(foodItemCard));
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: ThemeData(
+        primarySwatch: Colors.deepOrange,
+        accentColor: Colors.purple,
+      ),
       home: Scaffold(
         appBar: AppBar(
           title: Text("Easy List"),
         ),
         body: HomeScreen(foodItems: foodItems,),
-        floatingActionButton: FloatingActionButton(
-          child: Icon(
-            Icons.add,
-          ),
-          onPressed: ()
-          {
-            print("Adding New Item");
-            setState(() {
-              foodItems.add(FoodItemCard());
-            });
-          },
-          backgroundColor: Colors.deepOrange,
-        ),
+        floatingActionButton: FoodAddButton(addNewFood),
       ),
     );
   }
