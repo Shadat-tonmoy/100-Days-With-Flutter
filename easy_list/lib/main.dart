@@ -1,6 +1,9 @@
 import 'dart:ui';
 
+import 'package:easy_list/foodItemList.dart';
 import 'package:flutter/material.dart';
+
+import 'foodItem.dart';
 
 void main() => runApp(MyApp());
 
@@ -47,30 +50,12 @@ class HomeScreen extends StatelessWidget
   HomeScreen({this.foodItems});
 
   @override
-  Widget build(BuildContext context) {
-    print("Building ListView with ${foodItems.length}");
-    return SingleChildScrollView(
-      child: Column(
-        children: foodItems,
-      ),
+  Widget build(BuildContext context)
+  {
+    return FoodItemList(
+      foodItems: foodItems,
     );
   }
 }
 
 
-class FoodItemCard extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Card(
-      child: Column(
-        children: <Widget>[
-          Image.asset("assets/images/food.jpg"),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Text("Food Paradise"),
-          )
-        ],
-      ),
-    );
-  }
-}
