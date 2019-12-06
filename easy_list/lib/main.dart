@@ -48,8 +48,11 @@ class HomeScreen extends StatelessWidget
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      children: foodItems,
+    print("Building ListView with ${foodItems.length}");
+    return SingleChildScrollView(
+      child: Column(
+        children: foodItems,
+      ),
     );
   }
 }
