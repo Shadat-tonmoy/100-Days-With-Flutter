@@ -45,10 +45,30 @@ class HomeScreen extends StatelessWidget
   @override
   Widget build(BuildContext context) => getUIWidget();
 
-  Widget getUIWidget() => foodItems.length == 0 ? Text("No Food Item Found! Please Add One")
-      : FoodItemList(
-    foodItems: foodItems,
-  );
+  Widget getUIWidget(){
+   if(foodItems.length == 0){
+     return Center(
+       child: Column(
+         mainAxisAlignment: MainAxisAlignment.center,
+         children: <Widget>[
+           Image(
+             image: AssetImage("assets/images/no_item.png"),
+             fit: BoxFit.fill,
+             width: 250,
+             height: 200,
+           ),
+           Text("Nothing Found")
+         ],
+       ),
+     );
+   }
+   else {
+     return FoodItemList(
+       foodItems: foodItems,
+     );
+
+   }
+  }
 }
 
 
