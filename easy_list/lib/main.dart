@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:easy_list/foodItemList.dart';
 import 'package:flutter/material.dart';
 
@@ -15,12 +13,9 @@ class MyApp extends StatefulWidget
 
 class _MyAppState extends State<MyApp>
 {
-  List<FoodItemCard> foodItems = [FoodItemCard()];
+  List<FoodItemCard> foodItems = [];
 
-  void addNewFood(FoodItemCard foodItemCard)
-  {
-    setState(() => foodItems.add(foodItemCard));
-  }
+  void addNewFood(FoodItemCard foodItemCard) => setState(() => foodItems.add(foodItemCard));
 
   @override
   Widget build(BuildContext context) {
@@ -48,12 +43,12 @@ class HomeScreen extends StatelessWidget
   HomeScreen({this.foodItems});
 
   @override
-  Widget build(BuildContext context)
-  {
-    return FoodItemList(
-      foodItems: foodItems,
-    );
-  }
+  Widget build(BuildContext context) => getUIWidget();
+
+  Widget getUIWidget() => foodItems.length == 0 ? Text("No Food Item Found! Please Add One")
+      : FoodItemList(
+    foodItems: foodItems,
+  );
 }
 
 
