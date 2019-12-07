@@ -13,10 +13,9 @@ class FoodItemList extends StatelessWidget
   @override
   Widget build(BuildContext context) {
     print("Building ListView with ${foodItems.length}");
-    return SingleChildScrollView(
-      child: Column(
-        children: foodItems,
-      ),
+    return ListView(
+      children: foodItems.toList(),
+
     );
   }
 }
