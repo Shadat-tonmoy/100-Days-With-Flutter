@@ -57,7 +57,18 @@ class HomeScreen extends StatelessWidget
              width: 250,
              height: 200,
            ),
-           Text("Nothing Found")
+           Padding(
+             padding: const EdgeInsets.all(8.0),
+             child: Text(
+                "No Element Found!\nPlease tap the '+' button to add element",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: Colors.grey[600]
+                ),
+
+             ),
+           )
          ],
        ),
      );
