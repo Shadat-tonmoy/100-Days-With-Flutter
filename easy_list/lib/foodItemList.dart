@@ -24,7 +24,6 @@ class FoodItemList extends StatelessWidget
 class FoodAddButton extends StatelessWidget
 {
 
-
   final Function addNewFoodCallback;
 
   FoodAddButton(this.addNewFoodCallback);

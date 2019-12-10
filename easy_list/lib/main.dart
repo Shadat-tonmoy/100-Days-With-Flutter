@@ -1,21 +1,10 @@
-import 'package:easy_list/foodItemList.dart';
+import 'package:easy_list/screens/homeScreen.dart';
 import 'package:flutter/material.dart';
-
-import 'foodItem.dart';
 
 void main() => runApp(MyApp());
 
-class MyApp extends StatefulWidget
+class MyApp extends StatelessWidget
 {
-  @override
-  _MyAppState createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp>
-{
-  List<FoodItemCard> foodItems = [];
-
-  void addNewFood(FoodItemCard foodItemCard) => setState(() => foodItems.add(foodItemCard));
 
   @override
   Widget build(BuildContext context) {
@@ -24,64 +13,8 @@ class _MyAppState extends State<MyApp>
         primarySwatch: Colors.deepOrange,
         accentColor: Colors.purple,
       ),
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text("Easy List"),
-        ),
-        body: HomeScreen(foodItems: foodItems,),
-        floatingActionButton: FoodAddButton(addNewFood),
-      ),
+      home: HomeScreen(),
     );
-  }
-}
-
-class HomeScreen extends StatelessWidget
-{
-
-  final List<FoodItemCard> foodItems;
-
-  HomeScreen({this.foodItems});
-
-  @override
-  Widget build(BuildContext context) => getUIWidget();
-
-  Widget getUIWidget(){
-   if(foodItems.length == 0){
-     return Center(
-       child: Container(
-         margin: EdgeInsets.only(bottom: 50),
-         child: Column(
-           mainAxisAlignment: MainAxisAlignment.center,
-           children: <Widget>[
-             Image(
-               image: AssetImage("assets/images/no_item.png"),
-               fit: BoxFit.fill,
-               width: 250,
-               height: 200,
-             ),
-             Padding(
-               padding: const EdgeInsets.all(8.0),
-               child: Text(
-                  "No Element Found!\nPlease tap the '+' button to add element",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: Colors.grey[600]
-                  ),
-
-               ),
-             )
-           ],
-         ),
-       ),
-     );
-   }
-   else {
-     return FoodItemList(
-       foodItems: foodItems,
-     );
-
-   }
   }
 }
 
