@@ -1,33 +1,29 @@
+import 'package:easy_list/models/product.dart';
 import 'package:flutter/material.dart';
 
-import 'product.dart';
+import 'productCard.dart';
 
+class ProductList extends StatelessWidget {
+  final List<Product> products;
 
-class FoodItemList extends StatelessWidget
-{
-
-  final List<FoodItemCard> foodItems;
-
-  FoodItemList({this.foodItems});
+  ProductList({this.products});
 
   @override
   Widget build(BuildContext context) {
-    print("Building ListView with ${foodItems.length}");
+    print("Building ListView with ${products.length}");
     return ListView.builder(
-      itemBuilder: (context, index) => foodItems[index],
-      itemCount: foodItems.length,
+      itemBuilder: (context, index) => ProductCard(
+        product: products[index],
+      ),
+      itemCount: products.length,
     );
   }
 }
 
+class ProductAddButton extends StatelessWidget {
+  final Function addNewProductCallback;
 
-class FoodAddButton extends StatelessWidget
-{
-
-  final Function addNewFoodCallback;
-
-  FoodAddButton(this.addNewFoodCallback);
-
+  ProductAddButton(this.addNewProductCallback);
 
   @override
   Widget build(BuildContext context) {
@@ -36,11 +32,9 @@ class FoodAddButton extends StatelessWidget
       child: Icon(
         Icons.add,
       ),
-      onPressed: ()
-      {
-        addNewFoodCallback(FoodItemCard());
+      onPressed: () {
+        addNewProductCallback(Product("new_product","food.jpg"));
         print("Adding New Item");
-
       },
       backgroundColor: Theme.of(context).accentColor,
     );

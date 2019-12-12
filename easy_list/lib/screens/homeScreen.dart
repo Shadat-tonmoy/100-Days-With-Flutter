@@ -1,6 +1,7 @@
+import 'package:easy_list/models/product.dart';
 import 'package:flutter/material.dart';
 
-import '../product.dart';
+import '../productCard.dart';
 import '../productList.dart';
 
 class HomeScreen extends StatefulWidget
@@ -13,9 +14,9 @@ class HomeScreen extends StatefulWidget
 class _HomeScreenState extends State<HomeScreen>
 {
 
-  List<FoodItemCard> foodItems = [];
+  List<Product> products = [];
 
-  void addNewFood(FoodItemCard foodItemCard) => setState(() => foodItems.add(foodItemCard));
+  void addNewProduct(Product product) => setState(() => products.add(product));
 
 
   @override
@@ -26,12 +27,12 @@ class _HomeScreenState extends State<HomeScreen>
         title: Text("Easy List"),
       ),
       body: getUIWidget(),
-      floatingActionButton: FoodAddButton(addNewFood),
+      floatingActionButton: ProductAddButton(addNewProduct),
     );
   }
 
   Widget getUIWidget(){
-    if(foodItems.length == 0){
+    if(products.length == 0){
       return Center(
         child: Container(
           margin: EdgeInsets.only(bottom: 50),
@@ -62,8 +63,8 @@ class _HomeScreenState extends State<HomeScreen>
       );
     }
     else {
-      return FoodItemList(
-        foodItems: foodItems,
+      return ProductList(
+        products: products,
       );
 
     }
