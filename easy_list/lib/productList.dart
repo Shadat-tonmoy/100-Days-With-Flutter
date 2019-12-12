@@ -32,9 +32,10 @@ class ProductAddButton extends StatelessWidget {
       child: Icon(
         Icons.add,
       ),
-      onPressed: () {
-        addNewProductCallback(Product("new_product","food.jpg"));
-        print("Adding New Item");
+      onPressed: ()
+      {
+        Product product = Product("New Product At : ${DateTime.now().toString()}","food.jpg");
+        addNewProductCallback(product);
       },
       backgroundColor: Theme.of(context).accentColor,
     );

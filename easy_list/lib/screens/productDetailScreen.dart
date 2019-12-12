@@ -1,11 +1,19 @@
+import 'package:easy_list/models/product.dart';
 import 'package:flutter/material.dart';
 
-class ProductDetail extends StatelessWidget {
+import 'package:easy_list/constants/assetsConstants.dart';
+
+class ProductDetail extends StatelessWidget
+{
+  final Product product;
+
+  ProductDetail({@required this.product});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Product Details"),
+        title: Text(product.productTitle),
       ),
       body: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -16,11 +24,11 @@ class ProductDetail extends StatelessWidget {
             Card(
               child: Column(
                 children: <Widget>[
-                  Image.asset("assets/images/food.jpg"),
+                  Image.asset(AssetsConstants.IMAGE_BASE_PATH+product.productImage),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Text(
-                      "Food Paradise"
+                      product.productTitle
                     ),
                   )
                 ],
