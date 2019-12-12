@@ -3,8 +3,7 @@ import 'package:flutter/material.dart';
 
 import 'package:easy_list/constants/assetsConstants.dart';
 
-class ProductDetail extends StatelessWidget
-{
+class ProductDetail extends StatelessWidget {
   final Product product;
 
   ProductDetail({@required this.product});
@@ -24,12 +23,33 @@ class ProductDetail extends StatelessWidget
             Card(
               child: Column(
                 children: <Widget>[
-                  Image.asset(AssetsConstants.IMAGE_BASE_PATH+product.productImage),
+                  Image.asset(
+                      AssetsConstants.IMAGE_BASE_PATH + product.productImage),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: Text(
-                      product.productTitle
-                    ),
+                    child: Text(product.productTitle),
+                  ),
+                  ButtonBar(
+                    alignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      FlatButton(
+                        child: Row(
+                          children: <Widget>[
+                            Icon(Icons.delete),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Text(
+                                "Delete",
+                                style: TextStyle(
+                                  fontSize: 16.0
+                                ),
+                              ),
+                            )
+                          ],
+                        ),
+                        onPressed: () {},
+                      )
+                    ],
                   )
                 ],
               ),
