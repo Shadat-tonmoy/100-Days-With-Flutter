@@ -5,8 +5,9 @@ import 'productCard.dart';
 
 class ProductList extends StatelessWidget {
   final List<Product> products;
+  final Function productDeleteCallback;
 
-  ProductList({this.products});
+  ProductList({this.products,this.productDeleteCallback});
 
   @override
   Widget build(BuildContext context) {
@@ -14,6 +15,7 @@ class ProductList extends StatelessWidget {
     return ListView.builder(
       itemBuilder: (context, index) => ProductCard(
         product: products[index],
+        productDeleteCallback: productDeleteCallback,
       ),
       itemCount: products.length,
     );

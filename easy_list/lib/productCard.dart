@@ -8,8 +8,9 @@ class ProductCard extends StatelessWidget
 {
 
   final Product product;
+  final Function productDeleteCallback;
 
-  ProductCard({@required this.product});
+  ProductCard({@required this.product, this.productDeleteCallback});
 
 
   @override
@@ -29,12 +30,14 @@ class ProductCard extends StatelessWidget
                 child: Text(
                   "Details"
                 ),
-                onPressed: (){
-                  Navigator.push(context, MaterialPageRoute(builder: (context)
+                onPressed: () async {
+                  Product result = await Navigator.push(context, MaterialPageRoute(builder: (context)
                   {
                     return ProductDetail(product: product,);
 
                   }));
+                  productDeleteCallback(result);
+
                 },
               )
 

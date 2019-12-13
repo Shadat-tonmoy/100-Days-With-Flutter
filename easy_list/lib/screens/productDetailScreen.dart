@@ -47,7 +47,9 @@ class ProductDetail extends StatelessWidget {
                             )
                           ],
                         ),
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.pop(context,product);
+                        },
                       )
                     ],
                   )

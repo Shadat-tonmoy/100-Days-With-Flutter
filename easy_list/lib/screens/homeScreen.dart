@@ -65,8 +65,15 @@ class _HomeScreenState extends State<HomeScreen>
     else {
       return ProductList(
         products: products,
+        productDeleteCallback: onProductDelete,
       );
 
     }
+  }
+
+  void onProductDelete(Product product)
+  {
+    setState(() => products.remove(product));
+
   }
 }
