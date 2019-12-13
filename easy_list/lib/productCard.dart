@@ -30,13 +30,14 @@ class ProductCard extends StatelessWidget
                 child: Text(
                   "Details"
                 ),
-                onPressed: () async {
-                  Product result = await Navigator.push(context, MaterialPageRoute(builder: (context)
-                  {
+                onPressed: () {
+                  Navigator.push<Product>(context, MaterialPageRoute(builder: (context){
                     return ProductDetail(product: product,);
 
-                  }));
-                  productDeleteCallback(result);
+                  })).then((Product result){
+                    productDeleteCallback(result);
+                  });
+
 
                 },
               )
