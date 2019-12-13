@@ -1,3 +1,4 @@
+import 'package:easy_list/constants/assetsConstants.dart';
 import 'package:easy_list/models/product.dart';
 import 'package:flutter/material.dart';
 
@@ -23,6 +24,17 @@ class _HomeScreenState extends State<HomeScreen>
   Widget build(BuildContext context)
   {
     return  Scaffold(
+      drawer: Drawer(
+        child: SingleChildScrollView(
+          child: Column(
+            children: <Widget>[
+              Image.asset(AssetsConstants.IMAGE_BASE_PATH+"food.jpg"),
+
+
+            ],
+          ),
+        )
+      ),
       appBar: AppBar(
         title: Text("Easy List"),
       ),
