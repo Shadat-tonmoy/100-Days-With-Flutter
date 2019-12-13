@@ -1,3 +1,4 @@
+import 'package:easy_list/screens/authScreen.dart';
 import 'package:easy_list/screens/homeScreen.dart';
 import 'package:flutter/material.dart';
 
@@ -13,7 +14,7 @@ class MyApp extends StatelessWidget
         primarySwatch: Colors.deepOrange,
         accentColor: Colors.purple,
       ),
-      home: HomeScreen(),
+      home: AuthScreen(),
     );
   }
 }
