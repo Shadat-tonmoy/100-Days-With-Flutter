@@ -73,7 +73,8 @@ class _HomeScreenState extends State<HomeScreen>
 
   void onProductDelete(Product product)
   {
-    setState(() => products.remove(product));
+    if(product!=null)
+      setState(() => products.remove(product));
 
   }
 }

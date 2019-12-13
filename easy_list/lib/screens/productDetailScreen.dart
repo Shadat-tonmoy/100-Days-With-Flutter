@@ -10,53 +10,59 @@ class ProductDetail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(product.productTitle),
-      ),
-      body: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            SizedBox(
-              height: 5.0,
-            ),
-            Card(
-              child: Column(
-                children: <Widget>[
-                  Image.asset(
-                      AssetsConstants.IMAGE_BASE_PATH + product.productImage),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text(product.productTitle),
-                  ),
-                  ButtonBar(
-                    alignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      FlatButton(
-                        child: Row(
-                          children: <Widget>[
-                            Icon(Icons.delete),
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Text(
-                                "Delete",
-                                style: TextStyle(
-                                  fontSize: 16.0
-                                ),
-                              ),
-                            )
-                          ],
-                        ),
-                        onPressed: () {
-                          Navigator.pop(context,product);
-                        },
-                      )
-                    ],
-                  )
-                ],
+    return WillPopScope(
+      onWillPop: (){
+        Navigator.pop(context);
+        return Future.value(false);
+      },
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text(product.productTitle),
+        ),
+        body: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              SizedBox(
+                height: 5.0,
               ),
-            )
-          ]),
+              Card(
+                child: Column(
+                  children: <Widget>[
+                    Image.asset(
+                        AssetsConstants.IMAGE_BASE_PATH + product.productImage),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(product.productTitle),
+                    ),
+                    ButtonBar(
+                      alignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        FlatButton(
+                          child: Row(
+                            children: <Widget>[
+                              Icon(Icons.delete),
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Text(
+                                  "Delete",
+                                  style: TextStyle(
+                                    fontSize: 16.0
+                                  ),
+                                ),
+                              )
+                            ],
+                          ),
+                          onPressed: () {
+                            Navigator.pop(context,product);
+                          },
+                        )
+                      ],
+                    )
+                  ],
+                ),
+              )
+            ]),
+      ),
     );
   }
 }
