@@ -1,3 +1,5 @@
+import 'package:easy_list/screens/addProductScreen.dart';
+import 'package:easy_list/screens/allProductScreen.dart';
 import 'package:flutter/material.dart';
 
 class ManageProduct extends StatelessWidget {
@@ -15,14 +17,21 @@ class ManageProduct extends StatelessWidget {
             tabs: <Widget>[
               Tab(
                 text:"Add Product",
+                icon: Icon(Icons.edit)
               ),
               Tab(
                 text: "All Products",
+                icon: Icon(Icons.list),
               )
             ],
           ),
         ),
-        body: Container(
+        body: TabBarView(
+          children: <Widget>[
+            AddProductScreen(),
+            AllProductScreen()
+
+          ],
 
         ),
       ),
