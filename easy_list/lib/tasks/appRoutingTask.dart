@@ -7,7 +7,7 @@ class AppRouter
 
   void toManageProductScreen(BuildContext context)
   {
-    print("Navigating....");
+    Navigator.pop(context);
     Navigator.push(context, MaterialPageRoute(
       builder: (context) => ManageProduct()
     ));
