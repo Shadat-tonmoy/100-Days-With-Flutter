@@ -1,3 +1,4 @@
+import 'package:easy_list/constants/constants.dart';
 import 'package:easy_list/screens/homeScreen.dart';
 import 'package:flutter/material.dart';
 
@@ -13,9 +14,12 @@ class AuthScreen extends StatelessWidget
           ),
           onPressed: ()
           {
-            Navigator.pushReplacement(context, MaterialPageRoute(
+
+            /*Navigator.pushReplacement(context, MaterialPageRoute(
                 builder: (context) => HomeScreen()
-            ));
+            ));*/
+
+            Navigator.pushReplacementNamed(context, RoutingKeys.HOME_SCREEN);
 
           },
         ),

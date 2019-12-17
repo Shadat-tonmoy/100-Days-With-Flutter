@@ -1,6 +1,9 @@
 import 'package:easy_list/screens/authScreen.dart';
 import 'package:easy_list/screens/homeScreen.dart';
+import 'package:easy_list/screens/manageProductScreen.dart';
 import 'package:flutter/material.dart';
+
+import 'package:easy_list/constants/constants.dart';
 
 void main() => runApp(MyApp());
 
@@ -14,7 +17,13 @@ class MyApp extends StatelessWidget
         primarySwatch: Colors.deepOrange,
         accentColor: Colors.purple,
       ),
-      home: AuthScreen(),
+//      home: AuthScreen(),
+      routes: {
+        RoutingKeys.AUTH_SCREEN : (context) => AuthScreen(),
+        RoutingKeys.HOME_SCREEN : (context) => HomeScreen(),
+        RoutingKeys.MANAGE_PRODUCT_SCREEN : (context) => ManageProduct(),
+
+      },
     );
   }
 }
