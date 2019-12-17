@@ -1,10 +1,7 @@
-import 'package:easy_list/constants/assetsConstants.dart';
 import 'package:easy_list/customWidgets/homeScreenWidget.dart';
 import 'package:easy_list/models/product.dart';
 import 'package:easy_list/tasks/appRoutingTask.dart';
 import 'package:flutter/material.dart';
-
-import '../productList.dart';
 
 class HomeScreen extends StatefulWidget
 {

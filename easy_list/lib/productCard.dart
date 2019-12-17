@@ -37,8 +37,6 @@ class ProductCard extends StatelessWidget
                   })).then((Product result){
                     productDeleteCallback(result);
                   });
-
-
                 },
               )
 
