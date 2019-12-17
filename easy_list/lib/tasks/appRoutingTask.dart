@@ -1,6 +1,4 @@
 import 'package:easy_list/constants/constants.dart';
-import 'package:easy_list/screens/homeScreen.dart';
-import 'package:easy_list/screens/manageProductScreen.dart';
 import 'package:flutter/material.dart';
 
 class AppRouter
