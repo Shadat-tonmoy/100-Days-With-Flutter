@@ -8,6 +8,9 @@ class AddProductScreen extends StatefulWidget
 
 class _AddProductScreenState extends State<AddProductScreen>
 {
+  String productTitle, productDescription, deliveryAddress;
+  double productPrice;
+
   @override
   Widget build(BuildContext context)
   {
@@ -22,6 +25,10 @@ class _AddProductScreenState extends State<AddProductScreen>
                 prefixIcon: Icon(Icons.edit),
                 contentPadding: EdgeInsets.all(16.0),
               ),
+              onChanged: (value){
+                productTitle = value;
+
+              },
             ),
             TextField(
               decoration: InputDecoration(
@@ -29,6 +36,10 @@ class _AddProductScreenState extends State<AddProductScreen>
                 prefixIcon: Icon(Icons.edit),
                 contentPadding: EdgeInsets.all(16.0),
               ),
+              onChanged: (value){
+                productDescription = value;
+
+              },
               maxLines: 5,
             ),
             TextField(
@@ -37,7 +48,10 @@ class _AddProductScreenState extends State<AddProductScreen>
                 prefixIcon: Icon(Icons.edit),
                 contentPadding: EdgeInsets.all(16.0),
               ),
-              keyboardType: TextInputType.numberWithOptions(),
+              onChanged: (value){
+                productPrice = double.parse(value);
+              },
+              keyboardType: TextInputType.number,
             ),
             TextField(
               decoration: InputDecoration(
@@ -45,7 +59,10 @@ class _AddProductScreenState extends State<AddProductScreen>
                 prefixIcon: Icon(Icons.place),
                 contentPadding: EdgeInsets.all(16.0),
               ),
-              keyboardType: TextInputType.numberWithOptions(),
+              onChanged: (value){
+                deliveryAddress = value;
+              },
+
             )
           ],
         ),
