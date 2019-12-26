@@ -11,7 +11,6 @@ class ManageProduct extends StatelessWidget {
 
   void addNewProduct(Product product)
   {
-    print("New Product ${product.toString()}");
     Navigator.pop(context,product);
   }
 

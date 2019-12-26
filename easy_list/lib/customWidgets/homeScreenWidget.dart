@@ -13,11 +13,15 @@ class HomeScreenWidget
 
   HomeScreenWidget({@required this.context});
 
-  Widget _getNavDrawerItem(String title, IconData icon, Function onPressCallback)
+  Widget _getNavDrawerItem(String title, IconData icon, Function onPressCallback, {Function onResultCallback})
   {
     return GestureDetector(
-      onTap: (){
-        onPressCallback(context);
+      onTap: () async {
+        Product result = await onPressCallback(context);
+        if(result!=null){
+          print("Added Product From Router Callback ${result.toString()}");
+          onResultCallback(result);
+        }
       },
       child: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -76,7 +80,7 @@ class HomeScreenWidget
     );
   }
 
-  Widget getDrawerLayout()
+  Widget getDrawerLayout({Function onResultCallback})
   {
     AppRouter appRouter = AppRouter();
     return Container(
@@ -88,8 +92,8 @@ class HomeScreenWidget
         child: Column(
           children: <Widget>[
             Image.asset(AssetsConstants.IMAGE_BASE_PATH+"food.jpg"),
-            _getNavDrawerItem("Manage Product", Icons.edit,appRouter.getManageProductRouter()),
-            _getNavDrawerItem("Manage Account", Icons.account_circle, appRouter.getManageProductRouter()),
+            _getNavDrawerItem("Manage Product", Icons.edit,appRouter.getManageProductRouter(), onResultCallback: onResultCallback),
+            _getNavDrawerItem("Manage Account", Icons.account_circle, appRouter.getManageProductRouter(), onResultCallback: onResultCallback),
           ],
         ),
       ),

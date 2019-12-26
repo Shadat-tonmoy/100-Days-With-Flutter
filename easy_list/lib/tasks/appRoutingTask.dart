@@ -1,16 +1,19 @@
 import 'package:easy_list/constants/constants.dart';
+import 'package:easy_list/models/product.dart';
 import 'package:flutter/material.dart';
 
 class AppRouter
 {
 
-  void toManageProductScreen(BuildContext context)
+  Future<Product> toManageProductScreen<Product>(BuildContext context,{Function addNewProduct}) async
   {
     Navigator.pop(context);
     /*Navigator.push(context, MaterialPageRoute(
       builder: (context) => ManageProduct()
     ));*/
-    Navigator.pushNamed(context, RoutingKeys.MANAGE_PRODUCT_SCREEN);
+    
+    Product result = await Navigator.pushNamed(context, RoutingKeys.MANAGE_PRODUCT_SCREEN);
+    return result;
   }
 
   void toHomeScreen(BuildContext context)
