@@ -13,37 +13,43 @@ class HomeScreenWidget
 
   HomeScreenWidget({@required this.context});
 
-  Widget _getNavDrawerItem(String title, IconData icon, Function onPressCallback, {Function onResultCallback})
+  Widget _getNavDrawerItem({Widget navDrawerItemView, Function onItemClickCallback, Function onItemClickResultCallback})
   {
     return GestureDetector(
       onTap: () async {
-        Product result = await onPressCallback(context);
+        dynamic result = await onItemClickCallback(context);
         if(result!=null){
           print("Added Product From Router Callback ${result.toString()}");
-          onResultCallback(result);
+          onItemClickResultCallback(result);
         }
       },
-      child: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Row(
-          children: <Widget>[
-            Icon(
-              icon,
-              color: Colors.grey[600],
+      child: navDrawerItemView,
+    );
+
+  }
+
+  Widget _getNavDrawerItemView(String title, IconData icon)
+  {
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: Row(
+        children: <Widget>[
+          Icon(
+            icon,
+            color: Colors.grey[600],
+          ),
+          SizedBox(
+            width: 24.0,
+          ),
+          Text(
+            title,
+            style: TextStyle(
+                color: Colors.grey[800],
+                fontSize: 16.0,
+                fontWeight: FontWeight.w600
             ),
-            SizedBox(
-              width: 24.0,
-            ),
-            Text(
-              title,
-              style: TextStyle(
-                  color: Colors.grey[800],
-                  fontSize: 16.0,
-                  fontWeight: FontWeight.w600
-              ),
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
@@ -80,7 +86,7 @@ class HomeScreenWidget
     );
   }
 
-  Widget getDrawerLayout({Function onResultCallback})
+  Widget getDrawerLayout({Function newProductAddCallback})
   {
     AppRouter appRouter = AppRouter();
     return Container(
@@ -92,8 +98,14 @@ class HomeScreenWidget
         child: Column(
           children: <Widget>[
             Image.asset(AssetsConstants.IMAGE_BASE_PATH+"food.jpg"),
-            _getNavDrawerItem("Manage Product", Icons.edit,appRouter.getManageProductRouter(), onResultCallback: onResultCallback),
-            _getNavDrawerItem("Manage Account", Icons.account_circle, appRouter.getManageProductRouter(), onResultCallback: onResultCallback),
+            _getNavDrawerItem(
+              navDrawerItemView: _getNavDrawerItemView("Manage Product", Icons.edit),
+              onItemClickCallback: appRouter.getManageProductRouter(),
+              onItemClickResultCallback: newProductAddCallback
+            ),
+            _getNavDrawerItem(
+              navDrawerItemView: _getNavDrawerItemView("Manage Account", Icons.account_box),
+            )
           ],
         ),
       ),

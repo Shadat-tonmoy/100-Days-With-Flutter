@@ -30,7 +30,7 @@ class _HomeScreenState extends State<HomeScreen>
   Widget build(BuildContext context)
   {
     return  Scaffold(
-      drawer: homeScreenWidget.getDrawerLayout(onResultCallback: addNewProduct),
+      drawer: homeScreenWidget.getDrawerLayout(newProductAddCallback: addNewProduct),
       appBar: AppBar(
         title: Text("Easy List"),
       ),
