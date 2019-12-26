@@ -1,11 +1,24 @@
+import 'package:easy_list/models/product.dart';
 import 'package:easy_list/screens/addProductScreen.dart';
 import 'package:easy_list/screens/allProductScreen.dart';
 import 'package:flutter/material.dart';
 
 class ManageProduct extends StatelessWidget {
+
+  final BuildContext context;
+
+  ManageProduct({this.context});
+
+  void addNewProduct(Product product)
+  {
+    print("New Product ${product.toString()}");
+    Navigator.pop(context,product);
+  }
+
   @override
   Widget build(BuildContext context)
   {
+
     return DefaultTabController(
       length: 2,
       child: Scaffold(
@@ -28,12 +41,12 @@ class ManageProduct extends StatelessWidget {
         ),
         body: TabBarView(
           children: <Widget>[
-            AddProductScreen(),
+            AddProductScreen(addNewProduct: addNewProduct,),
             AllProductScreen()
 
           ],
-
         ),
+
       ),
     );
   }

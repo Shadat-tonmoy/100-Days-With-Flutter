@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget
       routes: {
         RoutingKeys.AUTH_SCREEN : (context) => AuthScreen(),
         RoutingKeys.HOME_SCREEN : (context) => HomeScreen(),
-        RoutingKeys.MANAGE_PRODUCT_SCREEN : (context) => ManageProduct(),
+        RoutingKeys.MANAGE_PRODUCT_SCREEN : (context) => ManageProduct(context: context,),
 
       },
     );

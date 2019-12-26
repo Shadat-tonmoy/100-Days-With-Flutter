@@ -1,21 +1,14 @@
 class Product
 {
 
-  String _productTitle;
-  String _productImage;
+  String productDescription, deliveryAddress,productImage,productTitle;
+  double productPrice;
 
-  Product(this._productTitle, this._productImage);
+  Product({this.productTitle, this.productImage, this.productDescription, this.deliveryAddress, this.productPrice});
 
-  String get productImage => _productImage;
-
-  set productImage(String value) {
-    _productImage = value;
-  }
-
-  String get productTitle => _productTitle;
-
-  set productTitle(String value) {
-    _productTitle = value;
+  @override
+  String toString() {
+    return 'Product{productDescription: $productDescription, deliveryAddress: $deliveryAddress, productImage: $productImage, productTitle: $productTitle, productPrice: $productPrice}';
   }
 
 

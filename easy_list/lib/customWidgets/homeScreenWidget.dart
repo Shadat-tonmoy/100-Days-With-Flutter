@@ -131,7 +131,13 @@ class ProductAddButton extends StatelessWidget {
       ),
       onPressed: ()
       {
-        Product product = Product("New Product At : ${DateTime.now().toString()}","food.jpg");
+        Product product = Product(
+            productTitle: "New Product At : ${DateTime.now().toString()}",
+            productDescription: "productDescription",
+            productPrice: 0.0,
+            deliveryAddress: "deliveryAddress",
+            productImage: AssetsConstants.DEFAULT_PRODUCT_IMAGE
+        );
         addNewProductCallback(product);
       },
       backgroundColor: Theme.of(context).accentColor,
