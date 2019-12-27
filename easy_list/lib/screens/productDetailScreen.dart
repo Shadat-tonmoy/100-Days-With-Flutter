@@ -1,3 +1,5 @@
+import 'package:easy_list/controller/productDetailScreenController.dart';
+import 'package:easy_list/customWidgets/productDetailScreenWidget.dart';
 import 'package:easy_list/models/product.dart';
 import 'package:flutter/material.dart';
 
@@ -5,97 +7,46 @@ import 'package:easy_list/constants/assetsConstants.dart';
 
 class ProductDetail extends StatelessWidget {
   final Product product;
+  ProductDetailScreenWidget productDetailScreenWidget;
+  ProductDetailController productDetailController;
 
   ProductDetail({@required this.product});
 
+  void initProductDetailWidget(BuildContext context)
+  {
+    productDetailScreenWidget = ProductDetailScreenWidget(
+        context: context,
+        product: product
+    );
+
+    productDetailController = ProductDetailController(
+      context: context,
+      product: product
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
+    initProductDetailWidget(context);
     return WillPopScope(
       onWillPop: (){
         Navigator.pop(context);
         return Future.value(false);
       },
       child: Scaffold(
-        appBar: AppBar(
-          title: Text(product.productTitle),
-        ),
-        body: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget>[
-              SizedBox(
-                height: 5.0,
-              ),
-              Card(
-                child: Column(
-                  children: <Widget>[
-                    Image.asset(
-                        AssetsConstants.IMAGE_BASE_PATH + product.productImage),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text(product.productTitle),
-                    ),
-                    ButtonBar(
-                      alignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        FlatButton(
-                          child: Row(
-                            children: <Widget>[
-                              Icon(Icons.delete),
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Text(
-                                  "Delete",
-                                  style: TextStyle(
-                                    fontSize: 16.0
-                                  ),
-                                ),
-                              )
-                            ],
-                          ),
-                          onPressed: ()
-                          {
-                            showDialog(context: context, builder: (context)
-                            {
-                              return AlertDialog(
-                                title: Text(
-                                  "Sure To Delete?"
-                                ),
-                                content: Text(
-                                  "Once you delete this item it can not be restored!"
-                                ),
-                                actions: <Widget>[
-                                  FlatButton(
-                                    onPressed: (){
-                                      Navigator.pop(context);
-                                    },
-                                    child: Text(
-                                        "No"
-                                    ),
-                                  ),
-
-                                  FlatButton(
-                                    onPressed: (){
-                                      Navigator.pop(context);
-                                      Navigator.pop(context,product);
-                                    },
-                                    child: Text(
-                                      "Yes"
-                                    ),
-                                  ),
-
-                                ],
-
-                              );
-
-                            });
-                          },
-                        )
-                      ],
-                    )
-                  ],
+        appBar: productDetailScreenWidget.getAppBar(),
+        body: SingleChildScrollView(
+          child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                SizedBox(
+                  height: 5.0,
                 ),
-              )
-            ]),
+                productDetailScreenWidget.getProductDetailCard(
+                  warningDialogFunction: productDetailController.getDeleteWarningDialogFunction()
+                )
+              ]),
+        ),
       ),
     );
   }
