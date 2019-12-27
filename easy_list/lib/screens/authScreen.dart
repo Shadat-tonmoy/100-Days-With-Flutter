@@ -1,20 +1,14 @@
-import 'package:easy_list/constants/constants.dart';
+import 'package:easy_list/controller/authScreenController.dart';
 import 'package:easy_list/customWidgets/authScreenWidget.dart';
-import 'package:easy_list/screens/homeScreen.dart';
 import 'package:flutter/material.dart';
 
 class AuthScreen extends StatelessWidget
 {
 
-  void moveToHomeScreen(BuildContext context)
-  {
-    Navigator.pushReplacementNamed(
-        context, RoutingKeys.HOME_SCREEN);
-  }
-
   @override
   Widget build(BuildContext context) {
     AuthScreenWidget authScreenWidget = AuthScreenWidget(context: context);
+    AuthScreenController authScreenController = AuthScreenController(context: context);
     return Scaffold(
       body: Center(
         child: SingleChildScrollView(
@@ -32,7 +26,7 @@ class AuthScreen extends StatelessWidget
                   isObscureText: true
               ),
               authScreenWidget.getLoginButton(
-                  onPressed: moveToHomeScreen
+                  onPressed: authScreenController.getMoveToHomeScreenCallback()
               )
             ],
           ),

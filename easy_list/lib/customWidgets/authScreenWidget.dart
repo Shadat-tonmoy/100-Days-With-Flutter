@@ -35,7 +35,7 @@ class AuthScreenWidget
         shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.all(Radius.circular(8.0))),
         onPressed: () {
-         onPressed(context);
+         onPressed();
         },
         color: Theme.of(context).primaryColor,
       ),
