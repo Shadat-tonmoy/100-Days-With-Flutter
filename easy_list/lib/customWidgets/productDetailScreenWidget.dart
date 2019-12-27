@@ -37,6 +37,22 @@ class ProductDetailScreenWidget
               textAlign: TextAlign.center,
             ),
           ),
+          Container(
+            padding: EdgeInsets.all(8.0),
+            margin: EdgeInsets.symmetric(vertical: 8.0),
+            decoration: BoxDecoration(
+                color: Colors.green, //new Color.fromRGBO(255, 0, 0, 0.0),
+                borderRadius: BorderRadius.all(Radius.circular(8.0))
+            ),
+            child: Text(
+              "\$ ${product.productPrice} Only",
+              style: TextStyle(
+                fontSize: 16.0,
+                color: Colors.white
+              ),
+
+            ),
+          ),
           getProductInfoText(
             infoLabel: "Description",
             info: product.productDescription,
