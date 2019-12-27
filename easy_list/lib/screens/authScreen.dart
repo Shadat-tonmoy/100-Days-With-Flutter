@@ -1,53 +1,38 @@
 import 'package:easy_list/constants/constants.dart';
+import 'package:easy_list/customWidgets/authScreenWidget.dart';
 import 'package:easy_list/screens/homeScreen.dart';
 import 'package:flutter/material.dart';
 
 class AuthScreen extends StatelessWidget
 {
+
+  void moveToHomeScreen(BuildContext context)
+  {
+    Navigator.pushReplacementNamed(
+        context, RoutingKeys.HOME_SCREEN);
+  }
+
   @override
   Widget build(BuildContext context) {
+    AuthScreenWidget authScreenWidget = AuthScreenWidget(context: context);
     return Scaffold(
       body: Center(
         child: SingleChildScrollView(
-          padding: EdgeInsets.all(16.0),
+          padding: EdgeInsets.all(8.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
-              TextField(
-                decoration: InputDecoration(
-                  labelText: "Email",
-                  border: OutlineInputBorder()
-                ),
-                keyboardType: TextInputType.emailAddress,
+              authScreenWidget.getInputField(
+                  label: "Email",
+                  isObscureText: false,
+                  textInputType: TextInputType.emailAddress
               ),
-              SizedBox(
-                height: 24.0,
+              authScreenWidget.getInputField(
+                  label: "Password",
+                  isObscureText: true
               ),
-              TextField(
-                decoration: InputDecoration(
-                  labelText: "Password",
-                  border: OutlineInputBorder(),
-                ),
-                obscureText: true,
-              ),
-              SizedBox(
-                height: 24.0,
-              ),
-              FlatButton(
-                padding: EdgeInsets.all(16.0),
-                child: Text(
-                  "Login",
-                  style: TextStyle(
-                    color: Colors.white
-                  ),
-                ),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(8.0))
-                ),
-                onPressed: (){
-                  Navigator.pushReplacementNamed(context, RoutingKeys.HOME_SCREEN);
-                },
-                color: Theme.of(context).primaryColor,
+              authScreenWidget.getLoginButton(
+                  onPressed: moveToHomeScreen
               )
             ],
           ),
