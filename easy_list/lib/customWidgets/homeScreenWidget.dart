@@ -8,77 +8,11 @@ import 'package:provider/provider.dart';
 
 import '../productCard.dart';
 
-class HomeScreenWidget extends StatelessWidget
+class EmptyListView extends StatelessWidget
 {
 
-
   @override
-  Widget build(BuildContext context)
-  {
-
-    if(Provider.of<ProductData>(context).products.length == 0)
-    {
-      return getEmptyListMessageWidget();
-    }
-    else
-    {
-      return ProductList(
-//        products: products,
-//        productDeleteCallback: onProductDelete,
-      );
-
-    }
-  }
-
-
-
-
-
-//  HomeScreenWidget({@required this.context});
-
-  /*Widget _getNavDrawerItem({Widget navDrawerItemView, Function onItemClickCallback, Function onItemClickResultCallback})
-  {
-    return GestureDetector(
-      onTap: () async {
-        dynamic result = await onItemClickCallback(context);
-        if(result!=null){
-          print("Added Product From Router Callback ${result.toString()}");
-          onItemClickResultCallback(result);
-        }
-      },
-      child: navDrawerItemView,
-    );
-
-  }*/
-
-  Widget _getNavDrawerItemView(String title, IconData icon)
-  {
-    return Padding(
-      padding: const EdgeInsets.all(16.0),
-      child: Row(
-        children: <Widget>[
-          Icon(
-            icon,
-            color: Colors.grey[600],
-          ),
-          SizedBox(
-            width: 24.0,
-          ),
-          Text(
-            title,
-            style: TextStyle(
-                color: Colors.grey[800],
-                fontSize: 16.0,
-                fontWeight: FontWeight.w600
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget getEmptyListMessageWidget()
-  {
+  Widget build(BuildContext context) {
     return Center(
       child: Container(
         margin: EdgeInsets.only(bottom: 50),
@@ -97,10 +31,7 @@ class HomeScreenWidget extends StatelessWidget
                 "No Element Found!\nPlease tap the '+' button to add element",
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: Colors.grey[600]
-                ),
-
+                    fontWeight: FontWeight.bold, color: Colors.grey[600]),
               ),
             )
           ],
@@ -108,62 +39,14 @@ class HomeScreenWidget extends StatelessWidget
       ),
     );
   }
-
-  Widget getDrawerLayout({Function newProductAddCallback})
-  {
-    AppRouter appRouter = AppRouter();
-    return Container(
-      width: 260.0,
-      height: double.infinity,
-      color: Colors.white,
-      child: SingleChildScrollView
-      (
-        child: Column(
-          children: <Widget>[
-            Image.asset(AssetsConstants.IMAGE_BASE_PATH+"food.jpg"),
-            /*_getNavDrawerItem(
-              navDrawerItemView: _getNavDrawerItemView("Manage Product", Icons.edit),
-              onItemClickCallback: appRouter.getManageProductRouter(),
-              onItemClickResultCallback: newProductAddCallback
-            ),
-            _getNavDrawerItem(
-              navDrawerItemView: _getNavDrawerItemView("Manage Account", Icons.account_box),
-            )*/
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget getAddProductButton()
-  {
-    return ProductAddButton();
-  }
-
- /* Widget getUIWidget(){
-    print("Context in homescreenwidet $context");
-    if(Provider.of<ProductData>(context).products.length == 0)
-    {
-      return getEmptyListMessageWidget();
-    }
-    else
-    {
-      return ProductList(
-//        products: products,
-//        productDeleteCallback: onProductDelete,
-      );
-
-    }
-  }*/
 }
 
 
-class ProductList extends StatelessWidget{
-
+class ProductList extends StatelessWidget {
   @override
-  Widget build(BuildContext context)
-  {
-    print("Building ListView with ${Provider.of<ProductData>(context).products.length}");
+  Widget build(BuildContext context) {
+    print(
+        "Building ListView with ${Provider.of<ProductData>(context).products.length}");
     return ListView.builder(
       itemBuilder: (context, index) => ProductCard(
         product: Provider.of<ProductData>(context).products[index],
@@ -174,10 +57,8 @@ class ProductList extends StatelessWidget{
   }
 }
 
-class ProductAddButton extends StatelessWidget {
-
-//  final Function addNewProductCallback;
-//  ProductAddButton(this.addNewProductCallback);
+class ProductAddButton extends StatelessWidget
+{
 
   @override
   Widget build(BuildContext context) {
@@ -185,16 +66,14 @@ class ProductAddButton extends StatelessWidget {
       child: Icon(
         Icons.add,
       ),
-      onPressed: ()
-      {
+      onPressed: () {
         Product product = Product(
             productTitle: "New Product At : ${DateTime.now().toString()}",
             productDescription: "productDescription",
             productPrice: 0.0,
             deliveryAddress: "deliveryAddress",
-            productImage: AssetsConstants.DEFAULT_PRODUCT_IMAGE
-        );
-        Provider.of<ProductData>(context,listen: false).addProduct(product);
+            productImage: AssetsConstants.DEFAULT_PRODUCT_IMAGE);
+        Provider.of<ProductData>(context, listen: false).addProduct(product);
 //        addNewProductCallback(product);
       },
       backgroundColor: Theme.of(context).accentColor,
@@ -202,4 +81,72 @@ class ProductAddButton extends StatelessWidget {
   }
 }
 
+class HomeScreenDrawerLayout extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 260.0,
+      height: double.infinity,
+      color: Colors.white,
+      child: SingleChildScrollView(
+        child: Column(
+          children: <Widget>[
+            Image.asset(AssetsConstants.IMAGE_BASE_PATH + "food.jpg"),
+            _getNavDrawerItem(
+              navDrawerItemView:
+                  NavDrawerItemView(title: "Manage Product", icon: Icons.edit),
+            ),
+            _getNavDrawerItem(
+              navDrawerItemView: NavDrawerItemView(
+                  title: "Manage Account", icon: Icons.account_box),
+            )
+          ],
+        ),
+      ),
+    );
+  }
 
+  Widget _getNavDrawerItem({Widget navDrawerItemView}) {
+    return GestureDetector(
+      onTap: () /*async */ {
+        /*dynamic result = await onItemClickCallback(context);
+        if(result!=null){
+          print("Added Product From Router Callback ${result.toString()}");
+          onItemClickResultCallback(result);
+        }*/
+      },
+      child: navDrawerItemView,
+    );
+  }
+}
+
+class NavDrawerItemView extends StatelessWidget {
+  final String title;
+  final IconData icon;
+  NavDrawerItemView({this.title, this.icon});
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: Row(
+        children: <Widget>[
+          Icon(
+            icon,
+            color: Colors.grey[600],
+          ),
+          SizedBox(
+            width: 24.0,
+          ),
+          Text(
+            title,
+            style: TextStyle(
+                color: Colors.grey[800],
+                fontSize: 16.0,
+                fontWeight: FontWeight.w600),
+          ),
+        ],
+      ),
+    );
+  }
+}
