@@ -15,5 +15,11 @@ class ProductData extends ChangeNotifier
     notifyListeners();
   }
 
+  void removeProduct(Product product)
+  {
+    products.remove(product);
+    notifyListeners();
+  }
+
 
 }

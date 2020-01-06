@@ -49,8 +49,8 @@ class ProductList extends StatelessWidget {
         "Building ListView with ${Provider.of<ProductData>(context).products.length}");
     return ListView.builder(
       itemBuilder: (context, index) => ProductCard(
-        product: Provider.of<ProductData>(context).products[index],
-//        productDeleteCallback: widget.productDeleteCallback,
+        productIndex: index,
+//        product: Provider.of<ProductData>(context).products[index],
       ),
       itemCount: Provider.of<ProductData>(context).products.length,
     );
