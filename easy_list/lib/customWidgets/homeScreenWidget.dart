@@ -45,12 +45,9 @@ class EmptyListView extends StatelessWidget
 class ProductList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    print(
-        "Building ListView with ${Provider.of<ProductData>(context).products.length}");
     return ListView.builder(
       itemBuilder: (context, index) => ProductCard(
         productIndex: index,
-//        product: Provider.of<ProductData>(context).products[index],
       ),
       itemCount: Provider.of<ProductData>(context).products.length,
     );

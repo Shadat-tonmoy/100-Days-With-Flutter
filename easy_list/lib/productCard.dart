@@ -39,8 +39,10 @@ class ProductCard extends StatelessWidget
                     return ProductDetail(product: product,);
 
                   })).then((Product result){
-                    /*if(productDeleteCallback!=null)
-                      productDeleteCallback(result);*/
+                    if(result!=null)
+                      {
+                        Provider.of<ProductData>(context,listen: false).removeProduct(result);
+                      }
                   });
                 },
               )
