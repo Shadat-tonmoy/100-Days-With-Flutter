@@ -5,12 +5,14 @@ import 'package:flutter/material.dart';
 
 import 'package:easy_list/constants/assetsConstants.dart';
 
-class ProductDetail extends StatelessWidget {
+class ProductDetailScreen extends StatelessWidget
+{
+
   final Product product;
   ProductDetailScreenWidget productDetailScreenWidget;
   ProductDetailController productDetailController;
 
-  ProductDetail({@required this.product});
+  ProductDetailScreen({@required this.product});
 
   void initProductDetailWidget(BuildContext context)
   {

@@ -8,13 +8,8 @@ import 'package:provider/provider.dart';
 
 class ProductCard extends StatelessWidget
 {
-
-//  final Product product;
-//  final Function productDeleteCallback;
   final int productIndex;
-
   ProductCard({@required this.productIndex});
-
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +31,7 @@ class ProductCard extends StatelessWidget
                 ),
                 onPressed: () {
                   Navigator.push<Product>(context, MaterialPageRoute(builder: (context){
-                    return ProductDetail(product: product,);
+                    return ProductDetailScreen(product: product,);
 
                   })).then((Product result){
                     if(result!=null)
