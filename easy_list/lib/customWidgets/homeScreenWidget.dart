@@ -1,19 +1,42 @@
 import 'package:easy_list/constants/assetsConstants.dart';
 import 'package:easy_list/models/product.dart';
+import 'package:easy_list/providerData/productData.dart';
 import 'package:easy_list/tasks/appRoutingTask.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../productCard.dart';
 
-class HomeScreenWidget
+class HomeScreenWidget extends StatelessWidget
 {
 
-  final BuildContext context;
 
-  HomeScreenWidget({@required this.context});
+  @override
+  Widget build(BuildContext context)
+  {
 
-  Widget _getNavDrawerItem({Widget navDrawerItemView, Function onItemClickCallback, Function onItemClickResultCallback})
+    if(Provider.of<ProductData>(context).products.length == 0)
+    {
+      return getEmptyListMessageWidget();
+    }
+    else
+    {
+      return ProductList(
+//        products: products,
+//        productDeleteCallback: onProductDelete,
+      );
+
+    }
+  }
+
+
+
+
+
+//  HomeScreenWidget({@required this.context});
+
+  /*Widget _getNavDrawerItem({Widget navDrawerItemView, Function onItemClickCallback, Function onItemClickResultCallback})
   {
     return GestureDetector(
       onTap: () async {
@@ -26,7 +49,7 @@ class HomeScreenWidget
       child: navDrawerItemView,
     );
 
-  }
+  }*/
 
   Widget _getNavDrawerItemView(String title, IconData icon)
   {
@@ -98,49 +121,66 @@ class HomeScreenWidget
         child: Column(
           children: <Widget>[
             Image.asset(AssetsConstants.IMAGE_BASE_PATH+"food.jpg"),
-            _getNavDrawerItem(
+            /*_getNavDrawerItem(
               navDrawerItemView: _getNavDrawerItemView("Manage Product", Icons.edit),
               onItemClickCallback: appRouter.getManageProductRouter(),
               onItemClickResultCallback: newProductAddCallback
             ),
             _getNavDrawerItem(
               navDrawerItemView: _getNavDrawerItemView("Manage Account", Icons.account_box),
-            )
+            )*/
           ],
         ),
       ),
     );
   }
+
+  Widget getAddProductButton()
+  {
+    return ProductAddButton();
+  }
+
+ /* Widget getUIWidget(){
+    print("Context in homescreenwidet $context");
+    if(Provider.of<ProductData>(context).products.length == 0)
+    {
+      return getEmptyListMessageWidget();
+    }
+    else
+    {
+      return ProductList(
+//        products: products,
+//        productDeleteCallback: onProductDelete,
+      );
+
+    }
+  }*/
 }
 
 
-class ProductList extends StatelessWidget {
-  final List<Product> products;
-  final Function productDeleteCallback;
-
-  ProductList({this.products,this.productDeleteCallback});
+class ProductList extends StatelessWidget{
 
   @override
-  Widget build(BuildContext context) {
-    print("Building ListView with ${products.length}");
+  Widget build(BuildContext context)
+  {
+    print("Building ListView with ${Provider.of<ProductData>(context).products.length}");
     return ListView.builder(
       itemBuilder: (context, index) => ProductCard(
-        product: products[index],
-        productDeleteCallback: productDeleteCallback,
+        product: Provider.of<ProductData>(context).products[index],
+//        productDeleteCallback: widget.productDeleteCallback,
       ),
-      itemCount: products.length,
+      itemCount: Provider.of<ProductData>(context).products.length,
     );
   }
 }
 
 class ProductAddButton extends StatelessWidget {
-  final Function addNewProductCallback;
 
-  ProductAddButton(this.addNewProductCallback);
+//  final Function addNewProductCallback;
+//  ProductAddButton(this.addNewProductCallback);
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return FloatingActionButton(
       child: Icon(
         Icons.add,
@@ -154,9 +194,12 @@ class ProductAddButton extends StatelessWidget {
             deliveryAddress: "deliveryAddress",
             productImage: AssetsConstants.DEFAULT_PRODUCT_IMAGE
         );
-        addNewProductCallback(product);
+        Provider.of<ProductData>(context,listen: false).addProduct(product);
+//        addNewProductCallback(product);
       },
       backgroundColor: Theme.of(context).accentColor,
     );
   }
 }
+
+

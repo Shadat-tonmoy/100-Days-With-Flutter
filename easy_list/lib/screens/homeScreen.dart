@@ -1,63 +1,51 @@
 import 'package:easy_list/customWidgets/homeScreenWidget.dart';
 import 'package:easy_list/models/product.dart';
+import 'package:easy_list/providerData/productData.dart';
 import 'package:easy_list/tasks/appRoutingTask.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-class HomeScreen extends StatefulWidget
-{
 
-  @override
-  _HomeScreenState createState() => _HomeScreenState();
-}
+class HomeScreen extends StatelessWidget{
 
-class _HomeScreenState extends State<HomeScreen>
-{
-
+  ProductData productData = ProductData();
   List<Product> products = [];
   AppRouter appRouter = AppRouter();
   HomeScreenWidget homeScreenWidget;
 
-  void addNewProduct(Product product) => setState(() => products.add(product));
+//  void addNewProduct(Product product) => setState(() => products.add(product));
 
-  @override
+  /*@override
   void initState()
   {
     super.initState();
-    homeScreenWidget = HomeScreenWidget(context: context);
-  }
+  }*/
 
   @override
   Widget build(BuildContext context)
   {
-    return  Scaffold(
-      drawer: homeScreenWidget.getDrawerLayout(newProductAddCallback: addNewProduct),
-      appBar: AppBar(
-        title: Text("Easy List"),
+//    print("Context in homescreen $context");
+    return  ChangeNotifierProvider<ProductData>(
+      create: (context) => productData,
+      child: Scaffold(
+//        drawer: homeScreenWidget.getDrawerLayout(),
+        appBar: AppBar(
+          title: Text("Easy List"),
+        ),
+        body: HomeScreenWidget(),
+        floatingActionButton: ProductAddButton(),
       ),
-      body: getUIWidget(),
-      floatingActionButton: ProductAddButton(addNewProduct),
     );
   }
 
-  Widget getUIWidget(){
-    if(products.length == 0)
-    {
-      return homeScreenWidget.getEmptyListMessageWidget();
-    }
-    else
-    {
-      return ProductList(
-        products: products,
-        productDeleteCallback: onProductDelete,
-      );
+  /*Widget getUIWidget(){
+    return homeScreenWidget.getUIWidget()
+  }*/
 
-    }
-  }
-
-  void onProductDelete(Product product)
+  /*void onProductDelete(Product product)
   {
     if(product!=null)
       setState(() => products.remove(product));
 
-  }
+  }*/
 }
