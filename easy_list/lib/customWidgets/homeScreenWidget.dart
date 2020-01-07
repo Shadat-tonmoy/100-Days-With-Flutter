@@ -1,4 +1,5 @@
 import 'package:easy_list/constants/assetsConstants.dart';
+import 'package:easy_list/constants/constants.dart';
 import 'package:easy_list/models/product.dart';
 import 'package:easy_list/providerData/productData.dart';
 import 'package:easy_list/tasks/appRoutingTask.dart';
@@ -79,8 +80,10 @@ class ProductAddButton extends StatelessWidget
 }
 
 class HomeScreenDrawerLayout extends StatelessWidget {
+  BuildContext context;
   @override
   Widget build(BuildContext context) {
+    this.context = context;
     return Container(
       width: 260.0,
       height: double.infinity,
@@ -89,11 +92,11 @@ class HomeScreenDrawerLayout extends StatelessWidget {
         child: Column(
           children: <Widget>[
             Image.asset(AssetsConstants.IMAGE_BASE_PATH + "food.jpg"),
-            _getNavDrawerItem(
+            NavDrawerItem(
               navDrawerItemView:
                   NavDrawerItemView(title: "Manage Product", icon: Icons.edit),
             ),
-            _getNavDrawerItem(
+            NavDrawerItem(
               navDrawerItemView: NavDrawerItemView(
                   title: "Manage Account", icon: Icons.account_box),
             )
@@ -102,20 +105,38 @@ class HomeScreenDrawerLayout extends StatelessWidget {
       ),
     );
   }
+}
 
-  Widget _getNavDrawerItem({Widget navDrawerItemView}) {
+
+class NavDrawerItem extends StatelessWidget
+{
+
+  final Widget navDrawerItemView;
+  NavDrawerItem({this.navDrawerItemView});
+
+  @override
+  Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () /*async */ {
-        /*dynamic result = await onItemClickCallback(context);
+      onTap: () async  {
+        dynamic result = await moveToScreen(context);
+        print("Result $result");
         if(result!=null){
-          print("Added Product From Router Callback ${result.toString()}");
-          onItemClickResultCallback(result);
-        }*/
+          Provider.of<ProductData>(context,listen: false).addProduct(result);
+//          onItemClickResultCallback(result);
+        }
       },
       child: navDrawerItemView,
     );
   }
+
+  Future<dynamic> moveToScreen(BuildContext context) async
+  {
+    Navigator.pop(context);
+    dynamic result = await Navigator.pushNamed(context, RoutingKeys.MANAGE_PRODUCT_SCREEN);
+    return result;
+  }
 }
+
 
 class NavDrawerItemView extends StatelessWidget {
   final String title;
