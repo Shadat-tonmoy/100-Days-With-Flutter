@@ -15,7 +15,8 @@ class HomeScreen extends StatelessWidget{
     return  ChangeNotifierProvider<ProductData>(
       create: (context) => productData,
       child: Scaffold(
-        drawer: HomeScreenDrawerLayout(),
+        drawer: HomeScreenDrawerLayout(
+        ),
         appBar: AppBar(
           title: Text("Easy List"),
         ),

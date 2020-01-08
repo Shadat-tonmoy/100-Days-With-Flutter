@@ -80,10 +80,9 @@ class ProductAddButton extends StatelessWidget
 }
 
 class HomeScreenDrawerLayout extends StatelessWidget {
-  BuildContext context;
+
   @override
   Widget build(BuildContext context) {
-    this.context = context;
     return Container(
       width: 260.0,
       height: double.infinity,
@@ -117,12 +116,11 @@ class NavDrawerItem extends StatelessWidget
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () async  {
+      onTap: () async
+      {
         dynamic result = await moveToScreen(context);
-        print("Result $result");
         if(result!=null){
           Provider.of<ProductData>(context,listen: false).addProduct(result);
-//          onItemClickResultCallback(result);
         }
       },
       child: navDrawerItemView,
@@ -131,8 +129,8 @@ class NavDrawerItem extends StatelessWidget
 
   Future<dynamic> moveToScreen(BuildContext context) async
   {
-    Navigator.pop(context);
     dynamic result = await Navigator.pushNamed(context, RoutingKeys.MANAGE_PRODUCT_SCREEN);
+    Navigator.pop(context);
     return result;
   }
 }
