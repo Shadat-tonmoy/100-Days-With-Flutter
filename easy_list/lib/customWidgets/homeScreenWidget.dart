@@ -1,5 +1,6 @@
 import 'package:easy_list/constants/assetsConstants.dart';
 import 'package:easy_list/constants/constants.dart';
+import 'package:easy_list/dataSource/dummyDataProvider.dart';
 import 'package:easy_list/models/product.dart';
 import 'package:easy_list/providerData/productData.dart';
 import 'package:easy_list/tasks/appRoutingTask.dart';
@@ -46,11 +47,15 @@ class EmptyListView extends StatelessWidget
 class ProductList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      itemBuilder: (context, index) => ProductCard(
-        productIndex: index,
-      ),
-      itemCount: Provider.of<ProductData>(context).products.length,
+    return Consumer<ProductData>(
+      builder: (context,productData,child){
+        return ListView.builder(
+          itemBuilder: (context, index) => ProductCard(
+            productIndex: index,
+          ),
+          itemCount: productData.products.length,
+        );
+      },
     );
   }
 }
@@ -60,21 +65,19 @@ class ProductAddButton extends StatelessWidget
 
   @override
   Widget build(BuildContext context) {
-    return FloatingActionButton(
-      child: Icon(
-        Icons.add,
-      ),
-      onPressed: () {
-        Product product = Product(
-            productTitle: "New Product At : ${DateTime.now().toString()}",
-            productDescription: "productDescription",
-            productPrice: 0.0,
-            deliveryAddress: "deliveryAddress",
-            productImage: AssetsConstants.DEFAULT_PRODUCT_IMAGE);
-        Provider.of<ProductData>(context, listen: false).addProduct(product);
+    return Consumer<ProductData>(
+      builder: (context, productData, child){
+        return FloatingActionButton(
+          child: Icon(
+            Icons.add,
+          ),
+          onPressed: () {
+            productData.addProduct(DummyDataProvider.getDummyProduct());
 //        addNewProductCallback(product);
+          },
+          backgroundColor: Theme.of(context).accentColor,
+        );
       },
-      backgroundColor: Theme.of(context).accentColor,
     );
   }
 }
