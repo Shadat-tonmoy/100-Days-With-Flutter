@@ -1,3 +1,4 @@
+import 'package:easy_list/customWidgets/productDetailScreenWidget.dart';
 import 'package:easy_list/models/product.dart';
 import 'package:easy_list/providerData/productData.dart';
 import 'package:easy_list/screens/productDetailScreen.dart';
@@ -13,39 +14,45 @@ class ProductCard extends StatelessWidget
 
   @override
   Widget build(BuildContext context) {
-    Product product = Provider.of<ProductData>(context).products.elementAt(productIndex);
-    return Card(
-      child: Column(
-        children: <Widget>[
-          Image.asset(AssetsConstants.IMAGE_BASE_PATH + product.productImage),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Text(product.productTitle),
-          ),
-          ButtonBar(
-            alignment: MainAxisAlignment.center,
-            children: <Widget>[
-              FlatButton(
-                child: Text(
-                  "Details"
+    return Consumer<ProductData>(
+      builder: (context, productData, chile)
+      {
+        Product product = productData.products.elementAt(productIndex);
+        return GestureDetector(
+          onTap: (){
+            Navigator.push<Product>(context, MaterialPageRoute(builder: (context){
+              return ProductDetailScreen(product: product,);
+
+            })).then((Product result){
+              if(result!=null)
+              {
+                Provider.of<ProductData>(context,listen: false).removeProduct(result);
+              }
+            });
+          },
+          child: Card(
+            child: Column(
+              children: <Widget>[
+                Image.asset(AssetsConstants.IMAGE_BASE_PATH + product.productImage),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    product.productTitle,
+                    textAlign: TextAlign.center,
+                  ),
                 ),
-                onPressed: () {
-                  Navigator.push<Product>(context, MaterialPageRoute(builder: (context){
-                    return ProductDetailScreen(product: product,);
-
-                  })).then((Product result){
-                    if(result!=null)
-                      {
-                        Provider.of<ProductData>(context,listen: false).removeProduct(result);
-                      }
-                  });
-                },
-              )
-
-            ],
+                ProductPriceTag(
+                  productPrice: product.productPrice,
+                  isSmall: true,
+                ),
+                SizedBox(
+                  height: 5.0,
+                )
+              ],
+            ),
           ),
-        ],
-      ),
+        );
+      },
     );
   }
 }

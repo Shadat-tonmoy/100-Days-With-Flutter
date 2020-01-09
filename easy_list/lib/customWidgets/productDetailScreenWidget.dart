@@ -37,22 +37,8 @@ class ProductDetailScreenWidget
               textAlign: TextAlign.center,
             ),
           ),
-          Container(
-            padding: EdgeInsets.all(8.0),
-            margin: EdgeInsets.symmetric(vertical: 8.0),
-            decoration: BoxDecoration(
-                color: Colors.green, //new Color.fromRGBO(255, 0, 0, 0.0),
-                borderRadius: BorderRadius.all(Radius.circular(8.0))
-            ),
-            child: Text(
-              "\$ ${product.productPrice} Only",
-              style: TextStyle(
-                fontSize: 16.0,
-                color: Colors.white
-              ),
-
-            ),
-          ),
+          ProductPriceTag(productPrice : product.productPrice,
+            isSmall: false,),
           getProductInfoText(
             infoLabel: "Description",
             info: product.productDescription,
@@ -126,6 +112,34 @@ class ProductDetailScreenWidget
               info
           ),
         ],
+      ),
+    );
+  }
+}
+
+class ProductPriceTag extends StatelessWidget {
+
+  ProductPriceTag({ @required this.productPrice, this.isSmall});
+
+  final double productPrice;
+  final bool isSmall;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: isSmall ? EdgeInsets.symmetric(vertical: 6.0, horizontal: 8.0)  : EdgeInsets.all( 8.0),
+      margin: EdgeInsets.symmetric(vertical: 8.0),
+      decoration: BoxDecoration(
+          color: Colors.green, //new Color.fromRGBO(255, 0, 0, 0.0),
+          borderRadius: BorderRadius.all(Radius.circular(8.0))
+      ),
+      child: Text(
+        "\$ ${productPrice.toString()} Only",
+        style: TextStyle(
+          fontSize: isSmall ? 12.0 : 16.0,
+          color: Colors.white
+        ),
+
       ),
     );
   }
