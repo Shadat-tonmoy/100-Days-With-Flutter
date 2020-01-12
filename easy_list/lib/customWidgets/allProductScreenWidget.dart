@@ -56,13 +56,19 @@ class SingleProductItem extends StatelessWidget {
         context: context,
         builder: (context)
         {
-          return ProductOptionBottomSheetLayout();
+          return ProductOptionBottomSheetLayout(
+            product: product,
+          );
         });
   }
 }
 
 class ProductOptionBottomSheetLayout extends StatelessWidget
 {
+
+  final Product product;
+
+  ProductOptionBottomSheetLayout({this.product});
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -71,14 +77,18 @@ class ProductOptionBottomSheetLayout extends StatelessWidget
             BottomSheetSingleItem(
               title: Strings.viewProductDetails,
               icon: Icons.remove_red_eye,
+              onTapCallback: () => print("View For ${product.productPrice}"),
             ),
             BottomSheetSingleItem(
               title: Strings.editProductInfo,
               icon: Icons.edit,
+              onTapCallback: () => print("Edit For ${product.productPrice}")
+              ,
             ),
             BottomSheetSingleItem(
               title: Strings.deleteProduct,
               icon: Icons.delete,
+              onTapCallback: () => print("Delete For ${product.productPrice}"),
             )
           ],
       ),
@@ -148,29 +158,32 @@ class AllProductListView extends StatelessWidget {
 class BottomSheetSingleItem extends StatelessWidget {
   final String title;
   final IconData icon;
-
-  BottomSheetSingleItem({this.title, this.icon});
+  final Function onTapCallback;
+  BottomSheetSingleItem({this.title, this.icon, this.onTapCallback});
 
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.all(16.0),
-      child: Row(
-        children: <Widget>[
-          Icon(
-            icon,
-          ),
-          SizedBox(
-            width: 16.0,
-          ),
-          Text(
-            title,
-            style: TextStyle(
-              fontSize: 16.0
+    return GestureDetector(
+      onTap: onTapCallback,
+      child: Container(
+        padding: EdgeInsets.all(16.0),
+        child: Row(
+          children: <Widget>[
+            Icon(
+              icon,
             ),
-          )
-        ],
+            SizedBox(
+              width: 16.0,
+            ),
+            Text(
+              title,
+              style: TextStyle(
+                fontSize: 16.0
+              ),
+            )
+          ],
+        ),
       ),
     );
   }
