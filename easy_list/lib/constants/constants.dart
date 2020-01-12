@@ -14,3 +14,11 @@ enum PriceTagSize
   EXTRA_SMALL
 
 }
+
+class Strings
+{
+  static final String viewProductDetails = "View Product Details";
+  static final String editProductInfo = "Edit Product Info";
+  static final String deleteProduct = "Delete Product";
+
+}
