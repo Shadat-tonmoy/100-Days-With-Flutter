@@ -4,6 +4,7 @@ import 'package:easy_list/controller/allProductScreenController.dart';
 import 'package:easy_list/customWidgets/productDetailScreenWidget.dart';
 import 'package:easy_list/models/product.dart';
 import 'package:easy_list/providerData/productData.dart';
+import 'package:easy_list/screens/productDetailScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -77,7 +78,9 @@ class ProductOptionBottomSheetLayout extends StatelessWidget
             BottomSheetSingleItem(
               title: Strings.viewProductDetails,
               icon: Icons.remove_red_eye,
-              onTapCallback: () => print("View For ${product.productPrice}"),
+              onTapCallback: () {
+                gotoProductDetailScreen(context);
+              },
             ),
             BottomSheetSingleItem(
               title: Strings.editProductInfo,
@@ -93,6 +96,20 @@ class ProductOptionBottomSheetLayout extends StatelessWidget
           ],
       ),
     );
+  }
+
+  void gotoProductDetailScreen(BuildContext context) async
+  {
+
+    Product productToDelete = await Navigator.push(context, MaterialPageRoute(
+        builder: (context) => ProductDetailScreen(product: product,)
+    ));
+    if(productToDelete!=null)
+    {
+      Provider.of<ProductData>(context,listen: false).removeProduct(productToDelete);
+      Navigator.pop(context);
+    }
+
   }
 }
 
