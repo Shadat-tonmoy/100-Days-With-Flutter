@@ -21,5 +21,9 @@ class ProductData extends ChangeNotifier
     notifyListeners();
   }
 
+  int get totalProduct {
+    return products.length;
+  }
+
 
 }
