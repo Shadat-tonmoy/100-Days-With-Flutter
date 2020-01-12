@@ -7,22 +7,18 @@ import 'package:provider/provider.dart';
 
 class HomeScreen extends StatelessWidget{
 
-  final ProductData productData = ProductData();
 
   @override
   Widget build(BuildContext context)
   {
-    return  ChangeNotifierProvider<ProductData>(
-      create: (context) => productData,
-      child: Scaffold(
-        drawer: HomeScreenDrawerLayout(
-        ),
-        appBar: AppBar(
-          title: Text("Easy List"),
-        ),
-        body: HomeScreenView(),
-        floatingActionButton: ProductAddButton(),
+    return  Scaffold(
+      drawer: HomeScreenDrawerLayout(
       ),
+      appBar: AppBar(
+        title: Text("Easy List"),
+      ),
+      body: HomeScreenView(),
+      floatingActionButton: ProductAddButton(),
     );
   }
 }
