@@ -1,4 +1,5 @@
 import 'package:easy_list/constants/assetsConstants.dart';
+import 'package:easy_list/constants/constants.dart';
 import 'package:easy_list/models/product.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -37,8 +38,9 @@ class ProductDetailScreenWidget
               textAlign: TextAlign.center,
             ),
           ),
-          ProductPriceTag(productPrice : product.productPrice,
-            isSmall: false,),
+          ProductPriceTag(
+            productPrice : product.productPrice,
+            priceTagSize: PriceTagSize.NORMAL,),
           getProductInfoText(
             infoLabel: "Description",
             info: product.productDescription,
@@ -119,16 +121,16 @@ class ProductDetailScreenWidget
 
 class ProductPriceTag extends StatelessWidget {
 
-  ProductPriceTag({ @required this.productPrice, this.isSmall});
+  ProductPriceTag({ @required this.productPrice, @required this.priceTagSize});
 
   final double productPrice;
-  final bool isSmall;
+  final PriceTagSize priceTagSize;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: isSmall ? EdgeInsets.symmetric(vertical: 6.0, horizontal: 8.0)  : EdgeInsets.all( 8.0),
-      margin: EdgeInsets.symmetric(vertical: 8.0),
+      padding: getPadding(),
+      margin: getMargin(),
       decoration: BoxDecoration(
           color: Colors.green, //new Color.fromRGBO(255, 0, 0, 0.0),
           borderRadius: BorderRadius.all(Radius.circular(8.0))
@@ -136,11 +138,56 @@ class ProductPriceTag extends StatelessWidget {
       child: Text(
         "\$ ${productPrice.toString()} Only",
         style: TextStyle(
-          fontSize: isSmall ? 12.0 : 16.0,
+          fontSize: getFontSize(),
           color: Colors.white
         ),
 
       ),
     );
+  }
+
+  double getFontSize()
+  {
+    switch (priceTagSize)
+    {
+      case PriceTagSize.NORMAL:
+        return 16.0;
+      case PriceTagSize.SMALL:
+        return 12.0;
+      case PriceTagSize.EXTRA_SMALL:
+        return 10.0;
+      default :
+        return 12.0;
+    }
+  }
+
+  EdgeInsets getPadding()
+  {
+    switch (priceTagSize)
+    {
+      case PriceTagSize.NORMAL:
+        return EdgeInsets.all( 8.0);
+      case PriceTagSize.SMALL:
+        return EdgeInsets.symmetric(vertical: 6.0, horizontal: 8.0);
+      case PriceTagSize.EXTRA_SMALL:
+        return EdgeInsets.symmetric(vertical: 4.0, horizontal: 6.0);
+      default :
+        return EdgeInsets.all(8.0);
+    }
+  }
+
+  EdgeInsets getMargin()
+  {
+    switch (priceTagSize)
+    {
+      case PriceTagSize.NORMAL:
+        return EdgeInsets.symmetric(vertical: 8.0);
+      case PriceTagSize.SMALL:
+        return EdgeInsets.symmetric(vertical: 8.0);
+      case PriceTagSize.EXTRA_SMALL:
+        return EdgeInsets.symmetric(vertical: 2.0);
+      default :
+        return EdgeInsets.symmetric(vertical: 8.0);
+    }
   }
 }

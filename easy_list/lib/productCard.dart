@@ -1,3 +1,4 @@
+import 'package:easy_list/constants/constants.dart';
 import 'package:easy_list/customWidgets/productDetailScreenWidget.dart';
 import 'package:easy_list/models/product.dart';
 import 'package:easy_list/providerData/productData.dart';
@@ -43,7 +44,7 @@ class ProductCard extends StatelessWidget
                 ),
                 ProductPriceTag(
                   productPrice: product.productPrice,
-                  isSmall: true,
+                  priceTagSize: PriceTagSize.SMALL,
                 ),
                 SizedBox(
                   height: 5.0,

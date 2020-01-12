@@ -6,3 +6,11 @@ class RoutingKeys
   static final String AUTH_SCREEN = "/";
 
 }
+
+enum PriceTagSize
+{
+  NORMAL,
+  SMALL,
+  EXTRA_SMALL
+
+}
