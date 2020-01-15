@@ -4,6 +4,7 @@ import 'package:easy_list/controller/allProductScreenController.dart';
 import 'package:easy_list/customWidgets/productDetailScreenWidget.dart';
 import 'package:easy_list/models/product.dart';
 import 'package:easy_list/providerData/productData.dart';
+import 'package:easy_list/screens/addProductScreen.dart';
 import 'package:easy_list/screens/productDetailScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -11,8 +12,9 @@ import 'package:provider/provider.dart';
 class SingleProductItem extends StatelessWidget {
 
   final Product product;
+  final int productIndex;
 
-  SingleProductItem({this.product});
+  SingleProductItem({this.product, this.productIndex});
 
   @override
   Widget build(BuildContext context)
@@ -68,8 +70,9 @@ class ProductOptionBottomSheetLayout extends StatelessWidget
 {
 
   final Product product;
+  final int productIndex;
 
-  ProductOptionBottomSheetLayout({this.product});
+  ProductOptionBottomSheetLayout({this.product, this.productIndex});
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -85,7 +88,9 @@ class ProductOptionBottomSheetLayout extends StatelessWidget
             BottomSheetSingleItem(
               title: Strings.editProductInfo,
               icon: Icons.edit,
-              onTapCallback: () => print("Edit For ${product.productPrice}")
+              onTapCallback: (){
+                gotoProductEditScreen(context);
+              }
               ,
             ),
             BottomSheetSingleItem(
@@ -108,6 +113,23 @@ class ProductOptionBottomSheetLayout extends StatelessWidget
     {
       Provider.of<ProductData>(context,listen: false).removeProduct(productToDelete);
       Navigator.pop(context);
+    }
+
+  }
+
+  void gotoProductEditScreen(BuildContext context) async
+  {
+
+    Product updatedProduct = await Navigator.push(context, MaterialPageRoute(
+      builder: (context) => ProductInfoFieldScreen(
+        product: product,
+      )
+    ));
+    if(updatedProduct!=null){
+      Provider.of<ProductData>(context, listen: false).updateProduct(productIndex, updatedProduct);
+      Navigator.pop(context);
+      print("UpdatedProduct ${updatedProduct.toString()}");
+
     }
 
   }
@@ -164,6 +186,7 @@ class AllProductListView extends StatelessWidget {
         padding: EdgeInsets.all(8.0),
         child: ListView.builder(itemBuilder: (context, index) => SingleProductItem(
           product: productData.products[index],
+          productIndex: index,
         ),
           itemCount: productData.totalProduct,
         ),

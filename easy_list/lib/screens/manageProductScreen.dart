@@ -40,7 +40,7 @@ class ManageProduct extends StatelessWidget {
         ),
         body: TabBarView(
           children: <Widget>[
-            AddProductScreen(addNewProduct: addNewProduct,),
+            ProductInfoFieldScreen(addNewProduct: addNewProduct,),
             AllProductScreen()
 
           ],

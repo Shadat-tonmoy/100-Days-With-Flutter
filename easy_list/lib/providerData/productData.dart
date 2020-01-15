@@ -21,6 +21,15 @@ class ProductData extends ChangeNotifier
     notifyListeners();
   }
 
+  void updateProduct(int index, Product product)
+  {
+    if(index < totalProduct)
+    {
+      products[index] = product;
+      notifyListeners();
+    }
+  }
+
   int get totalProduct {
     return products.length;
   }
