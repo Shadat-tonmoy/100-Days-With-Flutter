@@ -61,6 +61,7 @@ class SingleProductItem extends StatelessWidget {
         {
           return ProductOptionBottomSheetLayout(
             product: product,
+            productIndex: productIndex,
           );
         });
   }
@@ -119,6 +120,7 @@ class ProductOptionBottomSheetLayout extends StatelessWidget
 
   void gotoProductEditScreen(BuildContext context) async
   {
+    print("WillUpdate at index ${productIndex}");
 
     Product updatedProduct = await Navigator.push(context, MaterialPageRoute(
       builder: (context) => ProductInfoFieldScreen(

@@ -23,11 +23,8 @@ class ProductData extends ChangeNotifier
 
   void updateProduct(int index, Product product)
   {
-    if(index < totalProduct)
-    {
-      products[index] = product;
-      notifyListeners();
-    }
+    products[index] = product;
+    notifyListeners();
   }
 
   int get totalProduct {
