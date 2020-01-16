@@ -44,9 +44,7 @@ class ProductDetailScreen extends StatelessWidget
                 SizedBox(
                   height: 5.0,
                 ),
-                productDetailScreenWidget.getProductDetailCard(
-                  warningDialogFunction: productDetailController.getDeleteWarningDialogFunction()
-                )
+                productDetailScreenWidget.getProductDetailCard()
               ]),
         ),
       ),

@@ -1,5 +1,7 @@
 import 'package:easy_list/models/product.dart';
+import 'package:easy_list/providerData/productData.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class ProductDetailController
 {
@@ -9,7 +11,7 @@ class ProductDetailController
 
   ProductDetailController({this.context, this.product});
 
-  void showDeleteWarningDialog()
+  static void showDeleteWarningDialog(BuildContext context, Product product, Function onDeleteCallback)
   {
     showDialog(context: context, builder: (context)
     {
@@ -33,7 +35,9 @@ class ProductDetailController
           FlatButton(
             onPressed: (){
               Navigator.pop(context);
-              Navigator.pop(context,product);
+              if(onDeleteCallback!=null)
+                onDeleteCallback(context);
+              Provider.of<ProductData>(context,listen: false).removeProduct(product);
             },
             child: Text(
                 "Yes"

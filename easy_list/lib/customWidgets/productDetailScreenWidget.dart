@@ -1,5 +1,6 @@
 import 'package:easy_list/constants/assetsConstants.dart';
 import 'package:easy_list/constants/constants.dart';
+import 'package:easy_list/controller/productDetailScreenController.dart';
 import 'package:easy_list/models/product.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -20,7 +21,7 @@ class ProductDetailScreenWidget
     );
   }
 
-  Widget getProductDetailCard({Function warningDialogFunction})
+  Widget getProductDetailCard()
   {
     return Card(
       child: Column(
@@ -71,7 +72,8 @@ class ProductDetailScreenWidget
                 ),
                 onPressed: ()
                 {
-                  warningDialogFunction();
+                  ProductDetailController.showDeleteWarningDialog(context, product, onProductDelete);
+//                  warningDialogFunction();
                 },
               )
             ],
@@ -79,6 +81,11 @@ class ProductDetailScreenWidget
         ],
       ),
     );
+  }
+
+  void onProductDelete(BuildContext context)
+  {
+    Navigator.pop(context);
   }
 
   Widget getProductInfoText({String infoLabel, String info, IconData icon})
