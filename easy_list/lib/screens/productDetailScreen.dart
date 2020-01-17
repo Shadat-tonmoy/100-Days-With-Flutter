@@ -9,16 +9,19 @@ class ProductDetailScreen extends StatelessWidget
 {
 
   final Product product;
+  final bool isManagingProduct;
   ProductDetailScreenWidget productDetailScreenWidget;
   DialogShowingTasks productDetailController;
 
-  ProductDetailScreen({@required this.product});
+
+  ProductDetailScreen({@required this.product,this.isManagingProduct});
 
   void initProductDetailWidget(BuildContext context)
   {
     productDetailScreenWidget = ProductDetailScreenWidget(
         context: context,
-        product: product
+        product: product,
+        isManagingProduct: isManagingProduct
     );
 
     productDetailController = DialogShowingTasks(

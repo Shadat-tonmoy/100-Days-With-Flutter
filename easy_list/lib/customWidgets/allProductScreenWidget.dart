@@ -119,7 +119,7 @@ class ProductOptionBottomSheetLayout extends StatelessWidget
   {
 
     Product productToDelete = await Navigator.push(context, MaterialPageRoute(
-        builder: (context) => ProductDetailScreen(product: product,)
+        builder: (context) => ProductDetailScreen(product: product,isManagingProduct: true,)
     ));
     if(productToDelete!=null)
     {

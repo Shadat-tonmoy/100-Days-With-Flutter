@@ -1,3 +1,4 @@
+import 'package:easy_list/constants/constants.dart';
 import 'package:easy_list/models/product.dart';
 import 'package:easy_list/providerData/productData.dart';
 import 'package:flutter/material.dart';
@@ -17,10 +18,10 @@ class DialogShowingTasks
     {
       return AlertDialog(
         title: Text(
-            "Sure To Delete?"
+            Strings.sureToDelete
         ),
         content: Text(
-            "Once you delete this item it can not be restored!"
+            Strings.deleteWarning
         ),
         actions: <Widget>[
           FlatButton(
@@ -28,7 +29,7 @@ class DialogShowingTasks
               Navigator.pop(context);
             },
             child: Text(
-                "No"
+                Strings.no
             ),
           ),
 
@@ -40,7 +41,7 @@ class DialogShowingTasks
               Provider.of<ProductData>(context,listen: false).removeProduct(product);
             },
             child: Text(
-                "Yes"
+                Strings.yes
             ),
           ),
 

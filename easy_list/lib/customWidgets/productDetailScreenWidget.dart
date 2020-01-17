@@ -10,8 +10,9 @@ class ProductDetailScreenWidget
 
   BuildContext context;
   Product product;
+  bool isManagingProduct;
 
-  ProductDetailScreenWidget({this.context, this.product});
+  ProductDetailScreenWidget({this.context, this.product, this.isManagingProduct});
 
 
   Widget getAppBar()
@@ -52,31 +53,37 @@ class ProductDetailScreenWidget
             info: product.deliveryAddress,
             icon: Icons.place
           ),
-          ButtonBar(
-            alignment: MainAxisAlignment.center,
-            children: <Widget>[
-              FlatButton(
-                child: Row(
-                  children: <Widget>[
-                    Icon(Icons.delete),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text(
-                        "Delete",
-                        style: TextStyle(
-                            fontSize: 16.0
+          Visibility(
+            visible: isManagingProduct,
+            child: ButtonBar(
+              alignment: MainAxisAlignment.center,
+              children: <Widget>[
+                FlatButton(
+                  child: Row(
+                    children: <Widget>[
+                      Icon(Icons.delete),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                          "Delete",
+                          style: TextStyle(
+                              fontSize: 16.0
+                          ),
                         ),
-                      ),
-                    )
-                  ],
-                ),
-                onPressed: ()
-                {
-                  DialogShowingTasks.showDeleteWarningDialog(context, product, onProductDelete);
+                      )
+                    ],
+                  ),
+                  onPressed: ()
+                  {
+                    DialogShowingTasks.showDeleteWarningDialog(context, product, onProductDelete);
 //                  warningDialogFunction();
-                },
-              )
-            ],
+                  },
+                )
+              ],
+            ),
+          ),
+          SizedBox(
+            height: 16.0,
           )
         ],
       ),
