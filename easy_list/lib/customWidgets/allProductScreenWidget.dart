@@ -1,7 +1,7 @@
 import 'package:easy_list/constants/assetsConstants.dart';
 import 'package:easy_list/constants/constants.dart';
 import 'package:easy_list/controller/allProductScreenController.dart';
-import 'package:easy_list/controller/productDetailScreenController.dart';
+import 'package:easy_list/tasks/dialogShowingTasks.dart';
 import 'package:easy_list/customWidgets/productDetailScreenWidget.dart';
 import 'package:easy_list/models/product.dart';
 import 'package:easy_list/providerData/productData.dart';
@@ -99,7 +99,7 @@ class ProductOptionBottomSheetLayout extends StatelessWidget
               title: Strings.deleteProduct,
               icon: Icons.delete,
               onTapCallback: () {
-                ProductDetailController.showDeleteWarningDialog(context, product, onProductDelete);
+                DialogShowingTasks.showDeleteWarningDialog(context, product, onProductDelete);
               }
             )
           ],

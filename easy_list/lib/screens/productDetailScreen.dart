@@ -1,4 +1,4 @@
-import 'package:easy_list/controller/productDetailScreenController.dart';
+import 'package:easy_list/tasks/dialogShowingTasks.dart';
 import 'package:easy_list/customWidgets/productDetailScreenWidget.dart';
 import 'package:easy_list/models/product.dart';
 import 'package:flutter/material.dart';
@@ -10,7 +10,7 @@ class ProductDetailScreen extends StatelessWidget
 
   final Product product;
   ProductDetailScreenWidget productDetailScreenWidget;
-  ProductDetailController productDetailController;
+  DialogShowingTasks productDetailController;
 
   ProductDetailScreen({@required this.product});
 
@@ -21,7 +21,7 @@ class ProductDetailScreen extends StatelessWidget
         product: product
     );
 
-    productDetailController = ProductDetailController(
+    productDetailController = DialogShowingTasks(
       context: context,
       product: product
     );

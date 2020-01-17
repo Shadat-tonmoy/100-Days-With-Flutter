@@ -1,6 +1,6 @@
 import 'package:easy_list/constants/assetsConstants.dart';
 import 'package:easy_list/constants/constants.dart';
-import 'package:easy_list/controller/productDetailScreenController.dart';
+import 'package:easy_list/tasks/dialogShowingTasks.dart';
 import 'package:easy_list/models/product.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -72,7 +72,7 @@ class ProductDetailScreenWidget
                 ),
                 onPressed: ()
                 {
-                  ProductDetailController.showDeleteWarningDialog(context, product, onProductDelete);
+                  DialogShowingTasks.showDeleteWarningDialog(context, product, onProductDelete);
 //                  warningDialogFunction();
                 },
               )

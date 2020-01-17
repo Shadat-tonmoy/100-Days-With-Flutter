@@ -3,13 +3,13 @@ import 'package:easy_list/providerData/productData.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class ProductDetailController
+class DialogShowingTasks
 {
 
   BuildContext context;
   Product product;
 
-  ProductDetailController({this.context, this.product});
+  DialogShowingTasks({this.context, this.product});
 
   static void showDeleteWarningDialog(BuildContext context, Product product, Function onDeleteCallback)
   {
