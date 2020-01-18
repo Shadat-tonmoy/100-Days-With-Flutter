@@ -40,7 +40,23 @@ class AuthScreenWidget
         color: Theme.of(context).primaryColor,
       ),
     );
+  }
 
+
+  Widget getBottomAppBarMenu({@required String title, @required IconData icon})
+  {
+    return Container(
+      child: Column(
+        children: <Widget>[
+          Icon(
+            icon
+          ),
+          Text(
+            title
+          )
+        ],
+      ),
+    );
   }
 
 }

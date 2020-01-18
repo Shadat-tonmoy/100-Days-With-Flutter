@@ -13,7 +13,8 @@ class AllProductScreen extends StatelessWidget
     return Consumer<ProductData>(
       builder: (context, productData, child)
       {
-        return productData.hasProduct ? AllProductListView() : EmptyListView(emptyViewTitle: Strings.noElementFoundForManageScreen,);
+        return productData.hasProduct ? AllProductListView() :
+        EmptyListView(emptyViewTitle: Strings.noElementFoundForManageScreen,);
       },
     );
   }
