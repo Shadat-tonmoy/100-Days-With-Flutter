@@ -1,7 +1,8 @@
 import 'package:easy_list/constants/constants.dart';
+import 'package:easy_list/views/authScreenView.dart';
 import 'package:flutter/cupertino.dart';
 
-class AuthScreenController
+class AuthScreenController implements AuthScreenListener
 {
 
   final BuildContext context;
@@ -14,8 +15,9 @@ class AuthScreenController
         context, RoutingKeys.HOME_SCREEN);
   }
 
-  Function getMoveToHomeScreenCallback()
+  @override
+  void onLoginButtonPressed()
   {
-    return _moveToHomeScreen;
+    _moveToHomeScreen();
   }
 }
