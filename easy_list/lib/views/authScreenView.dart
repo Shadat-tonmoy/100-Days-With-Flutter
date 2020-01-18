@@ -36,6 +36,7 @@ class AuthScreenViewState extends State<AuthScreenView>
   @override
   Widget build(BuildContext context) {
     AuthScreenWidget authScreenWidget = AuthScreenWidget(context: context);
+    authScreenWidget.registerListener(controller);
     return Scaffold(
       bottomNavigationBar: AuthScreenBottomNavBar(onClickListener: controller.getBottomNavBarClickListener()),
       body: Center(
