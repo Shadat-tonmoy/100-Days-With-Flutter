@@ -31,5 +31,10 @@ class ProductData extends ChangeNotifier
     return products.length;
   }
 
+  bool get hasProduct {
+    return totalProduct > 0;
+
+  }
+
 
 }

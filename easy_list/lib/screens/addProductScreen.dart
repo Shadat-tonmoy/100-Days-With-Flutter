@@ -131,7 +131,7 @@ class _ProductInfoFieldScreenState extends State<ProductInfoFieldScreen>
       productDescription: productDescription,
       productPrice: productPrice,
       deliveryAddress: deliveryAddress,
-      productImage: AssetsConstants.DEFAULT_PRODUCT_IMAGE
+      productImage: AssetsConstants.defaultProductImage
     );
   }
 

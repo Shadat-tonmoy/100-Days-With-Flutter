@@ -1,7 +1,18 @@
 class AssetsConstants
 {
 
-  static final String IMAGE_BASE_PATH = "assets/images/";
-  static final String DEFAULT_PRODUCT_IMAGE = "food.jpg";
+  static final String imageBasePath = "assets/images/";
+  static final String defaultProductImage = "food.jpg";
+  static final String noProductImage = "no_item.png";
+
+}
+
+class AssetPathProvider
+{
+
+  static String get noProductImage {
+    return AssetsConstants.imageBasePath + AssetsConstants.noProductImage;
+
+}
 
 }

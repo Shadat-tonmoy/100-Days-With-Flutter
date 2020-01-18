@@ -11,7 +11,7 @@ class DummyDataProvider
         productDescription: "This is a long product description that will be nicely visible in screen. This is a long product description that will be nicely visible in screen. This is a long product description that will be nicely visible in screen. This is a long product description that will be nicely visible in screen. This is a long product description that will be nicely visible in screen. This is a long product description that will be nicely visible in screen.",
         productPrice: (Random().nextDouble()*100).roundToDouble(),
         deliveryAddress: "This is the delivery address of product. This is the delivery address of product. This is the delivery address of product. This is the delivery address of product. This is the delivery address of product.",
-        productImage: AssetsConstants.DEFAULT_PRODUCT_IMAGE);
+        productImage: AssetsConstants.defaultProductImage);
 
   }
 

@@ -31,7 +31,7 @@ class SingleProductItem extends StatelessWidget {
             Row(
               children: <Widget>[
                 Image(
-                  image: AssetImage(AssetsConstants.IMAGE_BASE_PATH + product.productImage),
+                  image: AssetImage(AssetsConstants.imageBasePath + product.productImage),
                   width: MediaQuery.of(context).size.width * 0.22,
                 ),
                 SizedBox(

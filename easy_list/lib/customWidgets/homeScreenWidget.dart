@@ -13,6 +13,10 @@ import '../productCard.dart';
 class EmptyListView extends StatelessWidget
 {
 
+  final String emptyViewTitle;
+
+  EmptyListView({this.emptyViewTitle});
+
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -22,7 +26,7 @@ class EmptyListView extends StatelessWidget
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Image(
-              image: AssetImage("assets/images/no_item.png"),
+              image: AssetImage(AssetPathProvider.noProductImage),
               fit: BoxFit.fill,
               width: 250,
               height: 200,
@@ -30,7 +34,7 @@ class EmptyListView extends StatelessWidget
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Text(
-                "No Element Found!\nPlease tap the '+' button to add element",
+                emptyViewTitle,
                 textAlign: TextAlign.center,
                 style: TextStyle(
                     fontWeight: FontWeight.bold, color: Colors.grey[600]),
@@ -93,7 +97,7 @@ class HomeScreenDrawerLayout extends StatelessWidget {
       child: SingleChildScrollView(
         child: Column(
           children: <Widget>[
-            Image.asset(AssetsConstants.IMAGE_BASE_PATH + "food.jpg"),
+            Image.asset(AssetsConstants.imageBasePath + "food.jpg"),
             NavDrawerItem(
               navDrawerItemView:
                   NavDrawerItemView(title: "Manage Product", icon: Icons.edit),

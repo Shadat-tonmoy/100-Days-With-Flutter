@@ -34,7 +34,7 @@ class ProductCard extends StatelessWidget
           child: Card(
             child: Column(
               children: <Widget>[
-                Image.asset(AssetsConstants.IMAGE_BASE_PATH + product.productImage),
+                Image.asset(AssetsConstants.imageBasePath + product.productImage),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Text(

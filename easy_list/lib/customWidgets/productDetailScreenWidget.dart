@@ -28,7 +28,7 @@ class ProductDetailScreenWidget
       child: Column(
         children: <Widget>[
           Image.asset(
-              AssetsConstants.IMAGE_BASE_PATH + product.productImage),
+              AssetsConstants.imageBasePath + product.productImage),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Text(

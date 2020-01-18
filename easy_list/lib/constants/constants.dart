@@ -25,6 +25,8 @@ class Strings
   static final String deleteWarning = "Once you delete this item it can not be restored!";
   static final String yes = "Yes";
   static final String no = "No";
+  static final String noElementFoundForHomeScreen = "No Element Found!\nPlease tap the '+' button to add element";
+  static final String noElementFoundForManageScreen = "No Element Found!";
 
 
 }
