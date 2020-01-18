@@ -1,41 +1,59 @@
 import 'package:easy_list/customWidgets/authScreenWidget.dart';
 import 'package:flutter/material.dart';
 
-class AuthScreenView extends StatelessWidget
-{
-  final AuthScreenListener authScreenListener;
 
-  AuthScreenView({this.authScreenListener});
+// ignore: must_be_immutable
+class AuthScreenView extends StatefulWidget
+{
+  AuthScreenListener authScreenListener;
+  AuthScreenViewState authScreenViewState;
+
+  AuthScreenView();
+
+  @override
+  AuthScreenViewState createState() {
+    authScreenViewState = AuthScreenViewState();
+    return authScreenViewState;
+  }
+
+  void registerListener(AuthScreenListener authScreenListener) => this.authScreenListener = authScreenListener;
+  AuthScreenViewState getViewState() => this.authScreenViewState;
+
+}
+
+class AuthScreenViewState extends State<AuthScreenView>
+{
+
+  AuthScreenListener controller;
+  int bottomNavPosition = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    controller = widget.authScreenListener;
+  }
 
   @override
   Widget build(BuildContext context) {
     AuthScreenWidget authScreenWidget = AuthScreenWidget(context: context);
-    return Center(
-      child: SingleChildScrollView(
-        padding: EdgeInsets.all(8.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: <Widget>[
-            authScreenWidget.getInputField(
-                label: "Email",
-                isObscureText: false,
-                textInputType: TextInputType.emailAddress
-            ),
-            authScreenWidget.getInputField(
-                label: "Password",
-                isObscureText: true
-            ),
-            authScreenWidget.getLoginButton(
-                onPressed: () => authScreenListener.onLoginButtonPressed()
-            )
-          ],
-        ),
+    return Scaffold(
+      bottomNavigationBar: AuthScreenBottomNavBar(onClickListener: controller.getBottomNavBarClickListener()),
+      body: Center(
+        child: authScreenWidget.getUserForm(bottomNavPosition),
       ),
     );
+  }
+
+  void updateBottomAppBarPosition(int position) {
+    setState(() {bottomNavPosition = position;});
   }
 }
 
 abstract class AuthScreenListener{
 
   void onLoginButtonPressed();
+
+  void onBottomNavBarOptionClicked(int position);
+
+  Function getBottomNavBarClickListener();
 }

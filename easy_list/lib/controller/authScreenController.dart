@@ -6,6 +6,8 @@ class AuthScreenController implements AuthScreenListener
 {
 
   final BuildContext context;
+  AuthScreenView authScreenView;
+  AuthScreenViewState viewState;
 
   AuthScreenController({@required this.context});
 
@@ -19,5 +21,28 @@ class AuthScreenController implements AuthScreenListener
   void onLoginButtonPressed()
   {
     _moveToHomeScreen();
+  }
+
+  void bindView(AuthScreenView authScreenView){
+    this.authScreenView = authScreenView;
+    authScreenView.registerListener(this);
+    viewState = authScreenView.getViewState();
+
+  }
+
+  @override
+  void onBottomNavBarOptionClicked(int position) 
+  {
+    updateViewState();
+    viewState.updateBottomAppBarPosition(position);
+  
+  }
+
+  @override
+  Function getBottomNavBarClickListener() => onBottomNavBarOptionClicked;
+
+  void updateViewState()
+  {
+    viewState = authScreenView.getViewState();
   }
 }

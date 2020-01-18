@@ -1,9 +1,11 @@
+import 'package:easy_list/views/authScreenView.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class AuthScreenWidget
 {
   final BuildContext context;
+  AuthScreenListener authScreenListener;
 
   AuthScreenWidget({@required this.context});
 
@@ -42,10 +44,76 @@ class AuthScreenWidget
     );
   }
 
+  Widget getUserForm(int position)
+  {
+    if(position == 0)
+      return getBuyerLoginForm();
+    else if(position == 1)
+      return getSellerLoginForm();
+    return null;
+  }
+
+  Widget getBuyerLoginForm()
+  {
+    return SingleChildScrollView(
+      padding: EdgeInsets.all(8.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: <Widget>[
+          getInputField(
+              label: "Email",
+              isObscureText: false,
+              textInputType: TextInputType.emailAddress
+          ),
+          getInputField(
+              label: "Password",
+              isObscureText: true
+          ),
+          getLoginButton(
+              onPressed: () => authScreenListener.onLoginButtonPressed()
+          )
+        ],
+      ),
+    );
+  }
+
+  Widget getSellerLoginForm()
+  {
+    return SingleChildScrollView(
+      padding: EdgeInsets.all(8.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: <Widget>[
+          getInputField(
+              label: "Seller Email",
+              isObscureText: false,
+              textInputType: TextInputType.emailAddress
+          ),
+          getInputField(
+              label: "Seller Password",
+              isObscureText: true
+          ),
+          getLoginButton(
+              onPressed: () => authScreenListener.onLoginButtonPressed()
+          )
+        ],
+      ),
+    );
+  }
+
+  void registerListener(AuthScreenListener authScreenListener)
+  {
+    this.authScreenListener = authScreenListener;
+  }
+
 }
 
 class AuthScreenBottomNavBar extends StatefulWidget
 {
+  final Function onClickListener;
+
+  AuthScreenBottomNavBar({this.onClickListener});
+
   @override
   _AuthScreenBottomNavBarState createState() => _AuthScreenBottomNavBarState();
 }
@@ -72,6 +140,7 @@ class _AuthScreenBottomNavBarState extends State<AuthScreenBottomNavBar> {
       onTap: (position){
         setState(() {
           currentPageIndex = position;
+          widget.onClickListener(position);
         });
 
       },
