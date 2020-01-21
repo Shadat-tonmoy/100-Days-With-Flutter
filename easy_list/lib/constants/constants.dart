@@ -1,9 +1,11 @@
 class RoutingKeys
 {
 
-  static final String HOME_SCREEN = "/home";
-  static final String MANAGE_PRODUCT_SCREEN = "/manage_product";
-  static final String AUTH_SCREEN = "/";
+  static final String homeScreen = "/home";
+  static final String manageProductScreen = "/manage_product";
+  static final String authScreen = "/";
+  static final String buyerSignUpScreen = "/buyer_sign_up";
+  static final String sellerSignUpScreen = "/buyer_sign_up";
 
 }
 

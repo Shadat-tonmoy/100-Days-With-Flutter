@@ -12,7 +12,7 @@ class AppRouter
       builder: (context) => ManageProduct()
     ));*/
     
-    Product result = await Navigator.pushNamed(context, RoutingKeys.MANAGE_PRODUCT_SCREEN);
+    Product result = await Navigator.pushNamed(context, RoutingKeys.manageProductScreen);
     return result;
   }
 
@@ -21,7 +21,7 @@ class AppRouter
     /*Navigator.pushReplacement(context, MaterialPageRoute(
       builder: (context) => HomeScreen()
     ));*/
-    Navigator.pushNamed(context, RoutingKeys.HOME_SCREEN);
+    Navigator.pushNamed(context, RoutingKeys.homeScreen);
   }
 
   Function getManageProductRouter()

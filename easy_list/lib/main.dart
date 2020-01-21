@@ -2,6 +2,8 @@ import 'package:easy_list/providerData/productData.dart';
 import 'package:easy_list/screens/authScreen.dart';
 import 'package:easy_list/screens/homeScreen.dart';
 import 'package:easy_list/screens/manageProductScreen.dart';
+import 'package:easy_list/screens/sellerSignUpScreen.dart';
+import 'package:easy_list/screens/buyerSignUpScreen.dart';
 import 'package:flutter/material.dart';
 
 import 'package:easy_list/constants/constants.dart';
@@ -25,9 +27,11 @@ class MyApp extends StatelessWidget
         ),
 //      home: AuthScreen(),
         routes: {
-          RoutingKeys.AUTH_SCREEN : (context) => AuthScreen(),
-          RoutingKeys.HOME_SCREEN : (context) => HomeScreen(),
-          RoutingKeys.MANAGE_PRODUCT_SCREEN : (context) => ManageProduct(context: context,),
+          RoutingKeys.authScreen : (context) => AuthScreen(),
+          RoutingKeys.homeScreen : (context) => HomeScreen(),
+          RoutingKeys.manageProductScreen : (context) => ManageProduct(context: context,),
+          RoutingKeys.buyerSignUpScreen : (context) => BuyerSignUpScreen(context: context,),
+          RoutingKeys.sellerSignUpScreen: (context) => SellerSignUpScreen(context: context,),
 
         },
       ),

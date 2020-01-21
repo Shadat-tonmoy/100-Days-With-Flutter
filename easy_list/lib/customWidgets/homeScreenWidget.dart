@@ -136,7 +136,7 @@ class NavDrawerItem extends StatelessWidget
 
   Future<dynamic> moveToScreen(BuildContext context) async
   {
-    dynamic result = await Navigator.pushNamed(context, RoutingKeys.MANAGE_PRODUCT_SCREEN);
+    dynamic result = await Navigator.pushNamed(context, RoutingKeys.manageProductScreen);
     Navigator.pop(context);
     return result;
   }

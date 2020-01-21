@@ -14,7 +14,7 @@ class AuthScreenController implements AuthScreenListener
   void _moveToHomeScreen()
   {
     Navigator.pushReplacementNamed(
-        context, RoutingKeys.HOME_SCREEN);
+        context, RoutingKeys.homeScreen);
   }
 
   @override
@@ -48,11 +48,13 @@ class AuthScreenController implements AuthScreenListener
 
   @override
   void onBuyerSignUpButtonPressed() {
+    Navigator.pushNamed(context, RoutingKeys.buyerSignUpScreen);
     print("Will Move To Buyer Sign Up");
   }
 
   @override
   void onSellerSignUpButtonPressed() {
     print("Will Move To Seller Sign Up");
+    Navigator.pushNamed(context, RoutingKeys.sellerSignUpScreen);
   }
 }
