@@ -79,6 +79,14 @@ class AuthScreenWidget
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
+          Icon(
+            Icons.person_pin,
+            size: 100,
+            color: Theme.of(context).primaryColor,
+          ),
+          SizedBox(
+            height: 16.0,
+          ),
           getInputField(
               label: "Email",
               isObscureText: false,
@@ -106,7 +114,16 @@ class AuthScreenWidget
       padding: EdgeInsets.all(8.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
+          Icon(
+            Icons.person_pin_circle,
+            size: 100,
+            color: Theme.of(context).primaryColor,
+          ),
+          SizedBox(
+            height: 16.0,
+          ),
           getInputField(
               label: "Seller Email",
               isObscureText: false,
