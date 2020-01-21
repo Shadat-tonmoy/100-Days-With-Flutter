@@ -45,4 +45,14 @@ class AuthScreenController implements AuthScreenListener
   {
     viewState = authScreenView.getViewState();
   }
+
+  @override
+  void onBuyerSignUpButtonPressed() {
+    print("Will Move To Buyer Sign Up");
+  }
+
+  @override
+  void onSellerSignUpButtonPressed() {
+    print("Will Move To Seller Sign Up");
+  }
 }

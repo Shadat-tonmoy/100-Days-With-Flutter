@@ -27,6 +27,7 @@ class Strings
   static final String no = "No";
   static final String noElementFoundForHomeScreen = "No Element Found!\nPlease tap the '+' button to add element";
   static final String noElementFoundForManageScreen = "No Element Found!";
+  static final String signUpMessage = "Do not have an account?\nTap to Sign Up for free";
 
 
 }

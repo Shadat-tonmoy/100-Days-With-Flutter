@@ -54,6 +54,10 @@ abstract class AuthScreenListener{
 
   void onLoginButtonPressed();
 
+  void onBuyerSignUpButtonPressed();
+
+  void onSellerSignUpButtonPressed();
+
   void onBottomNavBarOptionClicked(int position);
 
   Function getBottomNavBarClickListener();

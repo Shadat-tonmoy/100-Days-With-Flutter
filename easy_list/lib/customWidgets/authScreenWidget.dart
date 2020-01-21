@@ -1,3 +1,4 @@
+import 'package:easy_list/constants/constants.dart';
 import 'package:easy_list/views/authScreenView.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -44,6 +45,24 @@ class AuthScreenWidget
     );
   }
 
+  Widget getSignUpButton({String text, Function onTap})
+  {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        margin: EdgeInsets.all(16.0),
+        child: Text(
+          text,
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            color: Colors.deepOrange[900]
+          ),
+        ),
+      ),
+    );
+
+  }
+
   Widget getUserForm(int position)
   {
     if(position == 0)
@@ -71,6 +90,10 @@ class AuthScreenWidget
           ),
           getLoginButton(
               onPressed: () => authScreenListener.onLoginButtonPressed()
+          ),
+          getSignUpButton(
+            text: Strings.signUpMessage,
+            onTap: () => authScreenListener.onBuyerSignUpButtonPressed()
           )
         ],
       ),
@@ -95,6 +118,10 @@ class AuthScreenWidget
           ),
           getLoginButton(
               onPressed: () => authScreenListener.onLoginButtonPressed()
+          ),
+          getSignUpButton(
+              text: Strings.signUpMessage,
+              onTap: () => authScreenListener.onSellerSignUpButtonPressed()
           )
         ],
       ),
