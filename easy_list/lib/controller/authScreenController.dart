@@ -1,6 +1,7 @@
 import 'package:easy_list/constants/constants.dart';
+import 'package:easy_list/screens/buyerSignUpScreen.dart';
 import 'package:easy_list/views/authScreenView.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 class AuthScreenController implements AuthScreenListener
 {
@@ -48,8 +49,11 @@ class AuthScreenController implements AuthScreenListener
 
   @override
   void onBuyerSignUpButtonPressed() {
-    Navigator.pushNamed(context, RoutingKeys.buyerSignUpScreen);
-    print("Will Move To Buyer Sign Up");
+    print("Will Move To Buyer Sign Up Screen");
+    Navigator.push(context, MaterialPageRoute(
+        builder: (context) => BuyerSignUpScreen()
+    ));
+//    Navigator.pushNamed(context, RoutingKeys.buyerSignUpScreen);
   }
 
   @override

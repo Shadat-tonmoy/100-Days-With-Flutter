@@ -30,7 +30,7 @@ class MyApp extends StatelessWidget
           RoutingKeys.authScreen : (context) => AuthScreen(),
           RoutingKeys.homeScreen : (context) => HomeScreen(),
           RoutingKeys.manageProductScreen : (context) => ManageProduct(context: context,),
-          RoutingKeys.buyerSignUpScreen : (context) => BuyerSignUpScreen(context: context,),
+          RoutingKeys.buyerSignUpScreen : (context) => BuyerSignUpScreen(),
           RoutingKeys.sellerSignUpScreen: (context) => SellerSignUpScreen(context: context,),
 
         },
