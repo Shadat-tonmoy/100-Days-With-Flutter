@@ -9,9 +9,6 @@ class AuthScreen extends StatelessWidget
   Widget build(BuildContext context)
   {
     AuthScreenView authScreenView = AuthScreenView();
-    AuthScreenController authScreenController = AuthScreenController(context: context);
-    authScreenController.bindView(authScreenView);
-
     return authScreenView;
   }
 }

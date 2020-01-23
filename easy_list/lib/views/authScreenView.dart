@@ -1,44 +1,33 @@
+import 'package:easy_list/controller/authScreenController.dart';
 import 'package:easy_list/customWidgets/authScreenWidget.dart';
 import 'package:flutter/material.dart';
 
 
-// ignore: must_be_immutable
+
 class AuthScreenView extends StatefulWidget
 {
-  AuthScreenListener authScreenListener;
-  AuthScreenViewState authScreenViewState;
-
-  AuthScreenView();
-
   @override
-  AuthScreenViewState createState() {
-    authScreenViewState = AuthScreenViewState();
-    return authScreenViewState;
-  }
-
-  void registerListener(AuthScreenListener authScreenListener) => this.authScreenListener = authScreenListener;
-  AuthScreenViewState getViewState() => this.authScreenViewState;
-
+  State<StatefulWidget> createState() => _AuthScreenViewState();
 }
 
-class AuthScreenViewState extends State<AuthScreenView>
+class _AuthScreenViewState extends State<AuthScreenView>
 {
 
-  AuthScreenListener controller;
   int bottomNavPosition = 0;
+  AuthScreenController controller;
 
   @override
   void initState() {
     super.initState();
-    controller = widget.authScreenListener;
   }
 
   @override
   Widget build(BuildContext context) {
+    controller = AuthScreenController(context: context);
     AuthScreenWidget authScreenWidget = AuthScreenWidget(context: context);
     authScreenWidget.registerListener(controller);
     return Scaffold(
-      bottomNavigationBar: AuthScreenBottomNavBar(onClickListener: controller.getBottomNavBarClickListener()),
+      bottomNavigationBar: AuthScreenBottomNavBar(onClickListener: updateBottomAppBarPosition),
       body: Center(
         child: authScreenWidget.getUserForm(bottomNavPosition),
       ),
@@ -57,8 +46,4 @@ abstract class AuthScreenListener{
   void onBuyerSignUpButtonPressed();
 
   void onSellerSignUpButtonPressed();
-
-  void onBottomNavBarOptionClicked(int position);
-
-  Function getBottomNavBarClickListener();
 }
